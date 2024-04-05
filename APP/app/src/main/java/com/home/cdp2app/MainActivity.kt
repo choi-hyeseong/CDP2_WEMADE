@@ -6,23 +6,17 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.health.connect.client.PermissionController
-import androidx.health.connect.client.records.HeartRateRecord
-import androidx.health.connect.client.request.ReadRecordsRequest
-import androidx.health.connect.client.time.TimeRangeFilter
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.component.HealthConnectAPI
 import com.home.cdp2app.health.component.HealthConnectStatus
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
-import com.home.cdp2app.health.healthconnect.dao.HealthDao
-import com.home.cdp2app.health.heart.dao.HealthConnectHeartDao
-import com.home.cdp2app.health.heart.dao.HeartDao
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.mapper.HeartRateMapper
+import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.ZoneOffset
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,12 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         val dao = HealthConnectDao(applicationContext)
-        val heartDao = HealthConnectHeartDao(dao, HeartRateMapper())
+        val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         CoroutineScope(Dispatchers.IO).launch {
-            heartDao.readHeartRate(Instant.now().minusSeconds(3600), Instant.now()).forEach {
+            heartRepository.readHeartRate(Instant.now().minusSeconds(3600), Instant.now()).forEach {
                 Log.i(LOG_HEADER, "Read Record - Time : ${it.time}, bpm : ${it.bpm}")
             }
-            heartDao.writeHeartRate(listOf(
+            heartRepository.writeHeartRate(listOf(
                 HeartRate(Instant.now().minusSeconds(3000), 50L)
             ))
         }
