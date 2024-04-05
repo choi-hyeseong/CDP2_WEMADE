@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CDP2app</string>
+    <string name="health_not_supported">지원하지 않는 안드로이드 버젼 및 기기입니다. 애플리케이션을 종료합니다.</string>
+    <string name="health_require_install">HealthConnect 설치가 필요합니다. 마켓으로 이동합니다.</string>
+    <string name="health_require_permission">앱 사용에 필요한 권한 허용이 필요합니다.</string>
+    <string name="health_permission_denied">앱 사용에 필요한 권한이 허용되지 않았습니다. 다시 시도해주세요.</string>
 </resources>

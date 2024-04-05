@@ -4,33 +4,75 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.health.connect.client.PermissionController
 import com.home.cdp2app.databinding.ActivityMainBinding
-import com.skydoves.sandwich.getOrNull
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onFailure
-import com.skydoves.sandwich.onSuccess
+import com.home.cdp2app.health.component.HealthConnectAPI
+import com.home.cdp2app.health.component.HealthConnectStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    private val LOG_HEADER = "MainActivity-Logger"
+    private val permissions = HealthConnectAPI.PERMISSIONS
+    private lateinit var requestPermission : ActivityResultLauncher<Set<String>>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+        handleHealthConnectSDK()
+        initPermissionLauncher()
 
-        //For Web test
         CoroutineScope(Dispatchers.IO).launch {
-            val response = WebComponent.getTestService().getIPAddress()
-            val result = response.getOrNull()
-            withContext(Dispatchers.Main) {
-                if (result == null)
-                    Toast.makeText(this@MainActivity, "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-                else
-                    bind.mainText.text = "Hello World! IP : ${result.ip}"
+            requestPermission()
+        }
+    }
+
+    //sdk init
+    private fun handleHealthConnectSDK() {
+        val status : HealthConnectStatus = HealthConnectAPI.getSdkStatus(this)
+        Log.i(LOG_HEADER, "Health Connect Status : $status")
+        //이미 설치된 경우 핸들링 안함
+        if (status == HealthConnectStatus.OK)
+            return
+
+        //지원하지 않는 기기 및 버젼일경우 메시지와 함께 종료
+        if (status == HealthConnectStatus.NOT_SUPPORTED) {
+            Toast.makeText(this, getString(R.string.health_not_supported), Toast.LENGTH_LONG).show()
+            finish()
+        }
+        else {
+            //설치가 필요한경우 ACTION_VIEW로 호출
+            Toast.makeText(this, getString(R.string.health_require_install), Toast.LENGTH_LONG).show()
+            startActivity(HealthConnectAPI.createInstallSdkIntent(this))
+        }
+    }
+
+    //onCreate에서 Launcher 생성하기 위한 메소드
+    private fun initPermissionLauncher() {
+        //요청 contract와 callback
+        requestPermission = registerForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->
+            //권한이 허용되지 않았을경우
+            if (!granted.containsAll(permissions)) {
+                Toast.makeText(this, R.string.health_permission_denied, Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
+    }
+
+    //HealthConnect SDK Permission request
+    private suspend fun requestPermission() {
+        //요청될 permission
+        val permissions = HealthConnectAPI.PERMISSIONS
+        val healthConnectClient = HealthConnectAPI.getHealthConnectClient(applicationContext) //Singleton 준수하기 위한 Application Context 사용
+
+        //이미 충분한 권한이 지급된경우 return
+        if (healthConnectClient.permissionController.getGrantedPermissions().containsAll(permissions))
+            return
+
+        requestPermission.launch(permissions)
     }
 }
