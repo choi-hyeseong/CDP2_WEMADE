@@ -6,17 +6,27 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.health.connect.client.PermissionController
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.home.cdp2app.databinding.ActivityMainBinding
-import com.home.cdp2app.health.component.HealthConnectAPI
-import com.home.cdp2app.health.component.HealthConnectStatus
+import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
+import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.mapper.HeartRateMapper
 import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
+import com.home.cdp2app.view.chart.mapper.HeartRateChartMapper
+import com.home.cdp2app.view.chart.toEntry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Instant
+import java.util.Random
+import java.util.concurrent.ThreadLocalRandom
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,13 +47,35 @@ class MainActivity : AppCompatActivity() {
 
         val dao = HealthConnectDao(applicationContext)
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
+        val mapper = HeartRateChartMapper()
         CoroutineScope(Dispatchers.IO).launch {
-            heartRepository.readHeartRate(Instant.now().minusSeconds(3600), Instant.now()).forEach {
+            val heartRates = heartRepository.readHeartRate(Instant.now().minusSeconds(3600), Instant.now())
+            heartRates.forEach {
                 Log.i(LOG_HEADER, "Read Record - Time : ${it.time}, bpm : ${it.bpm}")
             }
             heartRepository.writeHeartRate(listOf(
-                HeartRate(Instant.now().minusSeconds(3000), 50L)
+                HeartRate(Instant.now(), ThreadLocalRandom.current().nextLong(150))
             ))
+            withContext(Dispatchers.Main) {
+                val charData = mapper.convertToChart(heartRates)
+                val chart = bind.chart
+                val linedataset = LineDataSet(charData.toEntry(), "HeartRate").apply {
+                    lineWidth = 2f
+                    circleRadius = 1f
+                    color = resources.getColor(R.color.black)
+                }
+                chart.data = LineData(linedataset)
+                chart.apply {
+                    xAxis.position = XAxis.XAxisPosition.BOTTOM
+                    xAxis.textColor = R.color.black
+                }
+                chart.data.notifyDataChanged()
+                chart.notifyDataSetChanged() //data 갱신
+                chart.invalidate() //view 갱신
+            }
+
+
+
         }
 
     }

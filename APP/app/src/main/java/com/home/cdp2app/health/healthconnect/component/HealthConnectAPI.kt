@@ -1,4 +1,4 @@
-package com.home.cdp2app.health.component
+package com.home.cdp2app.health.healthconnect.component
 
 import android.content.Context
 import android.content.Intent

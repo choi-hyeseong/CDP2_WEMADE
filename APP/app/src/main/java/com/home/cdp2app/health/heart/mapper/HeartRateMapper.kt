@@ -1,13 +1,12 @@
 package com.home.cdp2app.health.heart.mapper
 
 import androidx.health.connect.client.records.HeartRateRecord
-import com.home.cdp2app.common.RecordMapper
+import com.home.cdp2app.health.healthconnect.mapper.MultipleRecordMapper
 import com.home.cdp2app.health.heart.entity.HeartRate
-import java.time.ZoneOffset
 import java.time.ZonedDateTime
 
 //심박수 record를 mapping하는 클래스
-class HeartRateMapper : RecordMapper<HeartRateRecord, HeartRate> {
+class HeartRateMapper : MultipleRecordMapper<HeartRateRecord, HeartRate> {
     override fun mapToEntity(record: HeartRateRecord): List<HeartRate> {
         return record.samples.map {
             HeartRate(it.time, it.beatsPerMinute)

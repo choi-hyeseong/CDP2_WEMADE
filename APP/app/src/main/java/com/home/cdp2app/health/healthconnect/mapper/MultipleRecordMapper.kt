@@ -1,11 +1,11 @@
-package com.home.cdp2app.common
+package com.home.cdp2app.health.healthconnect.mapper
 
 import androidx.health.connect.client.records.Record
 
 /**
- * HealthConnect에 있는 Record를 Entity간 서로 매핑해주는 인터페이스
+ * HealthConnect에 있는 Record를 Entity간 서로 매핑해주는 인터페이스 1:N
  */
-interface RecordMapper<R : Record, E> {
+interface MultipleRecordMapper<R : Record, E> {
 
     /**
      * entity로 mapping을 수행하는 함수.
