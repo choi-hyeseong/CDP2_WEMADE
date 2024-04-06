@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
