@@ -10,6 +10,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
@@ -24,7 +25,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.time.Instant
+import java.util.Date
+import java.util.Locale
 import java.util.Random
 import java.util.concurrent.ThreadLocalRandom
 
@@ -45,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             requestPermission()
         }
 
+        //for test
         val dao = HealthConnectDao(applicationContext)
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         val mapper = HeartRateChartMapper()
@@ -57,17 +62,30 @@ class MainActivity : AppCompatActivity() {
                 HeartRate(Instant.now(), ThreadLocalRandom.current().nextLong(150))
             ))
             withContext(Dispatchers.Main) {
-                val charData = mapper.convertToChart(heartRates)
+                val charData = mapper.convertToChart(heartRates) //RecyclerView가 사용하는 Chart data class로 변환 (현재는 내부 아이템인 ChartItem만 사용)
                 val chart = bind.chart
-                val linedataset = LineDataSet(charData.toEntry(), "HeartRate").apply {
+
+                val entries = charData.toEntry()
+                //하나의 line을 구성하는 LineDataSet 구성. 이때, Chart에서 사용하는 Entry(Float, Float)으로 변환.
+                //toEntry는 Chart.kt에 명시되어 ChartItem(Instant, Double)을 Entry로 변환함.
+                val lineDataSet = LineDataSet(entries, "HeartRate").apply {
                     lineWidth = 2f
                     circleRadius = 1f
                     color = resources.getColor(R.color.black)
                 }
-                chart.data = LineData(linedataset)
+                chart.data = LineData(lineDataSet) //dataset을 linedata에 넣어 chart에 주입
                 chart.apply {
+                    isAutoScaleMinMaxEnabled = true
                     xAxis.position = XAxis.XAxisPosition.BOTTOM
                     xAxis.textColor = R.color.black
+                    xAxis.setLabelCount(100, true)
+                    xAxis.valueFormatter = object : IndexAxisValueFormatter() {
+                        //float형식의 epoch second를 date로 변경
+                        override fun getFormattedValue(value: Float): String {
+                            val format = SimpleDateFormat("HH:mm:ss", Locale.KOREA).format(Date.from(Instant.ofEpochSecond((value).toLong())))
+                            return format
+                        }
+                    }
                 }
                 chart.data.notifyDataChanged()
                 chart.notifyDataSetChanged() //data 갱신
