@@ -7,11 +7,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.health.connect.client.PermissionController
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
@@ -29,7 +27,6 @@ import java.text.SimpleDateFormat
 import java.time.Instant
 import java.util.Date
 import java.util.Locale
-import java.util.Random
 import java.util.concurrent.ThreadLocalRandom
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         val mapper = HeartRateChartMapper()
         CoroutineScope(Dispatchers.IO).launch {
-            val heartRates = heartRepository.readHeartRate(Instant.now())
+            val heartRates = heartRepository.readHeartRateBefore(Instant.now())
             heartRates.forEach {
                 Log.i(LOG_HEADER, "Read Record - Time : ${it.time}, bpm : ${it.bpm}")
             }

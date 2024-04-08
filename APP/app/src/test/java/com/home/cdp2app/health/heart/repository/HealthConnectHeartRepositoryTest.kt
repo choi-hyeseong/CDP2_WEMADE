@@ -3,9 +3,6 @@ package com.home.cdp2app.health.heart.repository
 
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.Record
-import androidx.health.connect.client.records.StepsRecord
-import androidx.health.connect.client.request.ReadRecordsRequest
-import androidx.health.connect.client.time.TimeRangeFilter
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.mapper.HeartRateMapper
@@ -43,7 +40,7 @@ class HealthConnectHeartRepositoryTest {
                 )))
         coEvery { heartDao.readRecordBefore(HeartRateRecord::class, any()) } returns response
         runBlocking {
-            val entityResponse = heartRepository.readHeartRate(start)
+            val entityResponse = heartRepository.readHeartRateBefore(start)
             Assertions.assertEquals(2, entityResponse.size)
             Assertions.assertEquals(150, entityResponse[0].bpm)
             Assertions.assertEquals(100, entityResponse[1].bpm)
