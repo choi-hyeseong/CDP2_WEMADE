@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         val mapper = HeartRateChartMapper()
         CoroutineScope(Dispatchers.IO).launch {
-            val heartRates = heartRepository.readHeartRate(Instant.now().minusSeconds(3600), Instant.now())
+            val heartRates = heartRepository.readHeartRate(Instant.now())
             heartRates.forEach {
                 Log.i(LOG_HEADER, "Read Record - Time : ${it.time}, bpm : ${it.bpm}")
             }

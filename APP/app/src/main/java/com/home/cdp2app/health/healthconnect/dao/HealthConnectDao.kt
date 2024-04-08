@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.request.ReadRecordsRequest
+import androidx.health.connect.client.time.TimeRangeFilter
+import java.time.Instant
+import kotlin.reflect.KClass
 
 //실제 healthconnect와의 접근이 이루어지는 dao. context는 반드시 application context를 주입할것.
 class HealthConnectDao(context: Context) : HealthDao {
@@ -15,7 +18,20 @@ class HealthConnectDao(context: Context) : HealthDao {
         healthConnectClient.insertRecords(listOf(record))
     }
 
-    override suspend fun <T : Record> readRecord(request: ReadRecordsRequest<T>): List<T> {
+    //T를 넣는게 아니라 recordClass를 넣어야 하는게 맞음..
+    override suspend fun <T : Record> readRecordBetween(recordClass: KClass<T>, start: Instant, end: Instant): List<T> {
+        return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.between(start, end)))
+    }
+
+    override suspend fun <T : Record> readRecordBefore(recordClass: KClass<T>, date: Instant): List<T> {
+       return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.before(date)))
+    }
+
+    override suspend fun <T : Record> readRecordAfter(recordClass: KClass<T>, date: Instant): List<T> {
+       return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.after(date)))
+    }
+
+    private suspend fun <T : Record> readRecord(request: ReadRecordsRequest<T>): List<T> {
         return healthConnectClient.readRecords(request).records
     }
 }

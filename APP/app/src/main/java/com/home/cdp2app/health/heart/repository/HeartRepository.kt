@@ -6,7 +6,7 @@ import java.time.Instant
 //심박수를 읽기 위한 repository
 interface HeartRepository {
 
-    suspend fun readHeartRate(start : Instant, end : Instant) : List<HeartRate>
+    suspend fun readHeartRate(date : Instant) : List<HeartRate>
 
     suspend fun writeHeartRate(heartList : List<HeartRate>)
 }

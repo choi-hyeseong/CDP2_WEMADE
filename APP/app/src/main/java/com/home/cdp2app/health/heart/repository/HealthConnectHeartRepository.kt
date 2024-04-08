@@ -10,9 +10,10 @@ import java.time.Instant
 
 //HealthConnect를 이용한 심박수를 다루는 레포. HealthConnectDao를 이용해서 접근함
 class HealthConnectHeartRepository(private val healthConnectDao: HealthConnectDao, private val heartRateMapper: HeartRateMapper) : HeartRepository {
-    override suspend fun readHeartRate(start: Instant, end: Instant): List<HeartRate> {
+    override suspend fun readHeartRate(date: Instant): List<HeartRate> {
         //dao로 읽어온 record를 mapper를 통해 변환 후, flatten하여 하나의 리스트로 변환.
-        return healthConnectDao.readRecord(ReadRecordsRequest(HeartRateRecord::class, TimeRangeFilter.Companion.between(start, end))).flatMap { heartRateMapper.mapToEntity(it) }
+        //우선 before을 통해 모든 데이터를 읽어옴. 추후 기간을 정할 필요가 있을때 repo에 추가 기능 구현 예정
+        return healthConnectDao.readRecordBefore(HeartRateRecord::class, date).flatMap { heartRateMapper.mapToEntity(it) }
 
     }
 
