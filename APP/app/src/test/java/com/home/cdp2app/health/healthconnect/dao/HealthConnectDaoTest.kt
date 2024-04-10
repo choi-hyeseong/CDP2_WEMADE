@@ -46,10 +46,9 @@ class HealthConnectDaoTest {
         unmockkAll()
     }
 
-    //해당 client로 insert 요청이 들어가는지 확인.
+    // insertRecord 수행시 insertRecords(listof(record))와 동일하게 동작하는지 확인
     @Test
     fun TEST_INSERT_RECORD() {
-        //static & companion mock. 동적 테스트 하기엔 실제 health connect에 기록이 들어감.
         handleStaticMock()
 
         //input capture용 slot
@@ -67,8 +66,40 @@ class HealthConnectDaoTest {
         runBlocking { healthConnectDao.insertRecord(record) }
         //mockClient의 record 삽입된지 확인
         coVerify(atLeast = 1) { mockClient.insertRecords(any()) }
+        //slot으로 캡처된게 listOf(record)한것과 동일한지 체크
+        assertEquals(listOf(record), input.captured)
+        releaseMock()
+    }
+
+    //해당 client로 insert 요청이 들어가는지 확인.
+    @Test
+    fun TEST_INSERT_RECORDS() {
+        //static & companion mock. 동적 테스트 하기엔 실제 health connect에 기록이 들어감.
+        handleStaticMock()
+
+        //input capture용 slot
+        val input = slot<List<Record>>()
+
+        //input만 보기위해 return mock
+        coEvery { mockClient.insertRecords(capture(input)) } returns mockk()
+
+        val healthConnectDao = HealthConnectDao(mockk())
+        //input
+        val record = HeartRateRecord(
+            Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
+                HeartRateRecord.Sample(Instant.now(), 75)
+            ))
+        val recordSecond = HeartRateRecord(
+            Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
+                HeartRateRecord.Sample(Instant.now(), 75)
+            ))
+        runBlocking { healthConnectDao.insertRecords(listOf(record, recordSecond)) }
+
+        coVerify(atLeast = 1) { mockClient.insertRecords(any()) }
         //slot으로 캡처된거랑 일치한지 확인
-        assertEquals(75, (input.captured[0] as HeartRateRecord).samples[0].beatsPerMinute)
+        assertEquals(2, input.captured.size)
+        assertEquals(record, input.captured[0])
+        assertEquals(recordSecond, input.captured[1])
         releaseMock()
     }
 
