@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 listOf(
                     HeartRate(Instant.now(), ThreadLocalRandom.current().nextLong(150))
                 ))
-            val chartData =
+            val mappedChart =
                 mapper.convertToChart(heartRates) //RecyclerView가 사용하는 Chart data class로 변환 (현재는 내부 아이템인 ChartItem만 사용)
             withContext(Dispatchers.Main) {
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                val entries = chartData.mapIndexed { index, it -> BarEntry(index.toFloat(), it.data.toFloat()) }
+                val entries = mappedChart.chartData.mapIndexed { index, it -> BarEntry(index.toFloat(), it.data.toFloat()) }
                 chart.apply {
                     //기본 bar chart 설정
                     setDrawGridBackground(false)
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     xAxis.setDrawGridLines(false)
                     xAxis.labelCount = 7
 
-                    xAxis.valueFormatter = Formatter(chartData.map { it.time })
+                    xAxis.valueFormatter = Formatter(mappedChart.chartData.map { it.time })
 
                     //yAxis 설정
                     axisLeft.setDrawAxisLine(false)
