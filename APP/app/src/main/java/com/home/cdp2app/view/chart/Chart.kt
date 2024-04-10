@@ -1,5 +1,6 @@
 package com.home.cdp2app.view.chart
 
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.home.cdp2app.view.chart.type.HealthCategory
 import java.time.Instant
@@ -24,8 +25,3 @@ data class ChartItem(
     val data : Double
 )
 
-/**
- * Chart를 구성하는 Item을 Entry로 변환함. 이때 float - Int(Long)간 전환시 시간 부분에 있어 오차가 발생할 수 있다. (부동소수점 문제)
- * @return Entry(Float, Float)으로 반환하며, 이때 X값은 time.epochSecond를 float으로 변환한 값이다. Y값은 data를 float으로 변환한 값이다.
- */
-fun List<ChartItem>.toEntry() : List<Entry> = this.map { Entry(it.time.epochSecond.toFloat(), it.data.toFloat()) }
