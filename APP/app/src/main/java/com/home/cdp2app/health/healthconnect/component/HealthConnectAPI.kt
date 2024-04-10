@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.HeartRateRecord
+import androidx.health.connect.client.records.SleepSessionRecord
 
 class HealthConnectAPI {
 
@@ -18,7 +19,10 @@ class HealthConnectAPI {
         //healthconnect에서 사용될 permission set. manifest에도 선언되어야 함
         val PERMISSIONS = setOf(
             HealthPermission.getReadPermission(HeartRateRecord::class),
-            HealthPermission.getWritePermission(HeartRateRecord::class))
+            HealthPermission.getWritePermission(HeartRateRecord::class),
+            HealthPermission.getReadPermission(SleepSessionRecord::class),
+            HealthPermission.getWritePermission(SleepSessionRecord::class)
+            )
 
         /**
          * HealthConnect SDK의 상태를 반환합니다.

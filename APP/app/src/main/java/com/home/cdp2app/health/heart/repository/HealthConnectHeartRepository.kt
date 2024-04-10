@@ -15,6 +15,7 @@ class HealthConnectHeartRepository(private val healthConnectDao: HealthConnectDa
 
     }
 
+    // List<HeartRate>가 하나의 레코드를 구성하는 1 : N 관계이기 때문에 insertRecord로 구성
     override suspend fun writeHeartRate(heartList: List<HeartRate>) {
         healthConnectDao.insertRecord(heartRateMapper.mapToRecord(heartList))
     }

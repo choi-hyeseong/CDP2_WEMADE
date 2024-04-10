@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.health.connect.client.PermissionController
+import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -19,12 +20,19 @@ import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.mapper.HeartRateMapper
 import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
+import com.home.cdp2app.health.sleep.entity.SleepHour
+import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
+import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
+import com.home.cdp2app.health.sleep.repository.SleepRepository
+import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.mapper.HeartRateChartMapper
+import com.home.cdp2app.view.chart.mapper.SleepHourChartMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
+import java.time.Duration
 import java.time.Instant
 import java.util.Date
 import java.util.Locale
@@ -51,66 +59,78 @@ class MainActivity : AppCompatActivity() {
         val dao = HealthConnectDao(applicationContext)
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         val mapper = HeartRateChartMapper()
+
+        val sleepRepository = HealthConnectSleepRepository(SleepHourMapper(), dao)
+        val sleepMapper = SleepHourChartMapper()
         CoroutineScope(Dispatchers.IO).launch {
             val heartRates = heartRepository.readHeartRateBefore(Instant.now())
-            heartRates.forEach {
-                Log.i(LOG_HEADER, "Read Record - Time : ${it.time}, bpm : ${it.bpm}")
-            }
+            val sleepHours = sleepRepository.readSleepHoursBefore(Instant.now())
             heartRepository.writeHeartRate(
                 listOf(
-                    HeartRate(Instant.now(), ThreadLocalRandom.current().nextLong(150))
+                    HeartRate(Instant.now(), ThreadLocalRandom.current().nextLong(150) + 1)
                 ))
+            sleepRepository.writeSleepHours(listOf(
+                SleepHour(Instant.now(), Duration.ofMinutes(ThreadLocalRandom.current().nextLong(600) + 1))
+            ))
             val mappedChart =
-                mapper.convertToChart(heartRates) //RecyclerView가 사용하는 Chart data class로 변환 (현재는 내부 아이템인 ChartItem만 사용)
-            withContext(Dispatchers.Main) {
+                mapper.convertToChart(heartRates) //RecyclerView가 사용하는 Chart data class로 변환
+            val mappedSleep = sleepMapper.convertToChart(sleepHours)
+            createChart(mappedChart, bind.chart)
+            createChart(mappedSleep, bind.sleepChart)
 
-                val chart = bind.chart
-
-                //instant를 float으로 변경하는게 아닌, Date를 따로 만들어서 index와 비교해서 보여주는 방식으로
-                class Formatter(val date: List<Instant>) : IndexAxisValueFormatter() {
-                    override fun getFormattedValue(value: Float): String {
-                        return SimpleDateFormat("MM-dd HH:mm", Locale.KOREA).format(Date.from(date[value.toInt()]))
-                    }
-                }
-
-                val entries = mappedChart.chartData.mapIndexed { index, it -> BarEntry(index.toFloat(), it.data.toFloat()) }
-                chart.apply {
-                    //기본 bar chart 설정
-                    setDrawGridBackground(false)
-                    setDrawBarShadow(false)
-                    setDrawBorders(false)
-                    description = Description().apply { isEnabled = false }
-                    animateY(1000)
-                    animateX(1000)
-
-
-                    //xAxis 설정
-                    xAxis.position = XAxis.XAxisPosition.BOTTOM
-                    xAxis.granularity = 1f
-                    xAxis.textColor = R.color.black
-                    xAxis.setDrawAxisLine(false)
-                    xAxis.setDrawGridLines(false)
-                    xAxis.labelCount = 7
-
-                    xAxis.valueFormatter = Formatter(mappedChart.chartData.map { it.time })
-
-                    //yAxis 설정
-                    axisLeft.setDrawAxisLine(false)
-                    axisLeft.textColor = R.color.black
-
-                    axisRight.isEnabled = false
-                    data = BarData(BarDataSet(entries, "HeartRate"))
-                    setVisibleXRangeMaximum(5f) //dateset 넣고 visible 설정가능
-                }
-                chart.data.notifyDataChanged()
-                chart.notifyDataSetChanged() //data 갱신
-                chart.invalidate() //view 갱신
-
-            }
 
 
         }
 
+    }
+
+    suspend fun createChart(mappedChart : Chart, chart : BarChart) {
+        withContext(Dispatchers.Main) {
+            if (mappedChart.chartData.isEmpty()) //빈 데이터의경우 return
+                return@withContext
+
+
+            //instant를 float으로 변경하는게 아닌, Date를 따로 만들어서 index와 비교해서 보여주는 방식으로
+            class Formatter(val date: List<Instant>) : IndexAxisValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return SimpleDateFormat("MM-dd HH:mm", Locale.KOREA).format(Date.from(date[value.toInt()]))
+                }
+            }
+
+            val entries = mappedChart.chartData.mapIndexed { index, it -> BarEntry(index.toFloat(), it.data.toFloat()) }
+            chart.apply {
+                //기본 bar chart 설정
+                setDrawGridBackground(false)
+                setDrawBarShadow(false)
+                setDrawBorders(false)
+                description = Description().apply { isEnabled = false }
+                animateY(1000)
+                animateX(1000)
+
+
+                //xAxis 설정
+                xAxis.position = XAxis.XAxisPosition.BOTTOM
+                xAxis.granularity = 1f
+                xAxis.textColor = R.color.black
+                xAxis.setDrawAxisLine(false)
+                xAxis.setDrawGridLines(false)
+                xAxis.labelCount = 7
+
+                xAxis.valueFormatter = Formatter(mappedChart.chartData.map { it.time })
+
+                //yAxis 설정
+                axisLeft.setDrawAxisLine(false)
+                axisLeft.textColor = R.color.black
+
+                axisRight.isEnabled = false
+                data = BarData(BarDataSet(entries, mappedChart.type.displayName))
+                setVisibleXRangeMaximum(5f) //dateset 넣고 visible 설정가능
+            }
+            chart.data.notifyDataChanged()
+            chart.notifyDataSetChanged() //data 갱신
+            chart.invalidate() //view 갱신
+
+        }
     }
 
     //sdk init
