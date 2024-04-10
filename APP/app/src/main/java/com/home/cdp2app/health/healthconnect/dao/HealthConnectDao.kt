@@ -14,8 +14,9 @@ class HealthConnectDao(context: Context) : HealthDao {
     //lazy로 선언해두어 실제 접근이 일어날때 초기화 됨. (permission, sdk status check 고려)
     private val healthConnectClient : HealthConnectClient by lazy {  HealthConnectClient.getOrCreate(context) }
 
-    override suspend fun insertRecord(record: Record) {
-        healthConnectClient.insertRecords(listOf(record))
+    //기본 구현체를 insertRecords로 하고, Interface에서 listOf 하는 형식으로 1개 insert하게 지원.
+    override suspend fun insertRecords(record: List<Record>) {
+        healthConnectClient.insertRecords(record)
     }
 
     //T를 넣는게 아니라 recordClass를 넣어야 하는게 맞음..

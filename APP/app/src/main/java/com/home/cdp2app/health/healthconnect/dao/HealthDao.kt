@@ -12,11 +12,18 @@ import kotlin.reflect.KClass
 interface HealthDao {
 
     /**
-     * Health Connect에 Record를 주입하는 메소드. Record 객체 내부에 시간이 지정되어 있어 날짜 지정이 가능합니다.
+     * insertRecords(listOf(record))와 동일한 기능을 하는 메소드입니다.
      * @param record 저장할 레코드 입니다.
      */
-    //todo multiple record insert support (1:1로 매핑되는 혈압 등등은 List<Record>형태로 가공됨)
-    suspend fun insertRecord(record: Record)
+    suspend fun insertRecord(record: Record) {
+        insertRecords(listOf(record))
+    }
+
+    /**
+     * Health Connect에 Record를 주입하는 메소드. Record 객체 내부에 시간이 지정되어 있어 날짜 지정이 가능합니다.
+     * @param record 저장할 레코드 리스트입니다.
+     */
+    suspend fun insertRecords(record: List<Record>)
 
     /**
      * Health Connect에서 특정 기간의 Record를 읽어옵니다.
