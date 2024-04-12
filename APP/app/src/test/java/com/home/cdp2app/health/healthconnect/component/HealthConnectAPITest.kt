@@ -9,7 +9,7 @@ import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.powermock.reflect.Whitebox
 
 class HealthConnectAPITest {
@@ -66,9 +66,7 @@ class HealthConnectAPITest {
         mockkObject(HealthConnectClient)
         //최소 28버젼보다 낮은 27버젼
         Whitebox.setInternalState(
-            Build.VERSION::class.java,
-            "SDK_INT",
-            27)
+            Build.VERSION::class.java, "SDK_INT", 27)
         val context = mockk<Context>()
         org.junit.jupiter.api.assertThrows<UnsupportedOperationException> { HealthConnectAPI.getHealthConnectClient(context) }
         unmockkAll()
@@ -80,9 +78,7 @@ class HealthConnectAPITest {
         mockkStatic(HealthConnectClient.Companion::class)
         mockkObject(HealthConnectClient)
         Whitebox.setInternalState(
-            Build.VERSION::class.java,
-            "SDK_INT",
-            28)
+            Build.VERSION::class.java, "SDK_INT", 28)
         val context = mockk<Context>()
         every { HealthConnectClient.isProviderAvailable(any(), any()) } returns false //HealthConnect의 설치 여부를 가져오지 못했을때
         every { HealthConnectClient.sdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED

@@ -5,7 +5,6 @@ import com.home.cdp2app.health.heart.entity.HeartRate
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 import java.time.Instant
 import java.time.ZonedDateTime
 
@@ -14,7 +13,7 @@ class HeartRateMapperTest {
     val heartRateMapper = HeartRateMapper()
 
 
-    fun buildRecord(samples : List<HeartRateRecord.Sample>) : HeartRateRecord{
+    fun buildRecord(samples: List<HeartRateRecord.Sample>): HeartRateRecord {
         val start = Instant.now()
         val end = Instant.now()
         val offset = ZonedDateTime.now().offset
@@ -23,8 +22,9 @@ class HeartRateMapperTest {
 
     @Test
     fun TEST_MAP_TO_ENTITY() {
-        val samples = listOf(HeartRateRecord.Sample(Instant.now(), 140), HeartRateRecord.Sample(
-            Instant.now(), 130))
+        val samples = listOf(
+            HeartRateRecord.Sample(Instant.now(), 140), HeartRateRecord.Sample(
+                Instant.now(), 130))
         val record = buildRecord(samples)
         val mappedEntity = heartRateMapper.mapToEntity(record)
         assertEquals(2, mappedEntity.size)
@@ -55,7 +55,7 @@ class HeartRateMapperTest {
 
     @Test
     fun TEST_EMPTY_ENTITIES_MAP_TO_RECORD() {
-        val entities : List<HeartRate> = listOf()
+        val entities: List<HeartRate> = listOf()
         assertThrows<IllegalArgumentException> { heartRateMapper.mapToRecord(entities) }
     }
 

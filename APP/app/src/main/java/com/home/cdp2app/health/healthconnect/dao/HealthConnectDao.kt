@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 class HealthConnectDao(context: Context) : HealthDao {
 
     //lazy로 선언해두어 실제 접근이 일어날때 초기화 됨. (permission, sdk status check 고려)
-    private val healthConnectClient : HealthConnectClient by lazy {  HealthConnectClient.getOrCreate(context) }
+    private val healthConnectClient: HealthConnectClient by lazy { HealthConnectClient.getOrCreate(context) }
 
     //기본 구현체를 insertRecords로 하고, Interface에서 listOf 하는 형식으로 1개 insert하게 지원.
     override suspend fun insertRecords(record: List<Record>) {
@@ -25,11 +25,11 @@ class HealthConnectDao(context: Context) : HealthDao {
     }
 
     override suspend fun <T : Record> readRecordBefore(recordClass: KClass<T>, date: Instant): List<T> {
-       return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.before(date)))
+        return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.before(date)))
     }
 
     override suspend fun <T : Record> readRecordAfter(recordClass: KClass<T>, date: Instant): List<T> {
-       return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.after(date)))
+        return readRecord(ReadRecordsRequest(recordClass, TimeRangeFilter.Companion.after(date)))
     }
 
     private suspend fun <T : Record> readRecord(request: ReadRecordsRequest<T>): List<T> {

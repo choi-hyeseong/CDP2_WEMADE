@@ -10,11 +10,11 @@ interface SleepRepository {
      * @param date 기준 날짜입니다.
      * @return SleepHour 엔티티 리스트를 반환합니다.
      */
-    suspend fun readSleepHoursBefore(date : Instant) : List<SleepHour>
+    suspend fun readSleepHoursBefore(date: Instant): List<SleepHour>
 
     /**
      * 수면시간을 기록합니다.
      * @param data SleepHour 엔티티입니다.
      */
-    suspend fun writeSleepHours(data : List<SleepHour>)
+    suspend fun writeSleepHours(data: List<SleepHour>)
 }

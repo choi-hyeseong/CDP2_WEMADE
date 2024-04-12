@@ -5,13 +5,14 @@ import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.type.HealthCategory
 import org.junit.Assert
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.Instant
 
 //수축기 혈압 매퍼 테스트
 class BloodPressureSystolicMapperTest {
 
     private val bloodPressureSystolicMapper = BloodPressureSystolicMapper()
+
     @Test
     fun TEST_MAP_TO_CHART() {
         val firstDiastolic = BloodPressure(Instant.now().minusSeconds(1), 120.0, 70.0) //1초전에 측정한 120/70의 혈압 엔티티
@@ -30,8 +31,7 @@ class BloodPressureSystolicMapperTest {
     @Test
     fun TEST_EMPTY_MAP_TO_CHART() {
         val data = listOf<BloodPressure>()
-        val chart : Chart =
-            org.junit.jupiter.api.assertDoesNotThrow { bloodPressureSystolicMapper.convertToChart(data) }
+        val chart: Chart = org.junit.jupiter.api.assertDoesNotThrow { bloodPressureSystolicMapper.convertToChart(data) }
         Assert.assertEquals(0, chart.chartData.size)
         assertEquals(HealthCategory.BLOOD_PRESSURE_SYSTOLIC, chart.type)
 

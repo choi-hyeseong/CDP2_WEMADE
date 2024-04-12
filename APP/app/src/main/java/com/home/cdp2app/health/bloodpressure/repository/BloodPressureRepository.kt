@@ -13,7 +13,7 @@ interface BloodPressureRepository {
      * @param date 기준 날짜입니다.
      * @return BloodPressure 리스트 엔티티입니다.
      */
-    suspend fun readBloodPressureBefore(date : Instant) : List<BloodPressure>
+    suspend fun readBloodPressureBefore(date: Instant): List<BloodPressure>
 
     /**
      * 혈압을 기록하는 메소드

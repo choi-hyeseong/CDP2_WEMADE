@@ -1,13 +1,11 @@
 package com.home.cdp2app.health.bloodpressure.mapper
 
 import androidx.health.connect.client.records.BloodPressureRecord
-import androidx.health.connect.client.records.SleepSessionRecord
 import androidx.health.connect.client.units.Pressure
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
-import com.home.cdp2app.health.sleep.entity.SleepHour
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
-import java.time.Duration
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import java.time.Instant
 import java.time.ZonedDateTime
 

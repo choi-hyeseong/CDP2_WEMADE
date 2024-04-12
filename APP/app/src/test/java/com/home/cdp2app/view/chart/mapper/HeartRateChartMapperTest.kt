@@ -2,7 +2,6 @@ package com.home.cdp2app.view.chart.mapper
 
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.view.chart.Chart
-import com.home.cdp2app.view.chart.ChartItem
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.jupiter.api.DisplayName
@@ -19,7 +18,7 @@ class HeartRateChartMapperTest {
         val firstRate = HeartRate(Instant.now().minusSeconds(1), 150)
         val secondRate = HeartRate(Instant.now().minusSeconds(2), 140)
         val heartRates = mutableListOf(firstRate, secondRate)
-        val chart : Chart = mapper.convertToChart(heartRates)
+        val chart: Chart = mapper.convertToChart(heartRates)
         assertEquals(2, chart.chartData.size)
         //chart data는 double로 형변환 됨
         assertEquals(firstRate.time, chart.chartData[0].time)
@@ -32,7 +31,7 @@ class HeartRateChartMapperTest {
     @Test
     fun TEST_EMPTY_MAP_TO_CHART() {
         val heartRates = mutableListOf<HeartRate>()
-        val chart : Chart = assertDoesNotThrow { mapper.convertToChart(heartRates) }
+        val chart: Chart = assertDoesNotThrow { mapper.convertToChart(heartRates) }
         assertEquals(0, chart.chartData.size)
 
     }

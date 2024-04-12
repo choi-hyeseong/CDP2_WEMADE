@@ -3,7 +3,7 @@ package com.home.cdp2app.health.sleep.mapper
 import androidx.health.connect.client.records.SleepSessionRecord
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.Duration
 import java.time.Instant
 import java.time.ZonedDateTime
@@ -13,7 +13,7 @@ class SleepHourMapperTest {
     val sleepHourMapper = SleepHourMapper()
 
     //1초간의 수면시간을 가진 Record 생성
-    fun buildRecord() : SleepSessionRecord {
+    fun buildRecord(): SleepSessionRecord {
         val start = Instant.now().minusMillis(1000)
         val end = Instant.now()
         val offset = ZonedDateTime.now().offset

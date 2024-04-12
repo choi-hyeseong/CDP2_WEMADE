@@ -9,7 +9,7 @@ import java.time.Instant
 /**
  * HealthConnect 기반 BloodPressureRepository
  */
-class HealthConnectBloodPressureRepository(private val dao : HealthConnectDao, private val mapper : BloodPressureMapper) : BloodPressureRepository {
+class HealthConnectBloodPressureRepository(private val dao: HealthConnectDao, private val mapper: BloodPressureMapper) : BloodPressureRepository {
     override suspend fun readBloodPressureBefore(date: Instant): List<BloodPressure> {
         return dao.readRecordBefore(BloodPressureRecord::class, date).map { mapper.mapToEntity(it) }
     }

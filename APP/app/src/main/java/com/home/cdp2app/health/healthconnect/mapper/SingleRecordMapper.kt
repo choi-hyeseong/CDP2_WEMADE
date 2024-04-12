@@ -12,12 +12,12 @@ interface SingleRecordMapper<R : Record, E> {
      * @param record mapping을 수행할 레코드 입니다.
      * @return Entity entity로 매핑된 데이터 입니다.
      */
-    fun mapToEntity(record : R) : E
+    fun mapToEntity(record: R): E
 
     /**
      * entity를 record로 mapping을 수행하는 함수
      * @param entity 특정기간 동안 수집된 엔티티 입니다.
      * @return 변환된 Record값입니다.
      */
-    fun mapToRecord(entity : E) : R
+    fun mapToRecord(entity: E): R
 }

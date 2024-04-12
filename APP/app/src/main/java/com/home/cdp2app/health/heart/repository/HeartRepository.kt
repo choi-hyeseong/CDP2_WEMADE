@@ -11,11 +11,11 @@ interface HeartRepository {
      * @param date 기준 날짜 입니다.
      * @return HeartRate List입니다.
      */
-    suspend fun readHeartRateBefore(date : Instant) : List<HeartRate>
+    suspend fun readHeartRateBefore(date: Instant): List<HeartRate>
 
     /**
      * 일정 기간동안 기록되 심박수를 저장하는 함수
      * @param heartList 심박수 엔티티 list입니다.
      */
-    suspend fun writeHeartRate(heartList : List<HeartRate>)
+    suspend fun writeHeartRate(heartList: List<HeartRate>)
 }

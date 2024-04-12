@@ -1,7 +1,6 @@
 package com.home.cdp2app.health.healthconnect.dao
 
 import androidx.health.connect.client.records.Record
-import androidx.health.connect.client.request.ReadRecordsRequest
 import java.time.Instant
 import kotlin.reflect.KClass
 
@@ -31,19 +30,19 @@ interface HealthDao {
      * @param start 탐색할 시작 날짜입니다.
      * @param end 탐색 종료할 날짜입니다.
      */
-    suspend fun <T : Record> readRecordBetween(recordClass : KClass<T>, start : Instant, end : Instant): List<T>
+    suspend fun <T : Record> readRecordBetween(recordClass: KClass<T>, start: Instant, end: Instant): List<T>
 
     /**
      * Health Connect에서 특정 날짜 이전의 Record를 읽어옵니다.
      * @param recordClass 읽어올 클래스 타입입니다.
      * @param date 대상 날짜입니다.
      */
-    suspend fun <T : Record> readRecordBefore(recordClass : KClass<T>, date : Instant) : List<T>
+    suspend fun <T : Record> readRecordBefore(recordClass: KClass<T>, date: Instant): List<T>
 
     /**
      * Health Connect에서 특정 날짜 이후의 Record를 읽어옵니다.
      * @param recordClass 읽어올 클래스 타입입니다.
      * @param date 대상 날짜입니다.
      */
-    suspend fun <T : Record> readRecordAfter(recordClass : KClass<T>, date : Instant) : List<T>
+    suspend fun <T : Record> readRecordAfter(recordClass: KClass<T>, date: Instant): List<T>
 }

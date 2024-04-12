@@ -8,7 +8,4 @@ import java.time.Instant
  * @property date 수면을 시작한 시간입니다
  * @property duration 수면시간입니다.
  */
-data class SleepHour(
-    val date : Instant,
-    val duration: Duration
-)
+data class SleepHour(val date: Instant, val duration: Duration)

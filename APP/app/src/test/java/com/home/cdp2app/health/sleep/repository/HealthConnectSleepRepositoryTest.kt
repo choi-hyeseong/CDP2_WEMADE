@@ -11,7 +11,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.Duration
 import java.time.Instant
 import java.time.ZonedDateTime
@@ -30,15 +30,13 @@ class HealthConnectSleepRepositoryTest {
 
         coEvery {
             dao.readRecordBefore(
-                SleepSessionRecord::class,
-                any())
+                SleepSessionRecord::class, any())
         } returns listOf(record)  //record 반환하게
         runBlocking {
             val response = repository.readSleepHoursBefore(targetDate)
             coVerify(atLeast = 1) {
                 dao.readRecordBefore(
-                    SleepSessionRecord::class,
-                    any())
+                    SleepSessionRecord::class, any())
             } //dao에서 요청이 들어갔는지
             assertEquals(1, response.size)
             //결과값 일치하는지 확인
@@ -53,25 +51,18 @@ class HealthConnectSleepRepositoryTest {
         //result가 2개인지, 각각 5,7 초의 수면시간을 보증하는지 확인
         val records = listOf(
             SleepSessionRecord(
-                Instant.now().minusSeconds(5),
-                offset,
-                Instant.now(),
-                offset) //response record
-            , SleepSessionRecord(Instant.now().minusSeconds(7), offset, Instant.now(), offset)
-        )
+                Instant.now().minusSeconds(5), offset, Instant.now(), offset) //response record
+            , SleepSessionRecord(Instant.now().minusSeconds(7), offset, Instant.now(), offset))
 
         coEvery {
             dao.readRecordBefore(
-                SleepSessionRecord::class,
-                any())
+                SleepSessionRecord::class, any())
         } returns records //record 반환하게
         runBlocking {
-            val response =
-                repository.readSleepHoursBefore(Instant.now()) //입력값 검증이 아닌, Duration만 보면 되므로 아무값 사용
+            val response = repository.readSleepHoursBefore(Instant.now()) //입력값 검증이 아닌, Duration만 보면 되므로 아무값 사용
             coVerify(atLeast = 1) {
                 dao.readRecordBefore(
-                    SleepSessionRecord::class,
-                    any())
+                    SleepSessionRecord::class, any())
             } //dao에서 요청이 들어갔는지
             assertEquals(2, response.size)
             //결과값 일치하는지 확인
@@ -83,8 +74,7 @@ class HealthConnectSleepRepositoryTest {
     @Test
     fun TEST_WRITE_RECORD() {
         val entities = listOf(
-            SleepHour(Instant.now(), Duration.ofSeconds(2)),
-            SleepHour(Instant.now(), Duration.ofSeconds(5))) //2초, 5초간의 수면시간을 가지는 레코드
+            SleepHour(Instant.now(), Duration.ofSeconds(2)), SleepHour(Instant.now(), Duration.ofSeconds(5))) //2초, 5초간의 수면시간을 가지는 레코드
         val input = slot<List<Record>>() //dao에 요청가는지 확인하기 위한 slot
 
         coEvery { dao.insertRecords(capture(input)) } returns mockk() //Unit만 반환하면됨

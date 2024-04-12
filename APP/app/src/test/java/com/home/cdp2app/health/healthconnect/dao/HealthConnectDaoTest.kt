@@ -1,12 +1,10 @@
 package com.home.cdp2app.health.healthconnect.dao
 
-import android.content.Context
 import android.os.Build
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.Record
 import androidx.health.connect.client.request.ReadRecordsRequest
-import androidx.health.connect.client.response.ReadRecordResponse
 import androidx.health.connect.client.response.ReadRecordsResponse
 import androidx.health.connect.client.time.TimeRangeFilter
 import io.mockk.coEvery
@@ -17,10 +15,9 @@ import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.slot
 import io.mockk.unmockkAll
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.powermock.reflect.Whitebox
 import java.time.Instant
 import java.time.ZoneOffset
@@ -35,9 +32,7 @@ class HealthConnectDaoTest {
         mockkStatic(HealthConnectClient.Companion::class)
         mockkObject(HealthConnectClient)
         Whitebox.setInternalState(
-            Build.VERSION::class.java,
-            "SDK_INT",
-            32) //reflection api 이용해서 version 수정
+            Build.VERSION::class.java, "SDK_INT", 32) //reflection api 이용해서 version 수정
         //getOrCreate시 mockClient 반환.
         every { HealthConnectClient.getOrCreate(any()) } returns mockClient
     }
@@ -61,8 +56,7 @@ class HealthConnectDaoTest {
         //input
         val record = HeartRateRecord(
             Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                HeartRateRecord.Sample(Instant.now(), 75)
-            ))
+                HeartRateRecord.Sample(Instant.now(), 75)))
         runBlocking { healthConnectDao.insertRecord(record) }
         //mockClient의 record 삽입된지 확인
         coVerify(atLeast = 1) { mockClient.insertRecords(any()) }
@@ -87,12 +81,10 @@ class HealthConnectDaoTest {
         //input
         val record = HeartRateRecord(
             Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                HeartRateRecord.Sample(Instant.now(), 75)
-            ))
+                HeartRateRecord.Sample(Instant.now(), 75)))
         val recordSecond = HeartRateRecord(
             Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                HeartRateRecord.Sample(Instant.now(), 75)
-            ))
+                HeartRateRecord.Sample(Instant.now(), 75)))
         runBlocking { healthConnectDao.insertRecords(listOf(record, recordSecond)) }
 
         coVerify(atLeast = 1) { mockClient.insertRecords(any()) }
@@ -109,20 +101,16 @@ class HealthConnectDaoTest {
         val targetDate = Instant.now()
 
 
-
         //response mock
         val response = mockk<ReadRecordsResponse<HeartRateRecord>>()
         every { response.records } returns listOf(
             HeartRateRecord(
                 Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                    HeartRateRecord.Sample(Instant.now(), 75),
-                    HeartRateRecord.Sample(Instant.now(), 155)
-                )))
+                    HeartRateRecord.Sample(Instant.now(), 75), HeartRateRecord.Sample(Instant.now(), 155))))
 
         //read시 mock된 response 반환
         val readRecordsRequest = ReadRecordsRequest(
-            HeartRateRecord::class,
-            TimeRangeFilter.Companion.before(targetDate))
+            HeartRateRecord::class, TimeRangeFilter.Companion.before(targetDate))
         coEvery { mockClient.readRecords(readRecordsRequest) } returns response
 
         val healthConnectDao = HealthConnectDao(mockk())
@@ -136,24 +124,20 @@ class HealthConnectDaoTest {
 
     @Test
     fun TEST_READ_RECORD_BETWEEN() {
-       handleStaticMock()
+        handleStaticMock()
 
         val targetDate = Instant.now().minusMillis(1000)
         val endDate = Instant.now()
 
 
-
         val readRecordsRequest = ReadRecordsRequest(
-            HeartRateRecord::class,
-            TimeRangeFilter.Companion.between(targetDate, endDate))
+            HeartRateRecord::class, TimeRangeFilter.Companion.between(targetDate, endDate))
         //response mock
         val response = mockk<ReadRecordsResponse<HeartRateRecord>>()
         every { response.records } returns listOf(
             HeartRateRecord(
                 Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                    HeartRateRecord.Sample(Instant.now(), 75),
-                    HeartRateRecord.Sample(Instant.now(), 155)
-                )))
+                    HeartRateRecord.Sample(Instant.now(), 75), HeartRateRecord.Sample(Instant.now(), 155))))
         //read시 mock된 response 반환
         coEvery { mockClient.readRecords(readRecordsRequest) } returns response
 
@@ -168,22 +152,19 @@ class HealthConnectDaoTest {
 
     @Test
     fun TEST_READ_RECORD_AFTER() {
-       handleStaticMock()
+        handleStaticMock()
 
         val targetDate = Instant.now().minusMillis(1000)
         //실제 요청될 request
         val readRecordsRequest = ReadRecordsRequest(
-            HeartRateRecord::class,
-            TimeRangeFilter.Companion.after(targetDate))
+            HeartRateRecord::class, TimeRangeFilter.Companion.after(targetDate))
 
         //response mock
         val response = mockk<ReadRecordsResponse<HeartRateRecord>>()
         every { response.records } returns listOf(
             HeartRateRecord(
                 Instant.now(), ZoneOffset.UTC, Instant.now(), ZoneOffset.UTC, listOf(
-                    HeartRateRecord.Sample(Instant.now(), 75),
-                    HeartRateRecord.Sample(Instant.now(), 155)
-                )))
+                    HeartRateRecord.Sample(Instant.now(), 75), HeartRateRecord.Sample(Instant.now(), 155))))
         //read시 mock된 response 반환
         coEvery { mockClient.readRecords(readRecordsRequest) } returns response
 

@@ -35,9 +35,7 @@ class HealthConnectHeartRepositoryTest {
         val response = listOf(
             HeartRateRecord(
                 start, offset, end, offset, listOf(
-                    HeartRateRecord.Sample(Instant.now(), 150),
-                    HeartRateRecord.Sample(Instant.now(), 100)
-                )))
+                    HeartRateRecord.Sample(Instant.now(), 150), HeartRateRecord.Sample(Instant.now(), 100))))
         coEvery { heartDao.readRecordBefore(HeartRateRecord::class, any()) } returns response
         runBlocking {
             val entityResponse = heartRepository.readHeartRateBefore(start)

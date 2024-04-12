@@ -8,8 +8,4 @@ import java.time.Instant
  * @property systolic 수축기 혈압입니다.
  * @property diastolic 이완기 혈압입니다.
  */
-data class BloodPressure(
-    val date: Instant,
-    val systolic: Double,
-    val diastolic: Double
-)
+data class BloodPressure(val date: Instant, val systolic: Double, val diastolic: Double)

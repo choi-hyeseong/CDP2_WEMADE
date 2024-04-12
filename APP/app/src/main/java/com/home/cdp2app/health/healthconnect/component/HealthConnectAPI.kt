@@ -8,6 +8,9 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
+import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus.NOT_SUPPORTED
+import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus.OK
+import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus.REQUIRE_INSTALL
 
 class HealthConnectAPI {
 
@@ -34,9 +37,9 @@ class HealthConnectAPI {
          */
         fun getSdkStatus(context: Context): HealthConnectStatus {
             return when (HealthConnectClient.sdkStatus(context, PROVIDER_PACKAGE_NAME)) {
-                HealthConnectClient.SDK_UNAVAILABLE -> HealthConnectStatus.NOT_SUPPORTED
-                HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED -> HealthConnectStatus.REQUIRE_INSTALL
-                else -> HealthConnectStatus.OK
+                HealthConnectClient.SDK_UNAVAILABLE -> NOT_SUPPORTED
+                HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED -> REQUIRE_INSTALL
+                else -> OK
             }
         }
 
