@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.permission.HealthPermission
+import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.SleepSessionRecord
 
@@ -21,8 +22,10 @@ class HealthConnectAPI {
             HealthPermission.getReadPermission(HeartRateRecord::class),
             HealthPermission.getWritePermission(HeartRateRecord::class),
             HealthPermission.getReadPermission(SleepSessionRecord::class),
-            HealthPermission.getWritePermission(SleepSessionRecord::class)
-            )
+            HealthPermission.getWritePermission(SleepSessionRecord::class),
+            HealthPermission.getReadPermission(BloodPressureRecord::class),
+            HealthPermission.getWritePermission(BloodPressureRecord::class),
+        )
 
         /**
          * HealthConnect SDK의 상태를 반환합니다.
@@ -43,8 +46,7 @@ class HealthConnectAPI {
          * @return Intent startActivity에 사용되는 Intent를 반환합니다.
          */
         fun createInstallSdkIntent(context: Context): Intent {
-            val uriString =
-                "market://details?id=$PROVIDER_PACKAGE_NAME&url=healthconnect%3A%2F%2Fonboarding"
+            val uriString = "market://details?id=$PROVIDER_PACKAGE_NAME&url=healthconnect%3A%2F%2Fonboarding"
             return Intent(Intent.ACTION_VIEW).apply {
                 setPackage("com.android.vending")
                 data = Uri.parse(uriString)

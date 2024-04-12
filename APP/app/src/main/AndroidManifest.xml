@@ -9,6 +9,9 @@
     <!-- 수면시간 Permission -->
     <uses-permission android:name="android.permission.health.READ_SLEEP"/>
     <uses-permission android:name="android.permission.health.WRITE_SLEEP"/>
+    <!-- 혈압 Permission -->
+    <uses-permission android:name="android.permission.health.READ_BLOOD_PRESSURE"/>
+    <uses-permission android:name="android.permission.health.WRITE_BLOOD_PRESSURE"/>
 
     <queries>
         <package android:name="com.google.android.apps.healthdata" />
