@@ -4,7 +4,16 @@ import * as path from 'path';
 
 @Injectable()
 export class HealthService {
-  async loadAndUseModel(
+  private model: tf.LayersModel | null = null;
+
+  async loadModel() {
+    if (!this.model) {
+      const modelPath = path.resolve(__dirname, '../../test_model/model.json');
+      this.model = await tf.loadLayersModel(`file://${modelPath}`);
+    }
+  }
+
+  async predictHealthInfo(
     sex: number,
     age: number,
     HE_sbp: number,
@@ -15,9 +24,7 @@ export class HealthService {
     pa_walk: number,
     total_sleep: number,
   ) {
-    const modelPath = path.resolve(__dirname, '../../test_model/model.json');
-    const model = await tf.loadLayersModel(`file://${modelPath}`);
-
+    await this.loadModel();
     const inputData = [
       sex,
       age,
@@ -30,7 +37,7 @@ export class HealthService {
       total_sleep,
     ].map(Number);
 
-    const outputData = model.predict(
+    const outputData = this.model.predict(
       tf.tensor2d([inputData], [1, 9]),
     ) as tf.Tensor;
     const prediction_result = await outputData.data();

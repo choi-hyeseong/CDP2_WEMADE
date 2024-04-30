@@ -17,7 +17,7 @@ export class HealthController {
     @Body('pa_walk') pa_walk: number,
     @Body('total_sleep') total_sleep: number,
   ) {
-    return this.healthService.loadAndUseModel(
+    return this.healthService.predictHealthInfo(
       sex,
       age,
       HE_sbp,
