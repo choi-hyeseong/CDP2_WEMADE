@@ -1,17 +1,20 @@
 package com.home.cdp2app.view.chart.mapper
 
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
+import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.view.chart.Chart
+import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
 import com.home.cdp2app.view.chart.type.HealthCategory
 import org.junit.Assert
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.Instant
 
 //수축기 혈압 매퍼 테스트
-class BloodPressureSystolicMapperTest {
+class BloodPressureSystolicChartMapperTest {
 
-    private val bloodPressureSystolicMapper = BloodPressureSystolicMapper()
+    private val bloodPressureSystolicMapper = BloodPressureSystolicChartMapper()
 
     @Test
     fun TEST_MAP_TO_CHART() {
@@ -35,5 +38,15 @@ class BloodPressureSystolicMapperTest {
         Assert.assertEquals(0, chart.chartData.size)
         assertEquals(HealthCategory.BLOOD_PRESSURE_SYSTOLIC, chart.type)
 
+    }
+
+    @Test
+    fun TEST_IS_SUPPORTS() {
+        Assertions.assertTrue(bloodPressureSystolicMapper.isSupports(BloodPressure::class))
+    }
+
+    @Test
+    fun TEST_IS_NOT_SUPPORTS() {
+        Assertions.assertFalse(bloodPressureSystolicMapper.isSupports(SleepHour::class))
     }
 }

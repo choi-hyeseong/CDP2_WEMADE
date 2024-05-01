@@ -1,10 +1,13 @@
 package com.home.cdp2app.view.chart.mapper
 
+import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.view.chart.Chart
+import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.chart.type.HealthCategory
 import org.junit.Assert
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.time.Duration
 import java.time.Instant
@@ -35,5 +38,15 @@ class SleepHourChartMapperTest {
         Assert.assertEquals(0, chart.chartData.size)
         assertEquals(HealthCategory.SLEEP_HOUR, chart.type)
 
+    }
+
+    @Test
+    fun TEST_IS_SUPPORTS() {
+        Assertions.assertTrue(chartMapper.isSupports(SleepHour::class))
+    }
+
+    @Test
+    fun TEST_IS_NOT_SUPPORTS() {
+        Assertions.assertFalse(chartMapper.isSupports(BloodPressure::class))
     }
 }

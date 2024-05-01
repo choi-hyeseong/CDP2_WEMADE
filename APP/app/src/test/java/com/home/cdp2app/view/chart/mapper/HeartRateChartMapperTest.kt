@@ -1,9 +1,12 @@
 package com.home.cdp2app.view.chart.mapper
 
 import com.home.cdp2app.health.heart.entity.HeartRate
+import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.view.chart.Chart
+import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertDoesNotThrow
 import java.time.Instant
@@ -34,5 +37,15 @@ class HeartRateChartMapperTest {
         val chart: Chart = assertDoesNotThrow { mapper.convertToChart(heartRates) }
         assertEquals(0, chart.chartData.size)
 
+    }
+
+    @Test
+    fun TEST_IS_SUPPORTS() {
+        Assertions.assertTrue(mapper.isSupports(HeartRate::class))
+    }
+
+    @Test
+    fun TEST_IS_NOT_SUPPORTS() {
+        Assertions.assertFalse(mapper.isSupports(SleepHour::class))
     }
 }
