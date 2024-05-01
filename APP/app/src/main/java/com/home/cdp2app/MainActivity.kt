@@ -21,8 +21,8 @@ import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
 import com.home.cdp2app.view.chart.Chart
-import com.home.cdp2app.view.chart.mapper.BloodPressureDiastolicMapper
-import com.home.cdp2app.view.chart.mapper.BloodPressureSystolicMapper
+import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
             //매 접속시 100~120 / 50~70사이의 혈압을 가진 데이터 기록
             bloodPressureRepository.writeBloodPressure(BloodPressure(Instant.now(), ThreadLocalRandom.current().nextDouble(100.0, 120.0), ThreadLocalRandom.current().nextDouble(50.0, 70.0)))
             //수축기/이완기 매핑
-            val systolicMappedChart = BloodPressureSystolicMapper().convertToChart(bloodPressures)
-            val diastolicMappedChart = BloodPressureDiastolicMapper().convertToChart(bloodPressures)
+            val systolicMappedChart = BloodPressureSystolicChartMapper().convertToChart(bloodPressures)
+            val diastolicMappedChart = BloodPressureDiastolicChartMapper().convertToChart(bloodPressures)
             //차트 매핑
             createChart(systolicMappedChart, bind.sleepChart)
             createChart(diastolicMappedChart, bind.chart)
