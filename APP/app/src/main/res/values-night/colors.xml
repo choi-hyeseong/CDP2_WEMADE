@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 다크모드에 따라 바뀌는 색상 -->
+    <color name="white">#000000</color>
+    <color name="black">#FFFFFF</color>
+    <color name="grey">#E6E6E6</color>
+    <color name="grey_light">#C8C8C8</color>
+
+</resources>

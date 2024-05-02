@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <include layout="@layout/imageview_logo_on_top"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nanum_gothic_normal"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/signin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/nanum_gothic_normal"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="@string/signin_comment"/>
+        <include layout="@layout/custom_textinput" android:id="@+id/textinput_id"/>
+        <include layout="@layout/custom_textinput" android:id="@+id/textinput_pw"/>
+        <TextView
+            android:id="@+id/textview_forgot_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/main_blue"
+            android:text="@string/forgot_pw"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/checkbox_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:buttonTint="@color/main_blue"
+            android:fontFamily="@font/nanum_gothic_normal"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/auto_login"/>
+        <include layout="@layout/button_enabled" android:id="@+id/btn_signin"/>
+    </LinearLayout>
+
+</LinearLayout>
