@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="background">#FDFDFF</color>
+    <color name="background_darkmode">#101010</color>
+    <color name="not_selected">#858585</color>
+
+    <!-- 메인 색상 -->
+    <color name="main_blue">#267CFA</color>
+    <color name="main_white">#FFFFFF</color>
+    <color name="main_blue_light">#E1EBFA</color>
+    <color name="main_gradient_light">#4C9FFF</color>
+    <color name="main_gradient_dark">#3354F4</color>
+
+    <!-- 다크모드에 따라 바뀌는 색상 -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey_light">#E6E6E6</color>
+    <color name="grey">#AAAAAA</color>
+
+    <!-- 상태 표현 -->
+    <color name="status_good">#00CF00</color>
+    <color name="status_normal">#FFE81C</color>
+    <color name="status_bad">#F63B11</color>
 </resources>
