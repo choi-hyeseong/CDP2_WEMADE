@@ -14,15 +14,23 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.home.cdp2app.databinding.ActivityMainBinding
+import com.home.cdp2app.databinding.BasicInfoBinding
+import com.home.cdp2app.health.basic.repository.BasicInfoRepository
+import com.home.cdp2app.health.basic.repository.PreferenceBasicInfoRepository
+import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
+import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
 import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
+import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.view.fragment.BasicInfoFragment
+import com.home.cdp2app.view.viewmodel.BasicInfoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +49,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val repository: BasicInfoRepository = PreferenceBasicInfoRepository(SharedPreferencesStorage(this))
+        setContentView(ActivityMainBinding.inflate(layoutInflater).root)
+        supportFragmentManager.beginTransaction().replace(R.id.frame, BasicInfoFragment(BasicInfoViewModel(LoadBasicInfo(repository), SaveBasicInfo(repository)))).commit() //for test, inflate 전 setContentView는 해야함
+        /*
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         handleHealthConnectSDK()
@@ -90,6 +102,8 @@ class MainActivity : AppCompatActivity() {
 
         }
         */
+
+         */
     }
 
     suspend fun createChart(mappedChart: Chart, chart: BarChart) {

@@ -57,11 +57,8 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // 회원가입 후에는 초기 정보 입력 화면으로 이동
-            val intent = Intent(this, PersonalInformationActivity::class.java)
-            startActivity(intent)
-            setResult(RESULT_OK)
-            finish()
+            // todo 회원가입 후에는 초기 정보 입력 화면으로 이동
+
         }
     }
 }

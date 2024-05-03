@@ -33,4 +33,20 @@
     <string name="account_pw_again_hint">비밀번호를 한 번 더 입력해 주세요.</string>
     <string name="account_pw_again_warning">비밀번호가 서로 일치하지 않습니다.</string>
     <string name="collect_information">개인정보 수집 및 이용에 동의합니다.</string>
+    
+    <!-- 기본 정보 -->
+    <string name="insert_basic_info">개인 정보 입력</string>
+    <string name="insert_basic_info_detail">고혈압 관리를 위한 정보 기입</string>
+    <string name="height">키</string>
+    <string name="height_format">%1$d cm</string>
+    <string name="weight">몸무게</string>
+    <string name="weight_format">%1$d kg</string>
+    <string name="smoking_or_not">흡연 여부</string>
+    <string name="smoker">흡연자</string>
+    <string name="non_smoker">비흡연자</string>
+    <string name="save">저장</string>
+    <string name="gender">성별</string>
+    <string name="man">남성</string>
+    <string name="woman">여성</string>
+    <string name="save_success">개인정보 저장이 완료 되었습니다.</string>
 </resources>
