@@ -9,4 +9,4 @@ import com.home.cdp2app.health.basic.type.Gender
  * @property gender 사용자의 성별입니다.
  * @property isSmoking 사용자의 흡연 여부입니다.
  */
-data class BasicInfo(private val height: Double, private val weight: Double, private val gender : Gender ,private val isSmoking: Boolean)
+data class BasicInfo( val height: Double,  val weight: Double,  val gender : Gender , val isSmoking: Boolean)
