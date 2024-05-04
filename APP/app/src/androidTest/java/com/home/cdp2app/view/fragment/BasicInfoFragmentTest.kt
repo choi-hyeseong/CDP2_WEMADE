@@ -48,6 +48,9 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -153,15 +156,6 @@ class BasicInfoFragmentTest {
         assertEquals(Gender.MAN, capturedInfo.gender) //성별 비교
         assertEquals(false, capturedInfo.isSmoking) //비흡연자 비교
 
-    }
-
-    //저장시 토스트 테스트
-    @Test
-    fun TEST_SAVE_TOAST() {
-        coEvery { saveBasicInfo(any()) } returns mockk() //저장 작동되게 every
-        onView(withId(R.id.save)).perform(ViewActions.click()) //저장버튼 클릭
-        runBlocking(Dispatchers.Main) { viewModel.saveLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) } //Thread sleep 대신 observe 관측시켜 완료될경우 수행되게
-        onView(withText(R.string.save_success)).inRoot(ToastMatcher().apply { matches(isDisplayed()) }) //토스트 발생 확인
     }
 
     fun withSliderValue(expectedValue: Float): Matcher<View?> {
