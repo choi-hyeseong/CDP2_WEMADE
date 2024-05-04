@@ -1,4 +1,4 @@
-package com
+package com.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
