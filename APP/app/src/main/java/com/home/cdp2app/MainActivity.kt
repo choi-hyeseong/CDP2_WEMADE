@@ -49,10 +49,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*
         val repository: BasicInfoRepository = PreferenceBasicInfoRepository(SharedPreferencesStorage(this))
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
         supportFragmentManager.beginTransaction().replace(R.id.frame, BasicInfoFragment(BasicInfoViewModel(LoadBasicInfo(repository), SaveBasicInfo(repository)))).commit() //for test, inflate 전 setContentView는 해야함
-        /*
+        */
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         handleHealthConnectSDK()
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
-         */
+
     }
 
     suspend fun createChart(mappedChart: Chart, chart: BarChart) {
@@ -119,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val entries = mappedChart.chartData.mapIndexed { index, it -> BarEntry(index.toFloat(), it.data.toFloat()) }
+            val entries = mutableListOf<BarEntry>() //entry에 빈값 들어가도 작동은 됨 안보일뿐
             chart.apply {
                 //기본 bar chart 설정
                 setDrawGridBackground(false)

@@ -35,6 +35,18 @@ android {
         jvmTarget = '1.8'
     }
 
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
+
+    testOptions {
+        packagingOptions { jniLibs { useLegacyPackaging = true } }
+    }
 }
 
 
@@ -57,6 +69,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     // mockk
     testImplementation "io.mockk:mockk:1.13.10"
+    androidTestImplementation "io.mockk:mockk-android:1.13.10"
     // powermock
     implementation 'org.powermock:powermock-core:2.0.9'
     // mpchart
@@ -66,12 +79,14 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
 
+    implementation 'androidx.test:core-ktx:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    debugImplementation 'androidx.fragment:fragment-testing:1.5.0'
 
     // viewpager indicator
     implementation "com.tbuonomo:dotsindicator:5.0"
@@ -79,3 +94,4 @@ dependencies {
     // cardview
     implementation "androidx.cardview:cardview:1.0.0"
 }
+
