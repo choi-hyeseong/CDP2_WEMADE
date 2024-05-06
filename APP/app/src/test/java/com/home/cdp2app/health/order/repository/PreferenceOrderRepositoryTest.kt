@@ -11,6 +11,7 @@ import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 
 class PreferenceOrderRepositoryTest {
 
@@ -28,7 +29,7 @@ class PreferenceOrderRepositoryTest {
         coEvery { preferencesStorage.saveObject(capture(keySlot), capture(saveSlot)) } returns mockk()
 
         //for save
-        val order = ChartOrder(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.BLOOD_PRESSURE_SYSTOLIC, HealthCategory.SLEEP_HOUR))
+        val order = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.BLOOD_PRESSURE_SYSTOLIC, HealthCategory.SLEEP_HOUR)))
         // test
         runBlocking {
             orderRepository.saveOrder(order)
@@ -38,11 +39,25 @@ class PreferenceOrderRepositoryTest {
     }
 
     @Test
+    fun TEST_THROW_ON_SAVE() {
+        // 일부 카테고리 미 포함시 에러 발생
+        coEvery { preferencesStorage.saveObject(any(), any()) } returns mockk()
+
+        //for save
+        val order = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_SYSTOLIC, HealthCategory.SLEEP_HOUR))) // Diastolic 미포함
+        // test
+        runBlocking {
+            assertThrows<IllegalArgumentException> { orderRepository.saveOrder(order) }
+
+        }
+    }
+
+    @Test
     fun TEST_LOAD_ORDER() {
         // key capture
         val keySlot : CapturingSlot<String> = slot()
         // return
-        val returnValue : ChartOrder = ChartOrder(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.BLOOD_PRESSURE_SYSTOLIC, HealthCategory.SLEEP_HOUR))
+        val returnValue : ChartOrder = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.BLOOD_PRESSURE_SYSTOLIC, HealthCategory.SLEEP_HOUR)))
         coEvery { preferencesStorage.loadObject(capture(keySlot), ChartOrder::class) } returns returnValue
 
         // test
