@@ -32,4 +32,19 @@ class EventTest {
         assertNotNull(unWrappedContent)
         assertEquals(content, unWrappedContent)
     }
+
+    @Test
+    fun TEST_IS_HANDLED() {
+        val content : String = "HellO!"
+        val event = Event(content)
+        event.getContent()
+        assertTrue(event.isHandled)
+    }
+
+    @Test
+    fun TEST_IS_NOT_HANDLED() {
+        val content : String = "HellO!"
+        val event = Event(content)
+        assertFalse(event.isHandled)
+    }
 }
