@@ -18,4 +18,9 @@ class BloodPressureSystolicChartMapper : ChartMapper<BloodPressure>() {
     override fun isSupports(targetClass: KClass<*>): Boolean {
         return BloodPressure::class == targetClass
     }
+
+    //systolic enum으로 변환됨
+    override fun isConvertTo(): HealthCategory {
+        return HealthCategory.BLOOD_PRESSURE_SYSTOLIC
+    }
 }

@@ -18,4 +18,9 @@ class SleepHourChartMapper : ChartMapper<SleepHour>() {
     override fun isSupports(targetClass: KClass<*>): Boolean {
         return SleepHour::class == targetClass
     }
+
+    // 수면시간으로 변환됨
+    override fun isConvertTo(): HealthCategory {
+        return HealthCategory.SLEEP_HOUR
+    }
 }

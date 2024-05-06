@@ -9,6 +9,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.time.Instant
 
@@ -49,5 +50,16 @@ class BloodPressureDiastolicChartMapperTest {
     @Test
     fun TEST_IS_NOT_SUPPORTS() {
         assertFalse(bloodPressureDiastolicMapper.isSupports(SleepHour::class))
+    }
+
+    @Test
+    fun TEST_IS_COVERTED_TO() {
+        assertEquals(HealthCategory.BLOOD_PRESSURE_DIASTOLIC, bloodPressureDiastolicMapper.isConvertTo())
+    }
+
+    // systolic은 미지원
+    @Test
+    fun TEST_IS_NOT_CONVERTED_TO() {
+        assertNotEquals(HealthCategory.BLOOD_PRESSURE_SYSTOLIC, bloodPressureDiastolicMapper.isConvertTo())
     }
 }

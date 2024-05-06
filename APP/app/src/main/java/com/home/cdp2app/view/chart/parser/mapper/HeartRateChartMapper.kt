@@ -16,4 +16,9 @@ class HeartRateChartMapper : ChartMapper<HeartRate>() {
     override fun isSupports(targetClass: KClass<*>): Boolean {
         return HeartRate::class == targetClass
     }
+
+    // heart rate로 변환됨
+    override fun isConvertTo(): HealthCategory {
+        return HealthCategory.HEART_RATE
+    }
 }

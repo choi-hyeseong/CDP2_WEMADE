@@ -18,4 +18,10 @@ class BloodPressureDiastolicChartMapper : ChartMapper<BloodPressure>() {
     override fun isSupports(targetClass: KClass<*>): Boolean {
         return BloodPressure::class == targetClass
     }
+
+    // diastolic으로 변환됨
+    override fun isConvertTo(): HealthCategory {
+        return HealthCategory.BLOOD_PRESSURE_DIASTOLIC
+    }
+
 }

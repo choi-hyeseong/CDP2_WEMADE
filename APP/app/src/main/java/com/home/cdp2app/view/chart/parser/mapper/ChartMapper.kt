@@ -1,5 +1,6 @@
 package com.home.cdp2app.view.chart.parser.mapper
 
+import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.view.chart.Chart
 import kotlin.reflect.KClass
 
@@ -19,4 +20,12 @@ abstract class ChartMapper<T> {
      * @return targetClass를 지원할경우 true, 아닐경우 false를 반환합니다.
      */
     abstract fun isSupports(targetClass : KClass<*>) : Boolean
+
+    /**
+     * 위 isSupports의 중복 문제를 해결하기 위한 메소드 입니다. 만약 isSupports가 같은 값은 반환하는 다른 클래스 2개 (BloodPressureDiastolic, Systolic..)이 있을경우 구분할 수 없습니다.
+     * 따라서, isConvertTo를 이용해서 어떤 카테고리로 매핑되는지 지정합니다.
+     * @see ChartParser
+     * @return 변환되는 차트의 카테고리를 반환합니다.
+     */
+    abstract fun isConvertTo() : HealthCategory
 }

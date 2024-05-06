@@ -1,6 +1,7 @@
 package com.home.cdp2app.view.chart.mapper
 
 import com.home.cdp2app.health.heart.entity.HeartRate
+import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
@@ -47,5 +48,15 @@ class HeartRateChartMapperTest {
     @Test
     fun TEST_IS_NOT_SUPPORTS() {
         Assertions.assertFalse(mapper.isSupports(SleepHour::class))
+    }
+
+    @Test
+    fun TEST_IS_COVERTED_TO() {
+        Assertions.assertEquals(HealthCategory.HEART_RATE, mapper.isConvertTo())
+    }
+
+    @Test
+    fun TEST_IS_NOT_CONVERTED_TO() {
+        Assertions.assertNotEquals(HealthCategory.SLEEP_HOUR, mapper.isConvertTo())
     }
 }

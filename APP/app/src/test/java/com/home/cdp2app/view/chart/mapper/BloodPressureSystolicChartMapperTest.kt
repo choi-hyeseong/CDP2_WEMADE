@@ -49,4 +49,15 @@ class BloodPressureSystolicChartMapperTest {
     fun TEST_IS_NOT_SUPPORTS() {
         Assertions.assertFalse(bloodPressureSystolicMapper.isSupports(SleepHour::class))
     }
+
+    @Test
+    fun TEST_IS_COVERTED_TO() {
+        assertEquals(HealthCategory.BLOOD_PRESSURE_SYSTOLIC, bloodPressureSystolicMapper.isConvertTo())
+    }
+
+    // diastolic은 미지원
+    @Test
+    fun TEST_IS_NOT_CONVERTED_TO() {
+        Assertions.assertNotEquals(HealthCategory.BLOOD_PRESSURE_DIASTOLIC, bloodPressureSystolicMapper.isConvertTo())
+    }
 }
