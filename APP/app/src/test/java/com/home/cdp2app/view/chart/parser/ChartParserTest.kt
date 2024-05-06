@@ -5,7 +5,7 @@ import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapp
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
-import com.home.cdp2app.view.chart.type.HealthCategory
+import com.home.cdp2app.health.order.type.HealthCategory
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 import java.lang.IllegalArgumentException
