@@ -1,4 +1,4 @@
-package com.home.cdp2app.view.chart.type
+package com.home.cdp2app.health.order.type
 
 /**
  * 각 건강 차트별 사용할 카테고리 enum입니다.

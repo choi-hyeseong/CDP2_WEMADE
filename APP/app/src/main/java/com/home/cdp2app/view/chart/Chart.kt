@@ -1,6 +1,6 @@
 package com.home.cdp2app.view.chart
 
-import com.home.cdp2app.view.chart.type.HealthCategory
+import com.home.cdp2app.health.order.type.HealthCategory
 import java.time.Instant
 
 /**

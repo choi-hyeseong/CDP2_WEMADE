@@ -3,7 +3,7 @@ package com.home.cdp2app.view.chart.parser.mapper
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.ChartItem
-import com.home.cdp2app.view.chart.type.HealthCategory
+import com.home.cdp2app.health.order.type.HealthCategory
 import kotlin.reflect.KClass
 
 class HeartRateChartMapper : ChartMapper<HeartRate>() {
