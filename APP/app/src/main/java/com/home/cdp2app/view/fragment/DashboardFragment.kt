@@ -67,6 +67,7 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
                 Toast.makeText(requireContext(), getString(R.string.sync_complete, category.displayName), Toast.LENGTH_LONG).show()
             }
         }
+        dashboardViewModel.loadAllChartData() //차트 데이터 모두 불러오기
 
     }
 }

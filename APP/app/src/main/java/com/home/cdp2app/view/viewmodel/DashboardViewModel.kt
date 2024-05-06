@@ -40,13 +40,13 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
         MutableLiveData<MutableList<Chart>>().apply {
             CoroutineScope(Dispatchers.IO).launch {
                 postValue(loadChartOrder().toEmptyChart())
-                initChartData() //value 설정하고 전체 로드. 왜 하나의 flow로 만들지 않았냐면 따로따로 로드하기가 어려움
+                //loadAllChartData() - lazy문은 시점 예측하기 좋지않음. 따라서 Fragment에서 로드 요청하더라도 거기로 옮기는게 좋을 것 같음. 여기서는 차트 순서 초기화만
             }
         }
     }
 
     //최초로 한번 모든 차트 데이터를 불러오는 기능
-    fun initChartData() {
+    fun loadAllChartData() {
         CoroutineScope(Dispatchers.IO).launch {
             val date = Instant.now()
             val heartRateJob = async { loadHeartRateChart(date) }
@@ -112,7 +112,7 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
     //data는 비어있어선 안됨.
     private fun updateChart(data : List<*>, category : HealthCategory) {
         //차트가 초기화 되어 있지 않을경우 ignore
-        if (!chartList.isInitialized || chartList.value!!.isEmpty()) {
+        if (chartList.value.isNullOrEmpty()) {
             Log.w(LOG_HEADER, "can't update recycler view. chart is empty.")
             return
         }
