@@ -35,7 +35,7 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
     private val LOG_HEADER : String = "Fragment_Dashboard" //for log
 
     val toastLiveData : MutableLiveData<Event<HealthCategory>> = MutableLiveData() //특정 sync toast 알림 위한 이벤트 라이브데이터
-    //lazy로 선언되어 접근시 loadOrder 수행
+    //lazy로 선언되어 접근시 loadOrder 수행. 모든 메소드를 수행하기전 observe를 수행해야함t
     val chartList: MutableLiveData<MutableList<Chart>> by lazy {
         MutableLiveData<MutableList<Chart>>().apply {
             CoroutineScope(Dispatchers.IO).launch {
