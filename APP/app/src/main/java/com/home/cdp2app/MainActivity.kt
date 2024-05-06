@@ -17,12 +17,27 @@ import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
 import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
+import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
+import com.home.cdp2app.health.heart.mapper.HeartRateMapper
+import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
+import com.home.cdp2app.health.heart.usecase.LoadHeartRate
+import com.home.cdp2app.health.order.repository.PreferenceOrderRepository
+import com.home.cdp2app.health.order.usecase.LoadChartOrder
+import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
+import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
+import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
+import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.view.chart.Chart
+import com.home.cdp2app.view.chart.parser.ChartParser
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
+import com.home.cdp2app.view.fragment.DashboardFragment
+import com.home.cdp2app.view.viewmodel.DashboardViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,11 +56,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*
-        val repository: BasicInfoRepository = PreferenceBasicInfoRepository(SharedPreferencesStorage(this))
+
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
-        supportFragmentManager.beginTransaction().replace(R.id.frame, BasicInfoFragment(BasicInfoViewModel(LoadBasicInfo(repository), SaveBasicInfo(repository)))).commit() //for test, inflate 전 setContentView는 해야함
-        */
+        val repository = PreferenceOrderRepository(SharedPreferencesStorage(applicationContext))
+        val healthDao = HealthConnectDao(applicationContext)
+        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
+        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
+        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
+        supportFragmentManager.beginTransaction().replace(R.id.frame, DashboardFragment(DashboardViewModel(LoadChartOrder(repository),
+            LoadHeartRate(heartRepo),
+            LoadBloodPressure(bloodRepo),
+            LoadSleepHour(sleepRepo),
+            ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
+        ))).commit() //for test, inflate 전 setContentView는 해야함
+        /*
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         handleHealthConnectSDK()
@@ -189,5 +213,8 @@ class MainActivity : AppCompatActivity() {
         if (healthConnectClient.permissionController.getGrantedPermissions().containsAll(permissions)) return
 
         requestPermission.launch(permissions)
+    }
+
+         */
     }
 }

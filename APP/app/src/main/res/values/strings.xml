@@ -49,4 +49,10 @@
     <string name="man">남성</string>
     <string name="woman">여성</string>
     <string name="save_success">개인정보 저장이 완료 되었습니다.</string>
+
+    <!-- 대시보드 -->
+    <string name="dashboard">대시보드</string>
+    <string name="sync">동기화</string>
+    <string name="detail">상세 정보</string>
+    <string name="sync_complete">%1$s의 동기화가 완료되었습니다!</string>
 </resources>

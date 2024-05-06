@@ -10,7 +10,7 @@ import com.home.cdp2app.health.order.type.HealthCategory
 interface ChartOrderRepository {
 
     companion object {
-        val DEFAULT : ChartOrder = ChartOrder(HealthCategory.values().toList())
+        val DEFAULT : ChartOrder = ChartOrder(LinkedHashSet(HealthCategory.values().toList()))
     }
 
     /**
@@ -22,6 +22,7 @@ interface ChartOrderRepository {
     /**
      * 순서를 저장하는 메소드 입니다.
      * @param order 저장할 순서 값 입니다.
+     * @throws IllegalArgumentException 해당 순서내에 HealthCategory enum이 전부 포함되어야 하나, 그렇지 않은경우 발생합니다. (미 포함시 차트에 안보임)
      */
     suspend fun saveOrder(order : ChartOrder)
 }
