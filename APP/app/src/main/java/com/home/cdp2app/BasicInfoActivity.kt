@@ -1,28 +1,33 @@
-package com.home.cdp2app.view.fragment
+package com.home.cdp2app
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.google.android.material.slider.Slider
+import androidx.appcompat.app.AppCompatActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.BasicInfoBinding
+import com.home.cdp2app.health.basic.repository.PreferenceBasicInfoRepository
 import com.home.cdp2app.health.basic.type.Gender
+import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
+import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
+import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.view.viewmodel.BasicInfoViewModel
 
 /**
- * 기본 건강정보 (BasicInfo)를 수정하고 관리하는 프래그먼트
+ * 기본 건강정보 (BasicInfo)를 수정하고 관리하는 액티비티
  */
-class BasicInfoFragment(private val viewModel: BasicInfoViewModel) : Fragment() {
+class BasicInfoActivity : AppCompatActivity() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val bind = BasicInfoBinding.inflate(inflater)
+    // todo hilt inject
+
+    private val repository by lazy {  PreferenceBasicInfoRepository(SharedPreferencesStorage(this)) }
+    private val viewModel : BasicInfoViewModel by lazy {  BasicInfoViewModel(LoadBasicInfo(repository), SaveBasicInfo(repository)) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val bind = BasicInfoBinding.inflate(layoutInflater)
+        setContentView(bind.root)
         initListener(bind)
         initObserve(bind)
-        return bind.root
     }
 
     //키 부분 텍스트뷰 값 변경하는 메소드
@@ -60,14 +65,14 @@ class BasicInfoFragment(private val viewModel: BasicInfoViewModel) : Fragment() 
     //LiveData Observe
     private fun initObserve(bind: BasicInfoBinding) {
         // 저장여부 observe
-        viewModel.saveLiveData.observe(viewLifecycleOwner) { event ->
+        viewModel.saveLiveData.observe(this) { event ->
             val isSaved = event.getContent() ?: return@observe //이벤트가 리스닝된경우 return, 아닌경우 content 가져옴
             if (isSaved)
-                Toast.makeText(requireContext(), R.string.save_success, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.save_success, Toast.LENGTH_SHORT).show()
         }
 
         //건강정보 읽었을때 파싱
-        viewModel.basicInfoLiveData.observe(viewLifecycleOwner) { data ->
+        viewModel.basicInfoLiveData.observe(this) { data ->
             val height = data.height.toFloat()
             bind.slider.value = height
             //슬라이더가 변경되지 않을경우 대비하여 수동으로 변경

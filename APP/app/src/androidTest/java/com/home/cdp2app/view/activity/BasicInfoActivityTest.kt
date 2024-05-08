@@ -1,36 +1,25 @@
-package com.home.cdp2app.view.fragment
+package com.home.cdp2app.view.activity
 
 import android.content.Context
 import android.view.View
-import android.view.WindowManager
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.ViewModel
-import androidx.test.espresso.Espresso
+import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Root
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.BoundedMatcher
-import androidx.test.espresso.matcher.RootMatchers.withDecorView
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isChecked
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isNotChecked
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.slider.Slider
-import com.home.ToastMatcher
+import com.home.cdp2app.BasicInfoActivity
 import com.home.cdp2app.R
-import com.home.cdp2app.databinding.FragmentTutorial1Binding
 import com.home.cdp2app.health.basic.entity.BasicInfo
-import com.home.cdp2app.health.basic.repository.BasicInfoRepository
 import com.home.cdp2app.health.basic.type.Gender
 import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
 import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
@@ -38,46 +27,31 @@ import com.home.cdp2app.view.viewmodel.BasicInfoViewModel
 import com.home.getOrAwaitValue
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.not
-import org.hamcrest.TypeSafeMatcher
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
-// basic info fragment runtime test
+// basic info activity runtime test
 // 각 테스트는 독립적으로 수행됨
 // robolectrictestrunner 이용해서 jvm 상에서 돌려도 되나, UI는 실제 안드로이드 런타임에서 동작해야 함으로 테스트 환경은 런타임으로
 @RunWith(AndroidJUnit4::class)
-class BasicInfoFragmentTest {
+class BasicInfoActivityTest {
 
-    val loadBasicInfo : LoadBasicInfo = mockk() //mock usecase
-    val saveBasicInfo : SaveBasicInfo = mockk() //save usecase
-    val viewModel : BasicInfoViewModel =  BasicInfoViewModel(loadBasicInfo, saveBasicInfo) //mock으로 된 값이 들어가므로 sharedPreference 신경 X
     val context : Context = InstrumentationRegistry.getInstrumentation().targetContext
 
 
     @Before
     fun beforeTest() {
-        coEvery { loadBasicInfo(any()) } returns BasicInfo(150.0, 75.0, Gender.MAN, true)  //기본값 반환하게
-        //fragment 실행, theme id 지정해줘야 오류 없음, factory로 vm 주입
-        launchFragmentInContainer<BasicInfoFragment>( themeResId = R.style.Theme_CDP2app, factory = object : FragmentFactory() {
-            override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-                return BasicInfoFragment(viewModel)
-            }
-        })
+        //activity 실행, factory로 vm 주입
+        launchActivity<BasicInfoActivity>()
     }
 
     //키 슬라이더 테스트
@@ -125,11 +99,14 @@ class BasicInfoFragmentTest {
         onView(withId(R.id.man)).check(matches(isNotChecked())) //남성 체크 안되어 있는지
     }
 
+    // TODO hilt 사용시 hilt by viewmodels 이용해서 mock 입력하기. 현재 activity로 변경한 상황이라 vm call 체크 못함
+    /*
+
     //livedata 값 로드 확인
     @Test
     fun TEST_LOAD_VALUE() {
-        //livedata에서 값을 읽어오기 위해 지연을 발생, 여기서 coEvery 선언해도 의미 X, fragment 생성시 이미 observe 됨
-        runBlocking(Dispatchers.Main) { viewModel.basicInfoLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) } //Thread sleep 대신 observe 관측시켜 완료될경우 수행되게 변경
+        //livedata에서 값을 읽어오기 위해 지연을 발생, 여기서 coEvery 선언해도 의미 X, activity 생성시 이미 observe 됨
+        runBlocking(Dispatchers.Main) { viewModel.basicInfoLiveData.getOrAwaitValue(2, TimeUnit.SECONDS) } //Thread sleep 대신 observe 관측시켜 완료될경우 수행되게 변경
         //맨 위에서 선언한 coEvery에서 반환하는 BasicInfo와 매칭되는지 확인
         onView(withId(R.id.slider)).check(matches(withSliderValue(150.0f))) //키 150 매칭
         onView(withId(R.id.slider_weight)).check(matches(withSliderValue(75.0f))) //몸무게 75 매칭
@@ -150,6 +127,7 @@ class BasicInfoFragmentTest {
         //저장버튼 클릭
         onView(withId(R.id.save)).perform(ViewActions.click())
 
+        Thread.sleep(500) //대기
         val capturedInfo = saveSlot.captured //저장 요청된 info
         assertEquals(165.0, capturedInfo.height, 0.0) //키 비교
         assertEquals(75.0, capturedInfo.weight, 0.0) //몸무게 비교
@@ -158,7 +136,9 @@ class BasicInfoFragmentTest {
 
     }
 
-    fun withSliderValue(expectedValue: Float): Matcher<View?> {
+     */
+
+    private fun withSliderValue(expectedValue: Float): Matcher<View?> {
         return object : BoundedMatcher<View?, Slider>(Slider::class.java) {
             override fun describeTo(description: Description) {
                 description.appendText("expected: $expectedValue")
@@ -169,7 +149,7 @@ class BasicInfoFragmentTest {
             }
         }
     }
-    fun setSliderValue(value: Float): ViewAction {
+    private fun setSliderValue(value: Float): ViewAction {
         return object : ViewAction {
             override fun getDescription(): String {
                 return "Set Slider value to $value"
