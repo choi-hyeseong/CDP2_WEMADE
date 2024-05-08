@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as tf from '@tensorflow/tfjs-node';
 import * as path from 'path';
 
 @Injectable()
 export class HealthService {
+  constructor(private configService: ConfigService) {}
   private model: tf.LayersModel | null = null;
 
   async loadModel() {
@@ -13,29 +15,25 @@ export class HealthService {
     }
   }
 
-  async predictHealthInfo(
-    sex: number,
-    age: number,
-    HE_sbp: number,
-    HE_dbp: number,
-    HE_BMI: number,
-    HE_PLS: number,
-    sm_present: number,
-    pa_walk: number,
-    total_sleep: number,
-  ) {
+  normalize(data: { [key: string]: number }): number[] {
+    const normalizedData = Object.values(data).map((value, index) => {
+      const fieldName = Object.keys(data)[index];
+      const min = this.configService.get<number>(
+        `MIN_${fieldName.toUpperCase()}`,
+      );
+      const max = this.configService.get<number>(
+        `MAX_${fieldName.toUpperCase()}`,
+      );
+      return (value - min) / (max - min);
+    });
+
+    return normalizedData;
+  }
+
+  async predictHealthInfo(data: { [key: string]: number }) {
     await this.loadModel();
-    const inputData = [
-      sex,
-      age,
-      HE_sbp,
-      HE_dbp,
-      HE_BMI,
-      HE_PLS,
-      sm_present,
-      pa_walk,
-      total_sleep,
-    ].map(Number);
+
+    const inputData = this.normalize(data);
 
     const outputData = this.model.predict(
       tf.tensor2d([inputData], [1, 9]),
