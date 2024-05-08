@@ -67,8 +67,10 @@ class BasicInfoActivity : AppCompatActivity() {
         // 저장여부 observe
         viewModel.saveLiveData.observe(this) { event ->
             val isSaved = event.getContent() ?: return@observe //이벤트가 리스닝된경우 return, 아닌경우 content 가져옴
-            if (isSaved)
+            if (isSaved) {
                 Toast.makeText(this, R.string.save_success, Toast.LENGTH_SHORT).show()
+                finish() //이전 화면으로 돌아가기 위한 finish
+            }
         }
 
         //건강정보 읽었을때 파싱
