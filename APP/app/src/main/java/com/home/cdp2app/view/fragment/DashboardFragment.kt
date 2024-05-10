@@ -15,8 +15,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.home.cdp2app.R
-import com.home.cdp2app.databinding.ChartRecyclerBinding
-import com.home.cdp2app.databinding.ChartRecyclerItemBinding
+import com.home.cdp2app.databinding.MainDashboardBinding
+import com.home.cdp2app.databinding.MainDashboardItemBinding
 import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
 import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
@@ -43,13 +43,13 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
     private var adapter : ChartAdapter? = null //추후 초기화 될 adapter. observe시 값 갱신에 사용됨
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val bind = ChartRecyclerBinding.inflate(inflater)
+        val bind = MainDashboardBinding.inflate(inflater)
         initObserver(bind)
         return bind.root
     }
 
     //observer 초기화
-    private fun initObserver(bind : ChartRecyclerBinding) {
+    private fun initObserver(bind : MainDashboardBinding) {
         //recyclerview observing
         dashboardViewModel.chartList.observe(viewLifecycleOwner) {
             if (adapter != null) //adapter가 이미 지정되어 있다면
@@ -82,7 +82,7 @@ class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChartViewHolder {
         val inflater = LayoutInflater.from(parent.context) //inflater 흭득
-        val item: ChartRecyclerItemBinding = ChartRecyclerItemBinding.inflate(inflater, parent, false) //parent의 inflater를 이용해서 item view 보여줌
+        val item: MainDashboardItemBinding = MainDashboardItemBinding.inflate(inflater, parent, false) //parent의 inflater를 이용해서 item view 보여줌
         return ChartViewHolder(item, viewModel)
     }
 
@@ -97,7 +97,7 @@ class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardV
 }
 
 //Adapter에서 bind된 layout 받아서 holder에서 가공
-class ChartViewHolder(private val view: ChartRecyclerItemBinding, private val viewModel: DashboardViewModel) : RecyclerView.ViewHolder(view.root) {
+class ChartViewHolder(private val view: MainDashboardItemBinding, private val viewModel: DashboardViewModel) : RecyclerView.ViewHolder(view.root) {
 
     fun bind(chart: Chart) {
         view.title.text = chart.type.displayName //displayName으로 설정
