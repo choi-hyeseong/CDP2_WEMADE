@@ -11,7 +11,7 @@ class SleepHourValidator {
     /**
      * validate 수행
      * @param date nullable한 날짜 문자열 (DateTimeUtil)
-     * @param sleepHour nullable한 수면시간 (double형 만족, 0이하 금지)
+     * @param sleepHour nullable한 수면시간 (double형 만족, 0.1이하 금지)
      */
     fun validate(date : String?, sleepHour : String?) : ValidateStatus {
         if (date.isNullOrBlank()) return ValidateStatus.FIELD_EMPTY
@@ -23,7 +23,7 @@ class SleepHourValidator {
         // 성공여부 catch
         val success = kotlin.runCatching {
             val parsedSleepHour = sleepHour.toDouble()
-            if (parsedSleepHour <= 0.1) throw IllegalArgumentException("0.05보다 낮아선 안됩니다.")
+            if (parsedSleepHour <= 0.1) throw IllegalArgumentException("0.1보다 낮아선 안됩니다.")
         }.isSuccess
         // 성공시 ok
         return if (success) ValidateStatus.OK
