@@ -5,9 +5,9 @@ import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.view.dialog.BloodPressureDialog
 import com.home.cdp2app.view.dialog.HeartRateDialog
 import com.home.cdp2app.view.dialog.SleepHourDialog
-import com.home.cdp2app.view.dialog.validator.validate.BloodPressureViewValidator
-import com.home.cdp2app.view.dialog.validator.validate.HeartRateViewValidator
-import com.home.cdp2app.view.dialog.validator.validate.SleepHourViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 
 /**

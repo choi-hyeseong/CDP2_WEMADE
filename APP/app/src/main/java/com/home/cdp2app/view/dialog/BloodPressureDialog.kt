@@ -9,7 +9,7 @@ import com.home.cdp2app.R
 import com.home.cdp2app.databinding.DialogBloodpressureBinding
 import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.BloodPressureViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 import java.time.Instant
 
@@ -35,7 +35,7 @@ class BloodPressureDialog(private val validator: BloodPressureViewValidator, pri
             //validator 추가
             when (validator.validate(view)) {
                 ValidateStatus.OK -> {
-                    viewModel.saveBloodPressure(DateTimeUtil.convertToDate(view.date.text.toString()), view.bloodSystolic.text.toString().toDouble(), view.bloodDiastolic.text.toString().toDouble()) //검증됨
+                    viewModel.saveBloodPressure(view.date.text.toString(), view.bloodSystolic.text.toString(), view.bloodDiastolic.text.toString()) //검증됨
                     dismiss() //요청 후 종료
                 }
                 ValidateStatus.FIELD_EMPTY -> Toast.makeText(requireContext(), R.string.field_empty, Toast.LENGTH_SHORT).show()

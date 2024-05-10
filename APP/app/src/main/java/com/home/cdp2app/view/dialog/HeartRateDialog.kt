@@ -10,7 +10,7 @@ import com.home.cdp2app.databinding.DialogHeartBinding
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.HeartRateViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 import java.time.Instant
 
@@ -37,7 +37,7 @@ class HeartRateDialog(private val validator : HeartRateViewValidator, private va
             //validator 추가
             when (validator.validate(view)) {
                 ValidateStatus.OK -> {
-                    viewModel.saveHeartRate(DateTimeUtil.convertToDate(view.date.text.toString()), view.heartRate.text.toString().toLong()) //검증됨
+                    viewModel.saveHeartRate(view.date.text.toString(), view.heartRate.text.toString()) //검증됨
                     dismiss() //요청 후 종료
                 }
                 ValidateStatus.FIELD_EMPTY -> Toast.makeText(requireContext(), R.string.field_empty, Toast.LENGTH_SHORT).show()

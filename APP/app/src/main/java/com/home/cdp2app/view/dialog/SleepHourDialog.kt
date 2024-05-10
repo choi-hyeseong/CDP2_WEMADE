@@ -10,7 +10,7 @@ import com.home.cdp2app.databinding.DialogSleephourBinding
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.SleepHourViewValidator
+import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 import java.time.Instant
 
@@ -36,7 +36,7 @@ class SleepHourDialog(private val validator : SleepHourViewValidator, private va
             //validator 추가
             when (validator.validate(view)) {
                 ValidateStatus.OK -> {
-                    viewModel.saveSleepHour(DateTimeUtil.convertToDate(view.date.text.toString()), view.sleepHour.text.toString().toDouble()) //검증됨
+                    viewModel.saveSleepHour(view.date.text.toString(), view.sleepHour.text.toString()) //검증됨
                     dismiss() //요청 후 종료
                 }
                 ValidateStatus.FIELD_EMPTY -> Toast.makeText(requireContext(), R.string.field_empty, Toast.LENGTH_SHORT).show()

@@ -12,10 +12,14 @@ import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.health.sleep.usecase.SaveSleepHour
+import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.util.livedata.Event
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.parser.ChartParser
 import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
+import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureValidator
+import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateValidator
+import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourValidator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +27,16 @@ import java.time.Duration
 import java.time.Instant
 
 //dashboard에서 상세정보 클릭시 보여줄 액티비티의 vm
-class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate, private val loadBloodPressure: LoadBloodPressure, private val loadSleepHour: LoadSleepHour, private val saveHeartRate: SaveHeartRate, private val saveBloodPressure: SaveBloodPressure, private val saveSleepHour: SaveSleepHour, private val chartParser: ChartParser) {
+class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate,
+                           private val loadBloodPressure: LoadBloodPressure,
+                           private val loadSleepHour: LoadSleepHour,
+                           private val saveHeartRate: SaveHeartRate,
+                           private val saveBloodPressure: SaveBloodPressure,
+                           private val saveSleepHour: SaveSleepHour,
+                           private val heartRateValidator: HeartRateValidator,
+                           private val sleepHourValidator: SleepHourValidator,
+                           private val bloodPressureValidator: BloodPressureValidator,
+                           private val chartParser: ChartParser) {
     private val LOG_HEADER = "DASHBOARD_VIEWMODEL"
     val chartLiveData: MutableLiveData<Chart> = MutableLiveData()
     val saveLiveData: MutableLiveData<Event<ValidateStatus>> = MutableLiveData()
@@ -42,43 +55,32 @@ class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate, private val
         }
     }
 
-    fun saveHeartRate(date: Instant?, heartRate: Long) {
+    fun saveHeartRate(date: String?, heartRate: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             // vm에서도 검증
-            val status: ValidateStatus = if (heartRate <= 0) ValidateStatus.VALUE_ERROR //심박수가 음수인경우
-            else if (date == null) ValidateStatus.FIELD_EMPTY //날짜가 비어있는 경우
-            else {
-                saveHeartRate(listOf(HeartRate(date, heartRate)))
-                ValidateStatus.OK //저장후 ok
-            }
+            val status: ValidateStatus = heartRateValidator.validate(date, heartRate)
+            if (status == ValidateStatus.OK)
+                saveHeartRate(listOf(HeartRate(DateTimeUtil.convertToDate(date)!!, heartRate!!.toLong())))
             saveLiveData.postValue(Event(status)) //저장 성공함
         }
     }
 
-    fun saveBloodPressure(date: Instant?, systolic: Double, diastolic: Double) {
+    fun saveBloodPressure(date: String?, systolic: String?, diastolic: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             // vm에서도 검증
-            val status: ValidateStatus = if (systolic <= 10 || diastolic <= 10) ValidateStatus.VALUE_ERROR //수축-이완기가 음수인경우
-            else if (systolic < diastolic) ValidateStatus.VALUE_ERROR //이완기가 수축기보다 더 큰경우
-            else if (date == null) ValidateStatus.FIELD_EMPTY //날짜가 비어있는 경우
-            else {
-                saveBloodPressure(BloodPressure(date, systolic, diastolic))
-                ValidateStatus.OK //저장후 ok
-            }
+            val status: ValidateStatus = bloodPressureValidator.validate(date, systolic, diastolic)
+            if (status == ValidateStatus.OK)
+                saveBloodPressure(BloodPressure(DateTimeUtil.convertToDate(date)!!, systolic!!.toDouble(), diastolic!!.toDouble())) //ok면 검증완료
             saveLiveData.postValue(Event(status)) //저장 성공함
         }
     }
 
-    fun saveSleepHour(date: Instant?, sleepHour: Double) {
+    fun saveSleepHour(date: String?, sleepHour: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             // vm에서도 검증
-            val sleepMinutes = (sleepHour * 60).toLong() //1.5시간 -> 90분
-            val status: ValidateStatus = if (sleepMinutes <= 0) ValidateStatus.VALUE_ERROR //수면시간이 음수인경우
-            else if (date == null) ValidateStatus.FIELD_EMPTY //날짜가 비어있는 경우
-            else {
-                saveSleepHour(listOf(SleepHour(date, Duration.ofMinutes(sleepMinutes))))
-                ValidateStatus.OK //저장후 ok
-            }
+            val status: ValidateStatus = sleepHourValidator.validate(date, sleepHour)
+            if (status == ValidateStatus.OK)
+                saveSleepHour(listOf(SleepHour(DateTimeUtil.convertToDate(date)!!, Duration.ofMinutes((sleepHour!!.toDouble() * 60.0).toLong())))) //곱하기로 해야함. 1.5 * 60 = 90
             saveLiveData.postValue(Event(status)) //저장 성공함
         }
     }
