@@ -55,4 +55,25 @@
     <string name="sync">동기화</string>
     <string name="detail">상세 정보</string>
     <string name="sync_complete">%1$s의 동기화가 완료되었습니다!</string>
+
+    <!-- 상세정보 -->
+    <string name="insert_health">직접 입력</string>
+    <string name="select_date">날짜를 선택해주세요</string>
+    <string name="chart_not_provide">차트 데이터가 제공되지 않았습니다. 다시 시도해주세요</string>
+
+    <!-- 다이얼로그 -->
+    <string name="date">날짜</string>
+    <string name="heart_rate">심박수</string>
+    <string name="input_date">날짜 입력하기</string>
+    <string name="input_heart_rate">심박수 입력하기 (숫자만 입력!)</string>
+    <string name="select_date_dialog">날짜 선택</string>
+    <string name="select_time_dialog">시간 선택</string>
+    <string name="field_empty">필요한 필드가 비어있습니다. 비어있는곳이 없게 작성해주세요</string>
+    <string name="value_error">일부 필드에 올바르지 않은 값이 들어있습니다. 값을 올바르게 작성해주세요.</string>
+    <string name="dialog_save_complete">건강정보 저장이 완료되었습니다!</string>
+    <string name="blood_systolic">혈압(수축기)</string>
+    <string name="blood_diastolic">혈압(이완기)</string>
+    <string name="blood_hint">혈압 입력하기 (소수점 가능!, 10이하 안됨!)</string>
+    <string name="sleep_hour">수면시간</string>
+    <string name="sleep_hint">수면시간 (0.5 = 30분)</string>
 </resources>

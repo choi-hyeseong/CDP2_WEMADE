@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.home.cdp2app.R
-import com.home.cdp2app.databinding.BasicInfoBinding
+import com.home.cdp2app.databinding.MainSettingBasicInfoBinding
 import com.home.cdp2app.health.basic.repository.PreferenceBasicInfoRepository
 import com.home.cdp2app.health.basic.type.Gender
 import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
@@ -24,24 +24,24 @@ class BasicInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bind = BasicInfoBinding.inflate(layoutInflater)
+        val bind = MainSettingBasicInfoBinding.inflate(layoutInflater)
         setContentView(bind.root)
         initListener(bind)
         initObserve(bind)
     }
 
     //키 부분 텍스트뷰 값 변경하는 메소드
-    private fun setHeightText(bind: BasicInfoBinding, value : Float) {
+    private fun setHeightText(bind: MainSettingBasicInfoBinding, value : Float) {
         bind.height.text = getString(R.string.height_format, value.toInt())
     }
 
     //몸무게 부분 텍스트뷰 값 변경하는 메소드
-    private fun setWeightText(bind: BasicInfoBinding, value : Float) {
+    private fun setWeightText(bind: MainSettingBasicInfoBinding, value : Float) {
         bind.weight.text = getString(R.string.weight_format, value.toInt())
     }
 
     //뷰 리스너 초기화 부분 (슬라이더, 저장버튼)
-    private fun initListener(bind: BasicInfoBinding) {
+    private fun initListener(bind: MainSettingBasicInfoBinding) {
         //키 부분 변경 리스너
         bind.slider.addOnChangeListener { _, value, _ ->
            setHeightText(bind, value)
@@ -63,7 +63,7 @@ class BasicInfoActivity : AppCompatActivity() {
     }
 
     //LiveData Observe
-    private fun initObserve(bind: BasicInfoBinding) {
+    private fun initObserve(bind: MainSettingBasicInfoBinding) {
         // 저장여부 observe
         viewModel.saveLiveData.observe(this) { event ->
             val isSaved = event.getContent() ?: return@observe //이벤트가 리스닝된경우 return, 아닌경우 content 가져옴

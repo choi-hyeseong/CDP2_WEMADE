@@ -1,5 +1,6 @@
 package com.home.cdp2app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -25,6 +26,7 @@ import com.home.cdp2app.health.heart.mapper.HeartRateMapper
 import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
 import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.health.order.repository.PreferenceOrderRepository
+import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
 import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
@@ -58,18 +60,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
-        val repository = PreferenceOrderRepository(SharedPreferencesStorage(applicationContext))
-        val healthDao = HealthConnectDao(applicationContext)
-        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
-        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
-        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
-        supportFragmentManager.beginTransaction().replace(R.id.frame, DashboardFragment(DashboardViewModel(LoadChartOrder(repository),
-            LoadHeartRate(heartRepo),
-            LoadBloodPressure(bloodRepo),
-            LoadSleepHour(sleepRepo),
-            ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
-        ))).commit() //for test, inflate 전 setContentView는 해야함
+        startActivity(Intent(this, MainPagerActivity::class.java))
         /*
+
+
         val bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         handleHealthConnectSDK()
