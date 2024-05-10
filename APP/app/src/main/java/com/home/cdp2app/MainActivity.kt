@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
-        startActivity(Intent(this, MainPagerActivity::class.java))
+        startActivity(Intent(this, MainPagerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK))) //다시 돌아가지 않음.
         /*
 
 
