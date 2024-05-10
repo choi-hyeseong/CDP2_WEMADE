@@ -23,7 +23,7 @@ class SleepHourValidator {
         // 성공여부 catch
         val success = kotlin.runCatching {
             val parsedSleepHour = sleepHour.toDouble()
-            if (parsedSleepHour <= 0) throw IllegalArgumentException("0보다 낮아선 안됩니다.")
+            if (parsedSleepHour <= 0.1) throw IllegalArgumentException("0.05보다 낮아선 안됩니다.")
         }.isSuccess
         // 성공시 ok
         return if (success) ValidateStatus.OK

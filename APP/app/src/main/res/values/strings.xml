@@ -75,5 +75,5 @@
     <string name="blood_diastolic">혈압(이완기)</string>
     <string name="blood_hint">혈압 입력하기 (소수점 가능!, 10이하 안됨!)</string>
     <string name="sleep_hour">수면시간</string>
-    <string name="sleep_hint">수면시간 (0.5 = 30분)</string>
+    <string name="sleep_hint">수면시간 (0.5 = 30분, 0.1이상 입력)</string>
 </resources>
