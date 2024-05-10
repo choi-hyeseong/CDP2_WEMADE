@@ -24,9 +24,9 @@ class SleepHourChartMapperTest {
         //데이터 일치하는지 확인
         Assert.assertEquals(2, chart.chartData.size)
         Assert.assertEquals(firstSleep.date, chart.chartData[0].time)
-        Assert.assertEquals(firstSleep.duration.toHours().toDouble(), chart.chartData[0].data, 0.0)
+        Assert.assertEquals(firstSleep.duration.toMinutes() / 60.0, chart.chartData[0].data, 0.0)
         Assert.assertEquals(secondSleep.date, chart.chartData[1].time)
-        Assert.assertEquals(secondSleep.duration.toHours().toDouble(), chart.chartData[1].data, 0.0)
+        Assert.assertEquals(secondSleep.duration.toMinutes() / 60.0, chart.chartData[1].data, 0.0)
         assertEquals(HealthCategory.SLEEP_HOUR, chart.type)
     }
 
