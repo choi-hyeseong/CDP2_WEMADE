@@ -10,6 +10,8 @@ import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
@@ -82,6 +84,24 @@ class PreferenceBasicInfoRepositoryTest {
         runBlocking {
             val result = assertThrows<IllegalArgumentException> { preferenceBasicInfoRepository.loadInfo(false) } //throw 되는지 확인
             assertEquals(expectedThrow, result) //exception 비교
+        }
+    }
+
+    @Test
+    fun TEST_HAVE_INFO() {
+        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } returns BasicInfo(180.0, 80.0, Gender.MAN, false) //DEFAULT와 값은 동일하지만, 다른 객체 (저장된 객체)
+
+        runBlocking {
+            assertTrue(preferenceBasicInfoRepository.hasInfo())
+        }
+    }
+
+    @Test
+    fun TEST_NOT_HAVE_INFO() {
+        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws NoSuchElementException("아무튼 exception")
+
+        runBlocking {
+            assertFalse(preferenceBasicInfoRepository.hasInfo())
         }
     }
 

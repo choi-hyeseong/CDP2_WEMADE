@@ -21,4 +21,9 @@ class PreferenceBasicInfoRepository(private val sharedPreferencesStorage: Shared
         sharedPreferencesStorage.saveObject(preferenceKey, info)
     }
 
+    //로드로 불러온값이 DEFAULT와 동일한지 주소값 비교. 같을경우 저장안된값, false로 load 요청하고 exception 체크해도 됨
+    override suspend fun hasInfo(): Boolean {
+        return loadInfo(true) !== BasicInfoRepository.DEFAULT
+    }
+
 }

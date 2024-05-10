@@ -27,4 +27,10 @@ interface BasicInfoRepository {
      * @param info 저장할 건강 정보입니다.
      */
     suspend fun saveInfo(info : BasicInfo)
+
+    /**
+     * 저장된 건강 정보가 존재하는지 여부를 체크합니다. 메인 화면에서 정보 확인시 사용됩니다.
+     * @return 건강정보가 저장되어 있을 경우 true, 저장되어 있지 않으면 false를 반환합니다.
+     */
+    suspend fun hasInfo() : Boolean
 }
