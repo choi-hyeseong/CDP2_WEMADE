@@ -1,7 +1,7 @@
-package com.home.cdp2app.view.dialog.validator.validate.heart
+package com.home.cdp2app.health.heart.valid
 
 import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
+import com.home.cdp2app.type.ValidateStatus
 
 /**
  * 심박수 validating class

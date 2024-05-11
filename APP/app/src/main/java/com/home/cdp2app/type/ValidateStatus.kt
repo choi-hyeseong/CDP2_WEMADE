@@ -1,4 +1,4 @@
-package com.home.cdp2app.view.dialog.validator.type
+package com.home.cdp2app.type
 
 /**
  * 값저장시 validate한 결과를 나타내는 enum 입니다.

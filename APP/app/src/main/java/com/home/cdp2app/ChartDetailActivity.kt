@@ -37,13 +37,13 @@ import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMappe
 import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.dialog.factory.DialogFactory
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureValidator
-import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureViewValidator
-import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateValidator
-import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateViewValidator
-import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourValidator
-import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourViewValidator
+import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.health.bloodpressure.valid.BloodPressureValidator
+import com.home.cdp2app.view.dialog.validator.blood.BloodPressureViewValidator
+import com.home.cdp2app.health.heart.valid.HeartRateValidator
+import com.home.cdp2app.view.dialog.validator.heart.HeartRateViewValidator
+import com.home.cdp2app.health.sleep.valid.SleepHourValidator
+import com.home.cdp2app.view.dialog.validator.sleep.SleepHourViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 
 //해당 액티비티 실행시 Intent에 DETAIL_PARAM값과 함께 HealthCategory enum을 제공해야 합니다.

@@ -16,10 +16,10 @@ import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.util.livedata.Event
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.parser.ChartParser
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.blood.BloodPressureValidator
-import com.home.cdp2app.view.dialog.validator.validate.heart.HeartRateValidator
-import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourValidator
+import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.health.bloodpressure.valid.BloodPressureValidator
+import com.home.cdp2app.health.heart.valid.HeartRateValidator
+import com.home.cdp2app.health.sleep.valid.SleepHourValidator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

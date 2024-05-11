@@ -9,8 +9,8 @@ import com.home.cdp2app.R
 import com.home.cdp2app.databinding.DialogSleephourBinding
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.sleep.SleepHourViewValidator
+import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.view.dialog.validator.sleep.SleepHourViewValidator
 import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
 import java.time.Instant
 

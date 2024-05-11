@@ -1,7 +1,7 @@
-package com.home.cdp2app.view.dialog.validator.validate.sleep
+package com.home.cdp2app.health.sleep.valid
 
 import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
+import com.home.cdp2app.type.ValidateStatus
 
 /**
  * SleepHour validate class

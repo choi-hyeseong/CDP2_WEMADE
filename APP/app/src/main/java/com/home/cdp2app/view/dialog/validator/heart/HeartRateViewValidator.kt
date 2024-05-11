@@ -1,9 +1,9 @@
-package com.home.cdp2app.view.dialog.validator.validate.heart
+package com.home.cdp2app.view.dialog.validator.heart
 
 import com.home.cdp2app.databinding.DialogHeartBinding
-import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.view.dialog.validator.type.ValidateStatus
-import com.home.cdp2app.view.dialog.validator.validate.ViewBindingDialogValidator
+import com.home.cdp2app.health.heart.valid.HeartRateValidator
+import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.view.dialog.validator.ViewBindingDialogValidator
 
 /**
  * DialogHeartBinding 뷰를 검증하는 클래스
