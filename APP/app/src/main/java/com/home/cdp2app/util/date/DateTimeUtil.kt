@@ -18,9 +18,9 @@ class DateTimeUtil {
         val dateFormatter : DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.systemDefault()) //spinner에 사용될 날짜 formatter
 
         /**
-         * nullable한 string을 LocalDateTime으로 변경합니다.
+         * nullable한 string을 Instant로 변경합니다.
          * @param str nullable한 문자열입니다.
-         * @return 파싱된 LocalDateTime을 반환합니다.
+         * @return nullable한 파싱된 Instant로 반환합니다. str이 null이거나 파싱 실패시 null을 반환합니다
          */
         fun convertToDate(str : String?) : Instant? {
             return kotlin.runCatching {
