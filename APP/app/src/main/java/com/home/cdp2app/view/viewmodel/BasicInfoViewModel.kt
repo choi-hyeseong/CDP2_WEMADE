@@ -20,12 +20,13 @@ class BasicInfoViewModel(private val loadBasicInfo: LoadBasicInfo, private val s
     //저장 완료여부 확인시켜주기 위한 Event Boolean LiveData. 1회성으로만 작동함. (enum 안쓴 이유는 1가지 메시지만 나타내면 되는데 굳이 enum 구현 까지 필요한가.. 싶음)
     val saveLiveData: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
-    //basic info 저장용 LiveData, lazy로 선언되어 VM 초기화가 아닌 observe등 변수 접근시 불러오기를 수행. IO Dispatcher라 postValue로 전달
-    val basicInfoLiveData: MutableLiveData<BasicInfo> by lazy {
-        MutableLiveData<BasicInfo>().apply {
-            CoroutineScope(Dispatchers.IO).launch {
-                postValue(loadBasicInfo(true))
-            }
+    //basic info 저장용 LiveData
+    val basicInfoLiveData: MutableLiveData<BasicInfo> = MutableLiveData()
+
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            val info = loadBasicInfo(true)
+            basicInfoLiveData.postValue(info)
         }
     }
 
