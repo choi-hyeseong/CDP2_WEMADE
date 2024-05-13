@@ -35,13 +35,13 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
     private val LOG_HEADER : String = "Fragment_Dashboard" //for log
 
     val toastLiveData : MutableLiveData<Event<HealthCategory>> = MutableLiveData() //특정 sync toast 알림 위한 이벤트 라이브데이터
-    //lazy로 선언되어 접근시 loadOrder 수행. 모든 메소드를 수행하기전 observe를 수행해야함t
-    val chartList: MutableLiveData<MutableList<Chart>> by lazy {
-        MutableLiveData<MutableList<Chart>>().apply {
-            CoroutineScope(Dispatchers.IO).launch {
-                postValue(loadChartOrder().toEmptyChart())
-                //loadAllChartData() - lazy문은 시점 예측하기 좋지않음. 따라서 Fragment에서 로드 요청하더라도 거기로 옮기는게 좋을 것 같음. 여기서는 차트 순서 초기화만
-            }
+    val chartList: MutableLiveData<MutableList<Chart>> = MutableLiveData<MutableList<Chart>>()
+
+    // init시 chart list 초기화. observe시 lazy로 초기화 하면 side effect로 차트가 바로 안뜨는 현상 발생
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            chartList.postValue(loadChartOrder().toEmptyChart())
+            loadAllChartData() //뷰에서 호출하니 차트 순서 불러오기전에 호출하는 문제로 인해 차트 로딩 안됨. vm에서 init시 해야할듯
         }
     }
 

@@ -3,6 +3,7 @@ package com.home.cdp2app.view.fragment
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,6 @@ import java.util.Date
 import java.util.Locale
 
 // dashboard view
-// TODO Detail
 class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fragment() {
 
     private lateinit var adapter : ChartAdapter
@@ -71,7 +71,6 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
                 Toast.makeText(requireContext(), getString(R.string.sync_complete, category.displayName), Toast.LENGTH_LONG).show()
             }
         }
-        dashboardViewModel.loadAllChartData() //차트 데이터 모두 불러오기
 
     }
 
