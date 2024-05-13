@@ -3,6 +3,7 @@ package com.home.cdp2app
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -53,14 +54,44 @@ class MainPagerActivity : AppCompatActivity(), ChartCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = MainPagerBinding.inflate(layoutInflater)
-        bind.pager.adapter = ViewpagerFragmentAdapter(this, dashboardViewModel)
-        TabLayoutMediator(bind.tabLayout, bind.pager) {tab, pos -> tab.text = "$pos 번"}.attach()
+        initTabLayout(bind)
         setContentView(bind.root)
+    }
+
+    private fun initTabLayout(view : MainPagerBinding) {
+        view.pager.adapter = ViewpagerFragmentAdapter(this, dashboardViewModel)
+        TabLayoutMediator(view.tabLayout, view.pager) {tab, pos ->
+            // icon & text setting
+            when (pos) {
+                0 -> {
+                    //0번째 - 대시보드
+                    tab.let {
+                        it.text = getString(R.string.dashboard)
+                        it.icon = AppCompatResources.getDrawable(this, R.drawable.dashboard_icon)
+                    }
+                }
+                1 -> {
+                    // icon by Freepik(flaticon)
+                    //1번째 - 고혈압 평가 메뉴
+                    tab.let {
+                        it.text = getString(R.string.blood_pressure_predict)
+                        it.icon = AppCompatResources.getDrawable(this, R.drawable.health_icon)
+                    }
+                }
+                2 -> {
+                    //2번째 - 설정 메뉴
+                    tab.let {
+                        it.text = getString(R.string.setting)
+                        it.icon = AppCompatResources.getDrawable(this, R.drawable.setting_icon)
+                    }
+                }
+            }
+        }.attach()
     }
 
     class ViewpagerFragmentAdapter(mainPagerActivity: MainPagerActivity, dashboardViewModel: DashboardViewModel) : FragmentStateAdapter(mainPagerActivity) {
 
-        private val fragments : List<Fragment> = listOf(MainFragment(), DashboardFragment(dashboardViewModel), SettingFragment())
+        private val fragments : List<Fragment> = listOf(DashboardFragment(dashboardViewModel), MainFragment() , SettingFragment())
 
         override fun getItemCount(): Int {
             return fragments.size

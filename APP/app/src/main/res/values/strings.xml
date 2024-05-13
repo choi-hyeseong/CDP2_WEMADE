@@ -82,4 +82,7 @@
     <string name="modify_user_info">개인 정보 수정</string>
     <string name="change_dashboard_order">대시보드 순서</string>
     <string name="sign_out">로그아웃</string>
+
+    <!-- 고혈압 평가 -->
+    <string name="blood_pressure_predict">고혈압 평가</string>
 </resources>
