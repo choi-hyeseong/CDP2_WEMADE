@@ -20,28 +20,23 @@ import java.util.concurrent.TimeUnit
 class DashboardOrderViewModelTest {
 
     // test용 mock
-     val loadChartOrder : LoadChartOrder = mockk()
-     val saveChartOrder : SaveChartOrder = mockk()
-    private lateinit var viewModel : DashboardOrderViewModel //init시 로드하는 부분이 있기 때문에 주의하기
+    val loadChartOrder: LoadChartOrder = mockk()
+    val saveChartOrder: SaveChartOrder = mockk()
+    private val viewModel: DashboardOrderViewModel = DashboardOrderViewModel(loadChartOrder, saveChartOrder)
 
+    private val order = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.SLEEP_HOUR))) // test용 order
     @get:Rule
     val instantExecutionRule = InstantTaskExecutorRule() //livedata testing rule
 
+
     @Before
     fun init() {
-        // for test
-        val order = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.SLEEP_HOUR))) //for test
         coEvery { loadChartOrder() } returns order
-        viewModel = DashboardOrderViewModel(loadChartOrder, saveChartOrder)
     }
 
     @Test
     fun TEST_INIT_LOAD_ORDER() {
         //init시 chart order 잘 하는지 확인
-        val order = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.SLEEP_HOUR)))
-        coEvery { loadChartOrder() } returns order
-        viewModel = DashboardOrderViewModel(loadChartOrder, saveChartOrder)
-
         val result = viewModel.orderLivedata.getOrAwaitValue(1, TimeUnit.SECONDS)
         val orderField = Whitebox.getField(viewModel::class.java, "chartOrder").get(viewModel) as ChartOrder //reflection으로 private 필드 가져오기
         assertEquals(order, result)
@@ -50,7 +45,8 @@ class DashboardOrderViewModelTest {
 
     @Test
     fun TEST_UPDATE() {
-        Thread.sleep(500) //coroutine sleep
+        viewModel.orderLivedata.getOrAwaitValue(1, TimeUnit.SECONDS) //for lazy loading
+
         val updateOrders = LinkedHashSet<HealthCategory>(listOf(HealthCategory.SLEEP_HOUR, HealthCategory.BLOOD_PRESSURE_DIASTOLIC)) //수면시간과 이완기 혈압만 갖고 있음. 테스트용이므로 검증 부분은 생략하고 새롭게 설정되는지만 확인
         viewModel.update(updateOrders)
         val orderField = Whitebox.getField(viewModel::class.java, "chartOrder").get(viewModel) as ChartOrder //reflection으로 private 필드 가져오기
@@ -62,8 +58,9 @@ class DashboardOrderViewModelTest {
 
     @Test
     fun TEST_SAVE_SUCCESS() {
+        viewModel.orderLivedata.getOrAwaitValue(1, TimeUnit.SECONDS) //for lazy loading
         val orderField = Whitebox.getField(viewModel::class.java, "chartOrder").get(viewModel) as ChartOrder //reflection으로 private 필드 가져오기
-        val captureField : CapturingSlot<ChartOrder> = slot() //save할때 사용될 order slot
+        val captureField: CapturingSlot<ChartOrder> = slot() //save할때 사용될 order slot
         coEvery { saveChartOrder(capture(captureField)) } returns mockk() //세이브할때 요청 캡쳐
         viewModel.save()
         Thread.sleep(500)
@@ -74,6 +71,7 @@ class DashboardOrderViewModelTest {
 
     @Test
     fun TEST_SAVE_FAIL() {
+        viewModel.orderLivedata.getOrAwaitValue(1, TimeUnit.SECONDS) //for lazy loading
         coEvery { saveChartOrder(any()) } throws Exception("실패") //실패 throw
         viewModel.save()
         Thread.sleep(500)
