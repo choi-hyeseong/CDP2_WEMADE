@@ -50,7 +50,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.concurrent.ThreadLocalRandom
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HealthConnectSuccessCallback {
 
     private val LOG_HEADER = "MainActivity-Logger"
     private val permissions = HealthConnectAPI.PERMISSIONS
@@ -60,18 +60,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
-        startActivity(Intent(this, MainPagerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK))) //다시 돌아가지 않음.
-        /*
-
-
-        val bind = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(bind.root)
         handleHealthConnectSDK()
-        initPermissionLauncher()
+        initPermissionLauncher(this) //펄미션 요청이 끝난 후 검증용 콜백
 
         CoroutineScope(Dispatchers.IO).launch {
-            requestPermission()
+            requestPermission(this@MainActivity)
         }
+        //
+
+
+        /*
+        val bind = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bind.root)
+
 
         //for test
         val dao = HealthConnectDao(applicationContext)
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             //차트 매핑
             createChart(systolicMappedChart, bind.sleepChart)
             createChart(diastolicMappedChart, bind.chart)
-        }/*
+        }
         수면시간, 심박수 차트 매핑 코드
         val heartRepository = HealthConnectHeartRepository(dao, HeartRateMapper())
         val mapper = HeartRateChartMapper()
@@ -117,54 +118,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    suspend fun createChart(mappedChart: Chart, chart: BarChart) {
-        withContext(Dispatchers.Main) {
-            if (mappedChart.chartData.isEmpty()) //빈 데이터의경우 return
-                return@withContext
 
-
-            //instant를 float으로 변경하는게 아닌, Date를 따로 만들어서 index와 비교해서 보여주는 방식으로
-            class Formatter(val date: List<Instant>) : IndexAxisValueFormatter() {
-                override fun getFormattedValue(value: Float): String {
-                    return SimpleDateFormat("MM-dd HH:mm", Locale.KOREA).format(Date.from(date[value.toInt()]))
-                }
-            }
-
-            val entries = mutableListOf<BarEntry>() //entry에 빈값 들어가도 작동은 됨 안보일뿐
-            chart.apply {
-                //기본 bar chart 설정
-                setDrawGridBackground(false)
-                setDrawBarShadow(false)
-                setDrawBorders(false)
-                description = Description().apply { isEnabled = false }
-                animateY(1000)
-                animateX(1000)
-
-
-                //xAxis 설정
-                xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.granularity = 1f
-                xAxis.textColor = R.color.black
-                xAxis.setDrawAxisLine(false)
-                xAxis.setDrawGridLines(false)
-                xAxis.labelCount = 7
-
-                xAxis.valueFormatter = Formatter(mappedChart.chartData.map { it.time })
-
-                //yAxis 설정
-                axisLeft.setDrawAxisLine(false)
-                axisLeft.textColor = R.color.black
-
-                axisRight.isEnabled = false
-                data = BarData(BarDataSet(entries, mappedChart.type.displayName))
-                setVisibleXRangeMaximum(5f) //dateset 넣고 visible 설정가능
-            }
-            chart.data.notifyDataChanged()
-            chart.notifyDataSetChanged() //data 갱신
-            chart.invalidate() //view 갱신
-
-        }
-    }
 
     //sdk init
     private fun handleHealthConnectSDK() {
@@ -186,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //onCreate에서 Launcher 생성하기 위한 메소드
-    private fun initPermissionLauncher() {
+    private fun initPermissionLauncher(callback : HealthConnectSuccessCallback) {
         //요청 contract와 callback
         requestPermission = registerForActivityResult(PermissionController.createRequestPermissionResultContract()) { granted ->
             //권한이 허용되지 않았을경우
@@ -194,21 +148,33 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.health_permission_denied, Toast.LENGTH_SHORT).show()
                 finish()
             }
+            else
+                callback.onSuccess()
         }
     }
 
     //HealthConnect SDK Permission request
-    private suspend fun requestPermission() {
+    private suspend fun requestPermission(callback: HealthConnectSuccessCallback) {
         //요청될 permission
         val permissions = HealthConnectAPI.PERMISSIONS
         val healthConnectClient = HealthConnectAPI.getHealthConnectClient(applicationContext) //Singleton 준수하기 위한 Application Context 사용
 
-        //이미 충분한 권한이 지급된경우 return
-        if (healthConnectClient.permissionController.getGrantedPermissions().containsAll(permissions)) return
+        //이미 충분한 권한이 지급된경우 정상 작동하므로 callback 실행 후 return
+        if (healthConnectClient.permissionController.getGrantedPermissions().containsAll(permissions)) {
+            callback.onSuccess()
+            return
+        }
 
         requestPermission.launch(permissions)
     }
 
-         */
+    override fun onSuccess() {
+        startActivity(Intent(this, MainPagerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK))) //다시 돌아가지 않음.
     }
+
+}
+
+// helath connect 설정이 모두 완료됐을때 수행하는 callback
+interface HealthConnectSuccessCallback {
+    fun onSuccess()
 }
