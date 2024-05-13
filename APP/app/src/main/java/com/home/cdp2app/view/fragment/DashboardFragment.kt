@@ -72,12 +72,6 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
             }
         }
 
-        dashboardViewModel.chartOrderLoadEvent.observe(viewLifecycleOwner) { event ->
-            event.getContent()?.let {
-                dashboardViewModel.loadAllChartData()
-            }
-        }
-
     }
 
     //callback 할당

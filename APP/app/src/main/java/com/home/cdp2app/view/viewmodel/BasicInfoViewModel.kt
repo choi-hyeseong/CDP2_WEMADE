@@ -21,9 +21,11 @@ class BasicInfoViewModel(private val loadBasicInfo: LoadBasicInfo, private val s
     val saveLiveData: MutableLiveData<Event<Boolean>> = MutableLiveData()
 
     //basic info 저장용 LiveData
-    val basicInfoLiveData: MutableLiveData<BasicInfo> = MutableLiveData()
+    val basicInfoLiveData: MutableLiveData<BasicInfo> by lazy {
+        MutableLiveData<BasicInfo>().also { loadInfo() }
+    }
 
-    init {
+    private fun loadInfo() {
         CoroutineScope(Dispatchers.IO).launch {
             val info = loadBasicInfo(true)
             basicInfoLiveData.postValue(info)

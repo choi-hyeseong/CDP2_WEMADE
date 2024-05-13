@@ -20,17 +20,21 @@ import java.util.LinkedHashSet
 class DashboardOrderViewModel(private val loadChartOrder: LoadChartOrder, private val saveChartOrder: SaveChartOrder) {
 
     // orderLiveData 접근시 차트 순서 로드
-    val orderLivedata : MutableLiveData<ChartOrder> = MutableLiveData<ChartOrder>()
+    val orderLivedata : MutableLiveData<ChartOrder> by lazy {
+        MutableLiveData<ChartOrder>().also { loadOrder() }
+    }
     val saveLiveData : MutableLiveData<Event<Boolean>> = MutableLiveData() //저장여부 확인용 livedata
     private lateinit var chartOrder: ChartOrder //vm에서 order를 가지고 있음 (state, 뷰에서 처리하지 않기 위함)
 
-    init {
+    // order가 수행되는 시점. lazy로 접근하여 생성자 init보다는 나은것으로 보임
+    private fun loadOrder() {
         CoroutineScope(Dispatchers.IO).launch {
             val latestOrder = loadChartOrder()
             chartOrder = latestOrder //값 init
             orderLivedata.postValue(latestOrder)
         }
     }
+
     fun update(orders : LinkedHashSet<HealthCategory>) {
         chartOrder.orders.let {
             it.clear()
