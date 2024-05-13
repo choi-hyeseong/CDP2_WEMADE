@@ -27,6 +27,7 @@
         <activity android:name=".ChartDetailActivity" android:exported="false">
 
         </activity>
+        <activity android:name=".DashboardOrderActivity" android:exported="false"/>
         <activity
             android:name=".BasicInfoActivity"
             android:exported="false" />

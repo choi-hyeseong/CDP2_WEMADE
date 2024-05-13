@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.home.cdp2app.BasicInfoActivity
+import com.home.cdp2app.DashboardOrderActivity
 import com.home.cdp2app.databinding.MainSettingBinding
 
 class SettingFragment : Fragment() {
@@ -25,6 +26,9 @@ class SettingFragment : Fragment() {
     private fun initListener(view : MainSettingBinding) {
         view.userInfo.setOnClickListener {
             startActivity(Intent(requireActivity(), BasicInfoActivity::class.java))
+        }
+        view.changeOrder.setOnClickListener {
+            startActivity(Intent(requireActivity(), DashboardOrderActivity::class.java))
         }
     }
 }

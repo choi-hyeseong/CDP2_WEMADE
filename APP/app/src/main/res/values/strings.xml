@@ -85,4 +85,9 @@
 
     <!-- 고혈압 평가 -->
     <string name="blood_pressure_predict">고혈압 평가</string>
+
+    <!-- 정렬 -->
+    <string name="dashboard_order">대시보드 정렬</string>
+    <string name="dashboard_order_save_complete">대시보드 순서 저장이 완료되었습니다. 앱 재시작시 적용됩니다.</string>
+    <string name="dashboard_order_save_failed">대시보드 순서 저장에 실패했습니다. 다시 시도해주세요</string>
 </resources>

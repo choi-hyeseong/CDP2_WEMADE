@@ -36,12 +36,19 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
 
     val toastLiveData : MutableLiveData<Event<HealthCategory>> = MutableLiveData() //특정 sync toast 알림 위한 이벤트 라이브데이터
     val chartList: MutableLiveData<MutableList<Chart>> = MutableLiveData<MutableList<Chart>>()
+    /* 좋은 방법인가? 의문이 드는 방식. ChartOrder로드 - Order에 맞춰 loadAll 호출하는 방식임.
+    * 원래는 vm에서 lazy로 호출 한다음 Order load - loadAllChartData 호출하는 방식으로 했었으나, 현재 init으로 변경하였음
+    * 이렇게 되니 VM이 초기화 되는 순간 무조건 모든 유스케이스를 활용해서 데이터를 불러오는 부작용이 생김 - 테스트가 매우 어려워짐
+    * 이를 해결하려 하면 vm이 아닌 view (fragment)에서 loadAllChart를 하는방식으로 변경해야함. 하지만 init에서 CoroutineScope로 ChartOrder를 로드하고 있음
+    * 이는, 뷰 onCreate등에서 loadAll을 호출할경우 아직 ChartOrder가 로드되지 않았을 가능성이 있음. - 이로 인한 문제 발생
+    *  따라서, Chart 순서가 로딩됐을경우 Event LiveData를 보내서 view에서 loadAll 호출하게는 했는데.. 음.. 더 좋은 방법이 있다면 수정하면 될것 같음.
+    */
+    val chartOrderLoadEvent : MutableLiveData<Event<Boolean>> = MutableLiveData()
 
-    // init시 chart list 초기화. observe시 lazy로 초기화 하면 side effect로 차트가 바로 안뜨는 현상 발생
     init {
         CoroutineScope(Dispatchers.IO).launch {
             chartList.postValue(loadChartOrder().toEmptyChart())
-            loadAllChartData() //뷰에서 호출하니 차트 순서 불러오기전에 호출하는 문제로 인해 차트 로딩 안됨. vm에서 init시 해야할듯
+            chartOrderLoadEvent.postValue(Event(true))
         }
     }
 
