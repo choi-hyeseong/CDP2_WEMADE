@@ -3,7 +3,6 @@ package com.home.cdp2app.view.fragment
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,30 +16,13 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainDashboardBinding
 import com.home.cdp2app.databinding.MainDashboardItemBinding
-import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
-import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
-import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
-import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.ChartCallback
 import com.home.cdp2app.view.chart.formatter.DateFormatter
-import com.home.cdp2app.view.chart.parser.ChartParser
-import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
-import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
 import com.home.cdp2app.view.viewmodel.DashboardViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.Date
-import java.util.Locale
 
 // dashboard view
 class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fragment() {
@@ -61,7 +43,7 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
             bind.chartRecycler.adapter = it
         }
         //recyclerview observing
-        dashboardViewModel.chartList.observe(viewLifecycleOwner) {
+        dashboardViewModel.chartLiveData.observe(viewLifecycleOwner) {
             adapter.updateView(it)
         }
 

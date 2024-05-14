@@ -11,4 +11,10 @@ import com.home.cdp2app.view.chart.Chart
 data class ChartOrder(val orders: LinkedHashSet<HealthCategory>) {
 
     fun toEmptyChart() : MutableList<Chart> = orders.map { Chart(it, mutableListOf()) }.toMutableList() //빈 차트로 매핑해주는 함수
+
+    // 내부 값 갱신용
+    fun update(categories : Collection<HealthCategory>) {
+        orders.clear()
+        orders.addAll(categories)
+    }
 }

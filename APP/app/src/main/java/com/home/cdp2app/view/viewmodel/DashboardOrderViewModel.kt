@@ -24,6 +24,7 @@ class DashboardOrderViewModel(private val loadChartOrder: LoadChartOrder, privat
         MutableLiveData<ChartOrder>().also { loadOrder() }
     }
     val saveLiveData : MutableLiveData<Event<Boolean>> = MutableLiveData() //저장여부 확인용 livedata
+    // load로 가져온순간 저장된 값과는 다른 값이기 때문에 깊은 복사임
     private lateinit var chartOrder: ChartOrder //vm에서 order를 가지고 있음 (state, 뷰에서 처리하지 않기 위함)
 
     // order가 수행되는 시점. lazy로 접근하여 생성자 init보다는 나은것으로 보임
@@ -36,10 +37,7 @@ class DashboardOrderViewModel(private val loadChartOrder: LoadChartOrder, privat
     }
 
     fun update(orders : LinkedHashSet<HealthCategory>) {
-        chartOrder.orders.let {
-            it.clear()
-            it.addAll(orders)
-        }
+        chartOrder.update(orders)
     }
 
     fun save() {

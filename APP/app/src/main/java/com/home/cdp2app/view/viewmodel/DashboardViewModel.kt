@@ -6,15 +6,14 @@ import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
 import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
-import com.home.cdp2app.health.order.usecase.SaveChartOrder
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.util.livedata.Event
 import com.home.cdp2app.view.chart.Chart
+import com.home.cdp2app.view.chart.applyChart
 import com.home.cdp2app.view.chart.parser.ChartParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.time.Instant
 
@@ -34,16 +33,18 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
 
     private val LOG_HEADER : String = "Fragment_Dashboard" //for log
 
+    //실제 vm에서 관리할 차트 데이터
+    private lateinit var chartList : MutableList<Chart>
     val toastLiveData : MutableLiveData<Event<HealthCategory>> = MutableLiveData() //특정 sync toast 알림 위한 이벤트 라이브데이터
     // 기존 init보다 lazy가 더 나아 order - chart 의 flow를 하나로 합쳐서 해결
-    val chartList: MutableLiveData<MutableList<Chart>> by lazy {
+    val chartLiveData: MutableLiveData<MutableList<Chart>> by lazy {
         MutableLiveData<MutableList<Chart>>().also { loadAllChartData() }
     }
 
     //최초로 한번 모든 차트 데이터를 불러오는 기능
     private fun loadAllChartData() {
         CoroutineScope(Dispatchers.IO).launch {
-            chartList.postValue(loadChartOrder().toEmptyChart()) //order load
+            chartList = loadChartOrder().toEmptyChart() //order load
             val date = Instant.now()
             val heartRateJob = async { loadHeartRateChart(date) }
             val sleepHourJob = async { loadSleepHourChart(date) }
@@ -54,6 +55,7 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
             sleepHourJob.await()
             systolicJob.await()
             diastolicJob.await()
+            chartLiveData.postValue(chartList) //위 job이 업데이트 하지 못할것 대비 (test)
         }
 
     }
@@ -108,22 +110,20 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
     //data는 비어있어선 안됨.
     private fun updateChart(data : List<*>, category : HealthCategory) {
         //차트가 초기화 되어 있지 않을경우 ignore
-        if (chartList.value.isNullOrEmpty()) {
+        //현재 변수로 따로 빼놓은 상태에서 전처럼 livedata로 접근하면 아직 초기화되지 않은 value라 계속 업데이트가 안됐음. 변수로 변경후 해결
+        if (chartList.isEmpty()) {
             Log.w(LOG_HEADER, "can't update recycler view. chart is empty.")
             return
         }
 
-        val lastChart : MutableList<Chart> = chartList.value!! //마지막으로 업데이트된 차트
         val parsedChart = chartParser.parse(data, category) //파싱
-        val categoryIndex = lastChart.indexOfFirst { it.type == category } //해당 enum을 가진 chart 탐색
-        if (categoryIndex == -1) {
-            //없는경우 - 순서 등록이 안되어있을때, 발생하지 않을것으로 사료됨
+        kotlin.runCatching {
+            chartList.applyChart(parsedChart)
+        }.onFailure {
             Log.w(LOG_HEADER, "can't update recycler view. can't find chart index")
-            return
+        }.onSuccess {
+            chartLiveData.postValue(chartList) //notify
         }
-        lastChart[categoryIndex] = parsedChart //차트 업데이트
-        chartList.postValue(lastChart) //notify
-
     }
 
 }

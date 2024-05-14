@@ -37,7 +37,7 @@ class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate,
                            private val sleepHourValidator: SleepHourValidator,
                            private val bloodPressureValidator: BloodPressureValidator,
                            private val chartParser: ChartParser) {
-    private val LOG_HEADER = "DASHBOARD_VIEWMODEL"
+    private val LOG_HEADER = "CHART_DETAIL_VIEWMODEL"
     val chartLiveData: MutableLiveData<Chart> = MutableLiveData()
     val saveLiveData: MutableLiveData<Event<ValidateStatus>> = MutableLiveData()
 

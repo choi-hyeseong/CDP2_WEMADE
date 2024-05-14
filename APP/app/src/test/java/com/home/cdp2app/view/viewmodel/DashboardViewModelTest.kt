@@ -2,7 +2,6 @@ package com.home.cdp2app.view.viewmodel
 
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.health.connect.client.HealthConnectClient
 import com.getOrAwaitValue
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
@@ -13,6 +12,7 @@ import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
+import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.chart.parser.ChartParser
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
@@ -23,7 +23,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.slot
 import io.mockk.unmockkAll
@@ -33,7 +32,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
-import org.mockito.ArgumentMatchers.any
+import org.powermock.reflect.Whitebox
 import java.time.Duration
 import java.time.Instant
 import java.util.concurrent.TimeUnit
@@ -72,11 +71,13 @@ class DashboardViewModelTest {
     @Test
     fun TEST_CHART_ORDER() {
         //lazy하게 접근하므로 observe하는 순간 로드 수행됨
-        val chart = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS)
-
+        val chart = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS)
+        //reflection chart
+        val fieldChart = Whitebox.getField(viewModel::class.java, "chartList").get(viewModel) as MutableList<Chart>
         //비교
         coVerify(atLeast = 1) { loadChartOrder() }
         assertEquals(chart, order.toEmptyChart()) //empty chart로 변환됨
+        assertEquals(order.toEmptyChart(), fieldChart)
     }
 
     @Test
@@ -98,11 +99,11 @@ class DashboardViewModelTest {
     fun TEST_LOAD_HEART_RATE() {
         val heartRate = listOf(HeartRate(Instant.now(), 150), HeartRate(Instant.now(), 145))
         coEvery { loadHeartRate(any()) } returns heartRate //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         runBlocking {
             viewModel.loadHeartRateChart(Instant.now())
-            val result = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
+            val result = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
             val find = result.find { it.type == HealthCategory.HEART_RATE }
             assertNotNull(find) //찾아야함
             assertEquals(2, find!!.chartData.size)
@@ -134,11 +135,11 @@ class DashboardViewModelTest {
     fun TEST_LOAD_SLEEP_HOUR() {
         val sleepHour = listOf(SleepHour(Instant.now(), Duration.ofSeconds(10)), SleepHour(Instant.now(), Duration.ofHours(1)))
         coEvery { loadSleepHour(any()) } returns sleepHour //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         runBlocking {
             viewModel.loadSleepHourChart(Instant.now())
-            val result = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
+            val result = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
             val find = result.find { it.type == HealthCategory.SLEEP_HOUR }
             assertNotNull(find) //찾아야함
             assertEquals(2, find!!.chartData.size)
@@ -170,11 +171,11 @@ class DashboardViewModelTest {
     fun TEST_LOAD_DIASTOLIC() {
         val bloodPressure = listOf(BloodPressure(Instant.now(), 145.5, 50.0), BloodPressure(Instant.now(),145.5, 70.0))
         coEvery { loadBloodPressure(any()) } returns bloodPressure //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         runBlocking {
             viewModel.loadBloodPressureDiastolicChart(Instant.now())
-            val result = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
+            val result = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
             val find = result.find { it.type == HealthCategory.BLOOD_PRESSURE_DIASTOLIC }
             assertNotNull(find) //찾아야함
             assertEquals(2, find!!.chartData.size)
@@ -205,11 +206,11 @@ class DashboardViewModelTest {
     fun TEST_LOAD_SYSTOLIC() {
         val bloodPressure = listOf(BloodPressure(Instant.now(), 145.5, 50.0), BloodPressure(Instant.now(),145.5, 70.0))
         coEvery { loadBloodPressure(any()) } returns bloodPressure //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         runBlocking {
             viewModel.loadBloodPressureSystolicChart(Instant.now())
-            val result = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
+            val result = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //차트 로드 대기
             val find = result.find { it.type == HealthCategory.BLOOD_PRESSURE_SYSTOLIC }
             assertNotNull(find) //찾아야함
             assertEquals(2, find!!.chartData.size)
@@ -226,7 +227,7 @@ class DashboardViewModelTest {
         // order가 지정되어 있지 않아 초기화 되지 않은경우
         coEvery { loadChartOrder() } returns ChartOrder(LinkedHashSet())
         coEvery { loadHeartRate(any()) } returns mutableListOf(HeartRate(Instant.now(), 150)) //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
         // for warn message capture
         val warnMessage : CapturingSlot<String> = slot()
         every { Log.w(any(), capture(warnMessage)) } returns 1
@@ -242,7 +243,7 @@ class DashboardViewModelTest {
         // 혈압에 대한 순서만 명시되어 있음
         coEvery { loadChartOrder() } returns ChartOrder(LinkedHashSet(listOf(HealthCategory.BLOOD_PRESSURE_DIASTOLIC, HealthCategory.BLOOD_PRESSURE_SYSTOLIC)))
         coEvery { loadHeartRate(any()) } returns mutableListOf(HeartRate(Instant.now(), 150)) //정상적인 값 반환
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
         val warnMessage : CapturingSlot<String> = slot()
         every { Log.w(any(), capture(warnMessage)) } returns 1
 
@@ -255,7 +256,7 @@ class DashboardViewModelTest {
     @Test
     fun TEST_REQUEST_SYNC_HEART_RATE() {
         //order mock
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         val heartRate = listOf(HeartRate(Instant.now(), 150), HeartRate(Instant.now(), 145))
         coEvery { loadHeartRate(any()) } returns heartRate //정상적인 값 반환
@@ -273,7 +274,7 @@ class DashboardViewModelTest {
     @Test
     fun TEST_REQUEST_SYNC_SLEEP_HOUR() {
         //order mock
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         val sleepHour = listOf(SleepHour(Instant.now(), Duration.ofHours(1)))
         coEvery { loadSleepHour(any()) } returns sleepHour //정상적인 값 반환
@@ -291,7 +292,7 @@ class DashboardViewModelTest {
     @Test
     fun TEST_REQUEST_SYNC_BLOOD_SYSTOLIC() {
         //order mock
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         val bloodPressure = listOf(BloodPressure(Instant.now(), 145.0, 150.0))
         coEvery { loadBloodPressure(any()) } returns bloodPressure //정상적인 값 반환
@@ -309,7 +310,7 @@ class DashboardViewModelTest {
     @Test
     fun TEST_REQUEST_SYNC_BLOOD_DIASTOLIC() {
         //order mock
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //order init 대기
 
         val bloodPressure = listOf(BloodPressure(Instant.now(), 145.0, 150.0))
         coEvery { loadBloodPressure(any()) } returns bloodPressure //정상적인 값 반환
@@ -331,18 +332,20 @@ class DashboardViewModelTest {
         coEvery { loadBloodPressure(any()) } returns mutableListOf(BloodPressure(Instant.now(), 140.0, 70.0))
         coEvery { loadSleepHour(any()) } returns mutableListOf(SleepHour(Instant.now(), Duration.ofHours(1)))
 
-        viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS) //loadAll 호출 (lazy)
+        viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //loadAll 호출 (lazy)
         //CoroutineScope sleep
         Thread.sleep(500)
         //호출됐는지 확인
         coVerify(atLeast = 1) { loadHeartRate(any()) }
         coVerify(atLeast = 1) { loadSleepHour(any()) }
         coVerify(atLeast = 1) { loadBloodPressure(any()) }
-
-        val chart = viewModel.chartList.getOrAwaitValue(1, TimeUnit.SECONDS)
+        //reflection chart
+        val fieldChart = Whitebox.getField(viewModel::class.java, "chartList").get(viewModel) as MutableList<Chart>
+        val chart = viewModel.chartLiveData.getOrAwaitValue(1, TimeUnit.SECONDS)
         //차트의 모든값이 비어있어선 안됨 (값이 다 있음)
-        chart.forEach {
+        chart.forEachIndexed { index, it ->
             assertEquals(1, it.chartData.size)
+            assertEquals(1, fieldChart[index].chartData.size)
         }
 
     }
