@@ -19,11 +19,9 @@ const val PREFERENCE_KEY = "HEALTH_APP_PREFERENCE" //preference 파일 키값. �
  */
 class SharedPreferencesStorage(context : Context) : LocalDataStorage {
 
-    private var sharedPreferences : SharedPreferences
-
-    init {
+    private val sharedPreferences : SharedPreferences by lazy {
         //private 모드로 PREFERENCE_KEY를 가진 preference 접근
-        sharedPreferences = context.getSharedPreferences(PREFERENCE_KEY, MODE_PRIVATE)
+        context.getSharedPreferences(PREFERENCE_KEY, MODE_PRIVATE)
     }
 
     override suspend fun saveObject(key: String, value: Any): Boolean {
