@@ -1,8 +1,7 @@
 package com.home.cdp2app.user.auth.usecase
 
-import android.graphics.Paint.Cap
 import com.home.cdp2app.user.auth.entity.AuthToken
-import com.home.cdp2app.user.auth.repository.AuthRepository
+import com.home.cdp2app.user.auth.repository.AuthTokenRepository
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -13,7 +12,7 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 
 class SaveAuthTokenTest {
-    private val repository: AuthRepository = mockk() //mock
+    private val repository: AuthTokenRepository = mockk() //mock
     private val saveAuthToken = SaveAuthToken(repository)
 
     @Test

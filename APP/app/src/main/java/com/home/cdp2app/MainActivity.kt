@@ -12,11 +12,8 @@ import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.user.auth.entity.AuthToken
-import com.home.cdp2app.user.auth.repository.PreferenceAuthRepository
-import com.home.cdp2app.user.auth.usecase.DeleteAuthToken
+import com.home.cdp2app.user.auth.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.auth.usecase.HasAuthToken
-import com.home.cdp2app.user.auth.usecase.SaveAuthToken
 import com.home.cdp2app.user.tutorial.repository.PreferenceTutorialRepository
 import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
 import com.home.cdp2app.view.viewmodel.MainViewModel
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity(), HealthConnectSuccessCallback {
     private val viewModel : MainViewModel by lazy {
         val storage = SharedPreferencesStorage(this)
         val tutorial = PreferenceTutorialRepository(storage)
-        val auth = PreferenceAuthRepository(storage)
+        val auth = PreferenceAuthTokenRepository(storage)
         MainViewModel(HasAuthToken(auth), CheckTutorialCompleted(tutorial))
     }
 

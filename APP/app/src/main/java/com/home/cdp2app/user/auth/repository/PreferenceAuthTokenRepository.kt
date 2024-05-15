@@ -6,7 +6,7 @@ import com.home.cdp2app.user.auth.entity.AuthToken
 /**
  * SharedPreference를 사용하는 AuthToken Repository, 보안이 필요하다면 EncryptedStorage로 변경하면 될듯
  */
-class PreferenceAuthRepository(private val preferencesStorage: SharedPreferencesStorage) : AuthRepository {
+class PreferenceAuthTokenRepository(private val preferencesStorage: SharedPreferencesStorage) : AuthTokenRepository {
 
     private val KEY : String = "AUTH_TOKEN"
 

@@ -1,11 +1,18 @@
 package com.home.cdp2app.rest.api
 
-import com.home.cdp2app.rest.dto.LoginDTO
+import com.home.cdp2app.rest.dto.LoginRequestDTO
+import com.home.cdp2app.rest.dto.LoginResponseDTO
+import com.home.cdp2app.rest.dto.RegisterRequestDTO
+import com.home.cdp2app.rest.dto.RegisterResponse
 import com.skydoves.sandwich.ApiResponse
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 interface RemoteUserAPI {
 
-    suspend fun register() : ApiResponse<Boolean>
+    @POST("/auth/register/email")
+    suspend fun register(@Body registerRequestDTO: RegisterRequestDTO) : ApiResponse<RegisterResponse>
 
-    suspend fun login() : ApiResponse<LoginDTO>
+    @POST("/auth/login/email")
+    suspend fun login(@Body loginRequestDTO: LoginRequestDTO) : ApiResponse<LoginResponseDTO>
 }

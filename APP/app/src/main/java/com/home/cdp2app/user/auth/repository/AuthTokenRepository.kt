@@ -6,7 +6,7 @@ import com.home.cdp2app.user.auth.entity.AuthToken
 /**
  * AuthToken을 관리하는 레포지토리 입니다.
  */
-interface AuthRepository {
+interface AuthTokenRepository {
 
     /**
      * AuthToken을 저장하는 클래스 입니다.

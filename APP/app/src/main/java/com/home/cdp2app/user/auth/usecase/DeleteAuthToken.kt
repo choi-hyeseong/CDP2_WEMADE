@@ -1,15 +1,15 @@
 package com.home.cdp2app.user.auth.usecase
 
-import com.home.cdp2app.user.auth.repository.AuthRepository
+import com.home.cdp2app.user.auth.repository.AuthTokenRepository
 
 /**
  * AuthToken을 제거하는 usecase
  */
-class DeleteAuthToken(private val repository: AuthRepository) {
+class DeleteAuthToken(private val repository: AuthTokenRepository) {
 
     /**
      * repository에서 auth token을 제거함
-     * @see AuthRepository.removeToken
+     * @see AuthTokenRepository.removeToken
      */
     suspend operator fun invoke() {
         repository.removeToken()

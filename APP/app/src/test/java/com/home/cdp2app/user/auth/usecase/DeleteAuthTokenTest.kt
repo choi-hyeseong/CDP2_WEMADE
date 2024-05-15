@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.auth.usecase
 
-import com.home.cdp2app.user.auth.repository.AuthRepository
+import com.home.cdp2app.user.auth.repository.AuthTokenRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class DeleteAuthTokenTest {
-    private val repository: AuthRepository = mockk() //mock
+    private val repository: AuthTokenRepository = mockk() //mock
     private val deleteAuthToken = DeleteAuthToken(repository)
 
     @Test

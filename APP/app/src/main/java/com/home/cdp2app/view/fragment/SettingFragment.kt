@@ -11,7 +11,7 @@ import com.home.cdp2app.BasicInfoActivity
 import com.home.cdp2app.DashboardOrderActivity
 import com.home.cdp2app.databinding.MainSettingBinding
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.user.auth.repository.PreferenceAuthRepository
+import com.home.cdp2app.user.auth.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.auth.usecase.DeleteAuthToken
 import com.home.cdp2app.view.callback.MainPagerCallback
 import com.home.cdp2app.view.viewmodel.setting.SettingViewModel
@@ -23,7 +23,7 @@ class SettingFragment : Fragment() {
     //todo hilt inject
     private val viewModel : SettingViewModel by lazy {
         val storage = SharedPreferencesStorage(requireContext())
-        SettingViewModel(DeleteAuthToken(PreferenceAuthRepository(storage)))
+        SettingViewModel(DeleteAuthToken(PreferenceAuthTokenRepository(storage)))
     }
 
     override fun onAttach(context: Context) {

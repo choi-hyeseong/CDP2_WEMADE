@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertDoesNotThrow
 
 
-class PreferenceAuthRepositoryTest {
+class PreferenceAuthTokenRepositoryTest {
 
     private val storage : SharedPreferencesStorage = mockk() //mock storage
-    private val repository : PreferenceAuthRepository = PreferenceAuthRepository(storage)
+    private val repository : PreferenceAuthTokenRepository = PreferenceAuthTokenRepository(storage)
 
     @Test
     fun TEST_LOAD_TOKEN() {
