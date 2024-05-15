@@ -1,4 +1,4 @@
-package com.home.cdp2app.view.dialog.validator
+package com.home.cdp2app.view.validator
 
 import androidx.viewbinding.ViewBinding
 import com.home.cdp2app.type.ValidateStatus
@@ -6,7 +6,7 @@ import com.home.cdp2app.type.ValidateStatus
 /**
  * 각 다이얼로그의 바인딩을 검사하는 validate interface 입니다.
  */
-interface ViewBindingDialogValidator<T : ViewBinding> {
+interface ViewBindingValidator<T : ViewBinding> {
 
     /**
      * validate를 수행하는 메소드 입니다.
