@@ -21,6 +21,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 import java.time.Instant
@@ -56,6 +58,20 @@ class SharedPreferencesStorageTest {
         }
     }
 
+
+    @Test
+    fun TEST_DELETE_OBJECT() {
+        val key : CapturingSlot<String> = slot()
+        coEvery { editor.remove(capture(key)) } returns editor
+        coEvery { editor.commit() } returns true
+
+        runBlocking {
+            val result = preferencesStorage.delete("TEST_KEY")
+            assertTrue(result)
+            assertEquals("TEST_KEY", key.captured)
+            coVerify(atLeast = 1) { editor.remove(any()) }
+        }
+    }
 
     @Test
     fun TEST_LOAD_OBJECT() {

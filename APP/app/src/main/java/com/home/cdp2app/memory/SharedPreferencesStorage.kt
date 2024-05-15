@@ -41,6 +41,10 @@ class SharedPreferencesStorage(context : Context) : LocalDataStorage {
         }
     }
 
+    override suspend fun delete(key: String) : Boolean {
+       return sharedPreferences.edit().remove(key).commit()
+    }
+
     override suspend fun putInt(key: String, value: Int): Boolean {
         return sharedPreferences.edit().putInt(key, value).commit()
     }

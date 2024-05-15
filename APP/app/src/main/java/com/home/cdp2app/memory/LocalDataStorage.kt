@@ -28,6 +28,12 @@ interface LocalDataStorage {
     suspend fun <T : Any> loadObject(key : String, targetClass : KClass<T>) : T
 
     /**
+     * 해당 key에 저장된 값을 제거합니다.
+     * @param key 값이 저장된 key 입니다.
+     * @return 삭제가 이루어졌는지 결과값입니다.
+     */
+    suspend fun delete(key : String) : Boolean
+    /**
      * @param key Int값을 저장할 키값입니다.
      * @param value 저장될 Int값입니다.
      * @return 저장의 성공 여부입니다.
