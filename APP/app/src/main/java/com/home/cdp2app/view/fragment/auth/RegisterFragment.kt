@@ -1,18 +1,21 @@
-package com.home.cdp2app
+package com.home.cdp2app.view.fragment.auth
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import com.home.cdp2app.databinding.ActivitySignupBinding
+import androidx.fragment.app.Fragment
+import com.home.cdp2app.R
+import com.home.cdp2app.databinding.AuthRegisterBinding
 
-class SignupActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class RegisterFragment : Fragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySignupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val binding = AuthRegisterBinding.inflate(inflater, container, false)
 
         // 텍스트 지정
         binding.textinputId.title.setText(R.string.account_id)
@@ -33,6 +36,7 @@ class SignupActivity : AppCompatActivity() {
         binding.textinputPwAgain.content.transformationMethod = PasswordTransformationMethod.getInstance()
 
         // 리스너 지정
+            /*
         binding.btnSignup.root.setOnClickListener {
             // id 조건 확인
             val id = binding.textinputId.content.text.toString()
@@ -60,5 +64,8 @@ class SignupActivity : AppCompatActivity() {
             // todo 회원가입 후에는 초기 정보 입력 화면으로 이동
 
         }
+
+             */
+        return binding.root
     }
 }

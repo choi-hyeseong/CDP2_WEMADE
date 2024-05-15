@@ -20,15 +20,15 @@ import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainDashboardBinding
 import com.home.cdp2app.databinding.MainDashboardItemBinding
 import com.home.cdp2app.view.chart.Chart
-import com.home.cdp2app.view.chart.ChartCallback
+import com.home.cdp2app.view.callback.MainPagerCallback
 import com.home.cdp2app.view.chart.formatter.DateFormatter
-import com.home.cdp2app.view.viewmodel.DashboardViewModel
+import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
 
 // dashboard view
 class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fragment() {
 
     private lateinit var adapter : ChartAdapter
-    private var callback : ChartCallback? = null
+    private var callback : MainPagerCallback? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = MainDashboardBinding.inflate(inflater)
@@ -59,7 +59,7 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
     //callback 할당
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = context as ChartCallback?
+        callback = context as MainPagerCallback?
     }
 
     //callback 제거
@@ -69,7 +69,7 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
     }
 
     // view에서 표시할 chart 받는 adapter
-    class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardViewModel, private val callback: ChartCallback?) : RecyclerView.Adapter<ChartViewHolder>() {
+    class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardViewModel, private val callback: MainPagerCallback?) : RecyclerView.Adapter<ChartViewHolder>() {
 
         fun updateView(chart: List<Chart>) {
             this.chartList = chart
@@ -93,7 +93,7 @@ class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fr
     }
 
     //Adapter에서 bind된 layout 받아서 holder에서 가공
-    class ChartViewHolder(private val view: MainDashboardItemBinding, private val viewModel: DashboardViewModel, private val callback : ChartCallback?) : RecyclerView.ViewHolder(view.root) {
+    class ChartViewHolder(private val view: MainDashboardItemBinding, private val viewModel: DashboardViewModel, private val callback : MainPagerCallback?) : RecyclerView.ViewHolder(view.root) {
 
         fun bind(chart: Chart) {
             view.title.text = chart.type.displayName //displayName으로 설정

@@ -1,4 +1,4 @@
-package com.home.cdp2app.view.viewmodel
+package com.home.cdp2app.view.viewmodel.setting
 
 import androidx.lifecycle.MutableLiveData
 import com.home.cdp2app.health.order.entity.ChartOrder

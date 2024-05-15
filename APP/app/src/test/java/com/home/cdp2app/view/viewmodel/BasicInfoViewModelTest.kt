@@ -6,6 +6,7 @@ import com.home.cdp2app.health.basic.entity.BasicInfo
 import com.home.cdp2app.health.basic.type.Gender
 import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
 import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
+import com.home.cdp2app.view.viewmodel.setting.BasicInfoViewModel
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

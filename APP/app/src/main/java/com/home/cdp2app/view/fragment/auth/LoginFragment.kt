@@ -1,29 +1,23 @@
-package com.home.cdp2app
+package com.home.cdp2app.view.fragment.auth
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.os.Build.VERSION_CODES.P
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.InputFilter
-import android.text.InputType
-import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import com.google.android.material.internal.TextWatcherAdapter
-import com.home.cdp2app.databinding.ActivitySigninBinding
+import androidx.fragment.app.Fragment
+import com.home.cdp2app.MainActivity
+import com.home.cdp2app.R
+import com.home.cdp2app.databinding.AuthLoginBinding
 
-class SigninActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
     // 로그인 화면
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivitySigninBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val binding = AuthLoginBinding.inflate(layoutInflater, container, false)
 
         // 텍스트 지정
         binding.textinputId.title.setText(R.string.account_id)
@@ -40,6 +34,7 @@ class SigninActivity : AppCompatActivity() {
         binding.textinputPw.content.transformationMethod = PasswordTransformationMethod.getInstance()
         
         // 리스너 지정
+        /*
         binding.textviewForgotPw.setOnClickListener {
             // 비밀번호 찾기 화면으로 연결 예정, 구현 논의 필요
             Toast.makeText(this, "그렇군요!", Toast.LENGTH_LONG).show()
@@ -67,5 +62,8 @@ class SigninActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+
+         */
+        return binding.root
     }
 }

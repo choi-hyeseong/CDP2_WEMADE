@@ -6,6 +6,7 @@ import com.home.cdp2app.health.order.entity.ChartOrder
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.order.usecase.SaveChartOrder
+import com.home.cdp2app.view.viewmodel.setting.DashboardOrderViewModel
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk

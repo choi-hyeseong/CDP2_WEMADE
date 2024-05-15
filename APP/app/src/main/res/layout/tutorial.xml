@@ -31,8 +31,6 @@
         android:clipToPadding="false"
         android:layout_marginBottom="20dp">
 
-        <include layout="@layout/button_enabled" android:id="@+id/btn_signup"/>
-        <include layout="@layout/button_enabled_light" android:id="@+id/btn_signin"/>
     </LinearLayout>
 
 </LinearLayout>

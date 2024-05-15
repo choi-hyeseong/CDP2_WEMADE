@@ -1,4 +1,4 @@
-package com.home.cdp2app.view.viewmodel
+package com.home.cdp2app.view.viewmodel.dashboard
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

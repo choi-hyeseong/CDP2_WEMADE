@@ -9,8 +9,12 @@
     <string name="service_title">고혈압 관리 앱</string>
 
     <!-- 튜토리얼 -->
-    <string name="tutorial2">튜토리얼2</string>
-    <string name="tutorial3">튜토리얼3</string>
+    <string name="tutorial2">고혈압 관리? 지금부터 시작!</string>
+    <string name="tutorial2_detail_1">고혈압은 초기 증상이 없어 꾸준한 관리가 필요한 질병입니다.</string>
+    <string name="tutorial2_detail_2">저희가 위험도를 예측하고 관리할 수 있도록 도와드릴게요!</string>
+    <string name="tutorial3">AI를 이용한 고혈압 위험도 판단!</string>
+    <string name="tutorial3_detail">저희가 학습시킨 AI를 이용해 고혈압의 위험도를 판단할 수 있어요!</string>
+    <string name="start">지금 시작하기</string>
 
     <!-- 로그인 -->
     <string name="signin">로그인</string>

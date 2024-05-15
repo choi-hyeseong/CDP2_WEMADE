@@ -19,25 +19,11 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.slider.Slider
 import com.home.cdp2app.BasicInfoActivity
 import com.home.cdp2app.R
-import com.home.cdp2app.health.basic.entity.BasicInfo
-import com.home.cdp2app.health.basic.type.Gender
-import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
-import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
-import com.home.cdp2app.view.viewmodel.BasicInfoViewModel
-import com.home.getOrAwaitValue
-import io.mockk.CapturingSlot
-import io.mockk.coEvery
-import io.mockk.mockk
-import io.mockk.slot
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 // basic info activity runtime test
 // 각 테스트는 독립적으로 수행됨

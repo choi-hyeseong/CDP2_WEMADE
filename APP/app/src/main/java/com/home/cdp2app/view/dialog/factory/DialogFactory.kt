@@ -8,7 +8,7 @@ import com.home.cdp2app.view.dialog.SleepHourDialog
 import com.home.cdp2app.view.dialog.validator.blood.BloodPressureViewValidator
 import com.home.cdp2app.view.dialog.validator.heart.HeartRateViewValidator
 import com.home.cdp2app.view.dialog.validator.sleep.SleepHourViewValidator
-import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
+import com.home.cdp2app.view.viewmodel.dashboard.ChartDetailViewModel
 
 /**
  * 건강 정보를 저장하는 다이얼로그를 생성하는 팩토리 입니다.

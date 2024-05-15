@@ -11,7 +11,7 @@ import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.type.ValidateStatus
 import com.home.cdp2app.view.dialog.validator.heart.HeartRateViewValidator
-import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
+import com.home.cdp2app.view.viewmodel.dashboard.ChartDetailViewModel
 import java.time.Instant
 
 

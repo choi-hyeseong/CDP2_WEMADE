@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.home.cdp2app.databinding.MainPagerBinding
@@ -23,7 +22,7 @@ import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
 import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.view.chart.ChartCallback
+import com.home.cdp2app.view.callback.MainPagerCallback
 import com.home.cdp2app.view.chart.parser.ChartParser
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
@@ -32,9 +31,9 @@ import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.fragment.DashboardFragment
 import com.home.cdp2app.view.fragment.MainFragment
 import com.home.cdp2app.view.fragment.SettingFragment
-import com.home.cdp2app.view.viewmodel.DashboardViewModel
+import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
 
-class MainPagerActivity : AppCompatActivity(), ChartCallback {
+class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
 
     // todo hilt inject
     private val dashboardViewModel : DashboardViewModel by lazy {
@@ -105,5 +104,9 @@ class MainPagerActivity : AppCompatActivity(), ChartCallback {
 
     override fun navigateDetail(category: HealthCategory) {
         startActivity(Intent(this, ChartDetailActivity::class.java).putExtra(ChartDetailActivity.DETAIL_PARAM, category.toString()))
+    }
+
+    override fun navigateMain() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

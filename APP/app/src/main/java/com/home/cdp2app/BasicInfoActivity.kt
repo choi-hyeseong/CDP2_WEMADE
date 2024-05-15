@@ -3,14 +3,13 @@ package com.home.cdp2app
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainSettingBasicInfoBinding
 import com.home.cdp2app.health.basic.repository.PreferenceBasicInfoRepository
 import com.home.cdp2app.health.basic.type.Gender
 import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
 import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.view.viewmodel.BasicInfoViewModel
+import com.home.cdp2app.view.viewmodel.setting.BasicInfoViewModel
 
 /**
  * 기본 건강정보 (BasicInfo)를 수정하고 관리하는 액티비티

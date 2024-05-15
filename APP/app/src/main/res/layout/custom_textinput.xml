@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="40dp"
     android:orientation="vertical"
-    tools:showIn="@layout/activity_signin">
+    tools:showIn="@layout/auth_login">
 
     <TextView
         android:id="@+id/title"

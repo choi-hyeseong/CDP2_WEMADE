@@ -1,8 +1,6 @@
 package com.home.cdp2app
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -16,7 +14,7 @@ import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.order.usecase.SaveChartOrder
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.view.viewmodel.DashboardOrderViewModel
+import com.home.cdp2app.view.viewmodel.setting.DashboardOrderViewModel
 import java.util.Collections
 
 //대시보드 순서 관리하는 액티비티

@@ -10,7 +10,7 @@ import com.home.cdp2app.databinding.DialogBloodpressureBinding
 import com.home.cdp2app.util.date.DateTimeUtil
 import com.home.cdp2app.type.ValidateStatus
 import com.home.cdp2app.view.dialog.validator.blood.BloodPressureViewValidator
-import com.home.cdp2app.view.viewmodel.ChartDetailViewModel
+import com.home.cdp2app.view.viewmodel.dashboard.ChartDetailViewModel
 import java.time.Instant
 
 class BloodPressureDialog(private val validator: BloodPressureViewValidator, private val viewModel: ChartDetailViewModel) : AbstractHealthDialog() {
