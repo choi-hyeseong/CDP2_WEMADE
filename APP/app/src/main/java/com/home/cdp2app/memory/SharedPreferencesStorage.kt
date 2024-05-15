@@ -5,6 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
+import com.home.cdp2app.memory.exception.TargetNotFoundException
 import com.home.cdp2app.util.json.JsonMapperUtil
 import java.lang.Exception
 import kotlin.reflect.KClass
@@ -30,7 +31,7 @@ class SharedPreferencesStorage(context : Context) : LocalDataStorage {
     override suspend fun <T : Any> loadObject(key: String, targetClass: KClass<T>): T {
         //key값이 저장되어 있지 않거나, String형식이 아닌경우 Exception
         if (!sharedPreferences.contains(key) || sharedPreferences.getString(key, null) == null)
-            throw NoSuchElementException("해당 key값에 저장된 값이 없습니다.")
+            throw TargetNotFoundException("해당 key값에 저장된 값이 없습니다.")
         try {
             //getString이 notNull임은 위 if문에서 보증
             return JsonMapperUtil.readObject(sharedPreferences.getString(key, null)!!, targetClass)

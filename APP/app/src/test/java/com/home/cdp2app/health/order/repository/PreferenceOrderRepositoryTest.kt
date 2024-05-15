@@ -4,6 +4,7 @@ import android.graphics.Paint.Cap
 import com.home.cdp2app.health.order.entity.ChartOrder
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.memory.exception.TargetNotFoundException
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -70,7 +71,7 @@ class PreferenceOrderRepositoryTest {
 
     @Test
     fun TEST_RETURN_DEFAULT() {
-        coEvery { preferencesStorage.loadObject(any(), ChartOrder::class) } throws NoSuchElementException("존재하지 않음") //저장 안됨
+        coEvery { preferencesStorage.loadObject(any(), ChartOrder::class) } throws TargetNotFoundException("존재하지 않음") //저장 안됨
 
         // test
         runBlocking {

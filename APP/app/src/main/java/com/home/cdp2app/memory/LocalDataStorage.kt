@@ -1,5 +1,6 @@
 package com.home.cdp2app.memory
 
+import com.home.cdp2app.memory.exception.TargetNotFoundException
 import kotlin.reflect.KClass
 
 /**
@@ -20,7 +21,7 @@ interface LocalDataStorage {
      * 저장된 객체를 불러오는 메소드 입니다.
      * @param key 불러올 객체의 키값입니다.
      * @param targetClass 객체의 클래스 타입입니다.
-     * @throws NoSuchElementException 해당 key에 저장된 값이 없을경우 발생하는 Exception 입니다.
+     * @throws TargetNotFoundException 해당 key에 저장된 값이 없을경우 발생하는 Exception 입니다.
      * @throws IllegalArgumentException 해당 key에 저장된 값은 있으나, targetClass로 deserialize 할 수 없는경우 발생합니다.
      * @return targetClass로 역직렬화 된 객체 T를 반환합니다.
      */

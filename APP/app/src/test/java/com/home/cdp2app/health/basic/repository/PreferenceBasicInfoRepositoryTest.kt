@@ -3,6 +3,7 @@ package com.home.cdp2app.health.basic.repository
 import com.home.cdp2app.health.basic.entity.BasicInfo
 import com.home.cdp2app.health.basic.type.Gender
 import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.memory.exception.TargetNotFoundException
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -55,7 +56,7 @@ class PreferenceBasicInfoRepositoryTest {
 
     @Test
     fun TEST_LOAD_DEFAULT() {
-        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws NoSuchElementException("테스트용 Exception") //존재하지 않는 value이므로 throw
+        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws TargetNotFoundException("테스트용 Exception") //존재하지 않는 value이므로 throw
 
         runBlocking {
             val result = preferenceBasicInfoRepository.loadInfo(true)
@@ -66,11 +67,11 @@ class PreferenceBasicInfoRepositoryTest {
     @Test
     fun TEST_THROW_EXCEPTION_NO_SUCH() {
         //저장된 값이 없고, default 로드 안하면 exception 던지기
-        val expectedThrow = NoSuchElementException("존재하지 않는 값입니다.")
+        val expectedThrow = TargetNotFoundException("존재하지 않는 값입니다.")
         coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws expectedThrow
 
         runBlocking {
-            val result = assertThrows<NoSuchElementException> { preferenceBasicInfoRepository.loadInfo(false) } //throw 되는지 확인
+            val result = assertThrows<TargetNotFoundException> { preferenceBasicInfoRepository.loadInfo(false) } //throw 되는지 확인
             assertEquals(expectedThrow, result) //exception 비교
         }
     }
@@ -98,7 +99,7 @@ class PreferenceBasicInfoRepositoryTest {
 
     @Test
     fun TEST_NOT_HAVE_INFO() {
-        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws NoSuchElementException("아무튼 exception")
+        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } throws TargetNotFoundException("아무튼 exception")
 
         runBlocking {
             assertFalse(preferenceBasicInfoRepository.hasInfo())

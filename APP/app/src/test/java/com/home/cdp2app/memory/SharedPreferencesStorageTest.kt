@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.heart.entity.HeartRate
+import com.home.cdp2app.memory.exception.TargetNotFoundException
 import com.home.cdp2app.util.json.JsonMapperUtil
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
@@ -76,7 +77,7 @@ class SharedPreferencesStorageTest {
         //키에 저장된 값이 없을경우 exception
         every { sharedPreferences.contains(any()) } returns false
         runBlocking {
-            assertThrows<NoSuchElementException> {
+            assertThrows<TargetNotFoundException> {
                 preferencesStorage.loadObject("Test", HeartRate::class)
             }
         }
@@ -88,7 +89,7 @@ class SharedPreferencesStorageTest {
         every { sharedPreferences.contains(any()) } returns true
         every { sharedPreferences.getString(any(), any()) } returns null
         runBlocking {
-            assertThrows<NoSuchElementException> {
+            assertThrows<TargetNotFoundException> {
                 preferencesStorage.loadObject("Test", HeartRate::class)
             }
         }
