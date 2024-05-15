@@ -15,7 +15,6 @@ const val PREFERENCE_KEY = "HEALTH_APP_PREFERENCE" //preference 파일 키값. �
  * SharedPreferences를 사용하는 LocalDataStroage 클래스
  * @constructor context SharedPreference를 불러오기 위한 Application Context 입니다.
  * @property sharedPreferences 실제 사용될 SharedPreference 입니다.
- * @property objectMapper Object를 저장하고 읽어올때 사용될 json parser 입니다.
  */
 class SharedPreferencesStorage(context : Context) : LocalDataStorage {
 
@@ -55,6 +54,14 @@ class SharedPreferencesStorage(context : Context) : LocalDataStorage {
 
     override suspend fun getDouble(key: String, defaultValue: Double) : Double {
         return sharedPreferences.getFloat(key, defaultValue.toFloat()).toDouble()
+    }
+
+    override suspend fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+        return sharedPreferences.getBoolean(key, defaultValue)
+    }
+
+    override suspend fun putBoolean(key: String, value: Boolean): Boolean {
+        return sharedPreferences.edit().putBoolean(key, value).commit()
     }
 
 }

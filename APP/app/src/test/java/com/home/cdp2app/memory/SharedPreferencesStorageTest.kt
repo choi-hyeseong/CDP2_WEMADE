@@ -171,5 +171,37 @@ class SharedPreferencesStorageTest {
         }
     }
 
+    @Test
+    fun TEST_SAVE_BOOLEAN() {
+        //입력값 검증
+        val key : CapturingSlot<String> = slot()
+        val value : CapturingSlot<Boolean> = slot()
+        every { editor.putBoolean(capture(key), capture(value)) } returns editor
+        every { editor.commit() } returns true
+
+        runBlocking {
+            val result = preferencesStorage.putBoolean("TEST", true)
+            Assert.assertEquals("TEST", key.captured)
+            Assert.assertTrue(value.captured)
+            Assert.assertTrue(result)
+            coVerify(atLeast = 1) { editor.commit() }
+        }
+    }
+
+    @Test
+    fun TEST_GET_BOOLEAN() {
+        //입력값 검증
+        val key : CapturingSlot<String> = slot()
+        val value : CapturingSlot<Boolean> = slot()
+        every { sharedPreferences.getBoolean(capture(key), capture(value)) } returns false //false반환
+
+        runBlocking {
+            val result = preferencesStorage.getBoolean("TEST", true)
+            Assert.assertEquals("TEST", key.captured)
+            Assert.assertTrue(value.captured) //default value false
+            Assert.assertFalse(result)
+        }
+    }
+
 
 }

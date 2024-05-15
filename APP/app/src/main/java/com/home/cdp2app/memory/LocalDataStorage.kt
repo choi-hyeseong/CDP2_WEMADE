@@ -54,5 +54,20 @@ interface LocalDataStorage {
      */
     suspend fun getDouble(key : String, defaultValue : Double) : Double
 
+    /**
+     * @param key Boolean값을 불러올 키 값입니다.
+     * @param defaultValue 해당 키값이 없을경우 불러올 default 값입니다.
+     * @return 불러온 Boolean값 입니다. 만약 키에 저장된 Boolean값이 없을경우 defaultValue를 반환합니다.
+     */
+    suspend fun getBoolean(key : String, defaultValue: Boolean) : Boolean
+
+
+    /**
+     * @param key Boolean값을 저장할 키값입니다.
+     * @param value 저장될 Boolean 값입니다.
+     * @return 저장의 성공 여부입니다.
+     */
+    suspend fun putBoolean(key : String, value : Boolean) : Boolean
+
 
 }
