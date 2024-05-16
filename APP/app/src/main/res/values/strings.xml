@@ -19,6 +19,7 @@
     <!-- 로그인 -->
     <string name="signin">로그인</string>
     <string name="signin_comment">반갑습니다!</string>
+    <string name="signin_login_badrequest">로그인에 실패하였습니다. 다시 시도해주세요</string>
     <string name="account_email">이메일</string>
     <string name="account_nickname">별명</string>
     <string name="account_nickname_hint">닉네임 (2자 이상)</string>
@@ -31,14 +32,17 @@
     <string name="account_pw_warning">비밀번호 구성 조건을 확인해 주세요.\n8 ~ 20자 (영문, 숫자, 특수문자 각각 1자 이상)</string>
     <string name="forgot_pw">비밀번호를 잊으셨나요?</string>
     <string name="auto_login">자동 로그인을 사용합니다.</string>
+    <string name="success_login">로그인에 성공했습니다!</string>
 
     <!-- 회원가입 -->
     <string name="signup">회원 가입</string>
     <string name="signup_comment">환영합니다!</string>
+    <string name="signup_success">회원가입에 성공하였습니다. 해당 계정으로 로그인 해주시길 바랍니다.</string>
     <string name="account_pw_again">비밀번호 확인</string>
     <string name="account_pw_again_hint">비밀번호를 한 번 더 입력해 주세요.</string>
     <string name="account_pw_again_warning">비밀번호가 서로 일치하지 않습니다.</string>
     <string name="collect_information">개인정보 수집 및 이용에 동의합니다.</string>
+    <string name="connection_badrequest_signup">이메일이 이미 존재합니다. 다른 이메일로 시도해주세요.</string>
     
     <!-- 기본 정보 -->
     <string name="insert_basic_info">개인 정보 입력</string>
@@ -96,4 +100,10 @@
     <string name="dashboard_order">대시보드 정렬</string>
     <string name="dashboard_order_save_complete">대시보드 순서 저장이 완료되었습니다. 앱 재시작시 적용됩니다.</string>
     <string name="dashboard_order_save_failed">대시보드 순서 저장에 실패했습니다. 다시 시도해주세요</string>
+
+    <!-- 네트워크 오류 -->
+    <string name="connection_error">서버와 연결상태가 좋지 않습니다. 다시 시도해주세요.</string>
+    <string name="unauthorized">로그인 상태가 만료되었습니다. 다시 로그인해주세요.</string>
+    <string name="internal_error">서버 상태가 좋지 않습니다. 잠시후 시도해주세요.</string>
+    <string name="other_error">기타 오류가 발생했습니다. 개발자에게 문의해주세요.</string>
 </resources>

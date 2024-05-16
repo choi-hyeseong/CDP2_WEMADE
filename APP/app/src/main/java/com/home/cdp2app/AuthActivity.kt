@@ -14,11 +14,11 @@ class AuthActivity : AppCompatActivity(), AuthCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = AuthBinding.inflate(layoutInflater)
-        navigateToSelect()
+        navigateSelect()
         setContentView(bind.root)
     }
 
-    private fun navigateToSelect() {
+    override fun navigateSelect() {
         supportFragmentManager.beginTransaction().replace(R.id.frame, AuthSelectFragment()).commit()
     }
 
@@ -30,5 +30,11 @@ class AuthActivity : AppCompatActivity(), AuthCallback {
     override fun navigateToLogin() {
         supportFragmentManager.beginTransaction().replace(R.id.frame, LoginFragment()).addToBackStack(null).commit()
     }
+
+    override fun navigateToMain() {
+        //메인으로 이동
+        startActivityWithBackstackClear(MainPagerActivity::class.java)
+    }
+
 
 }
