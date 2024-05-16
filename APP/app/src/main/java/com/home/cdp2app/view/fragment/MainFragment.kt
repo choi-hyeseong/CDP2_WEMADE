@@ -30,6 +30,7 @@ class MainFragment : Fragment() {
     private fun initView(bind : MainPredictBinding) {
         //뷰 색상 지정등등
         bind.percentageChartView.let {
+            it.textSize = 70f
             it.setAdaptiveColorProvider(ChartColorProvider(requireContext()))
             it.apply()
         }

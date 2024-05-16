@@ -91,8 +91,8 @@ dependencies {
     // viewpager indicator
     implementation "com.tbuonomo:dotsindicator:5.0"
 
-    // percent chart view
-    implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.1'
+    // percent chart view - hotfix for renderer repository
+    implementation 'com.github.choi-hyeseong:PercentageChartView:-SNAPSHOT'
 
     // cardview
     implementation "androidx.cardview:cardview:1.0.0"
