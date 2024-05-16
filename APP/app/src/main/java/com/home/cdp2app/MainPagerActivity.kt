@@ -2,12 +2,15 @@ package com.home.cdp2app
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.home.cdp2app.databinding.MainPagerBinding
+import com.home.cdp2app.health.basic.repository.PreferenceBasicInfoRepository
+import com.home.cdp2app.health.basic.usecase.HasBasicInfo
 import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
 import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
 import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
@@ -31,6 +34,7 @@ import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.fragment.DashboardFragment
 import com.home.cdp2app.view.fragment.MainFragment
 import com.home.cdp2app.view.fragment.SettingFragment
+import com.home.cdp2app.view.viewmodel.MainPagerViewModel
 import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
 
 class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
@@ -50,11 +54,31 @@ class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
             ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
         )
     }
+
+    private val pagerViewModel : MainPagerViewModel by lazy {
+        val storage = SharedPreferencesStorage(this)
+        val repository = PreferenceBasicInfoRepository(storage)
+        MainPagerViewModel(HasBasicInfo(repository))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = MainPagerBinding.inflate(layoutInflater)
         initTabLayout(bind)
         setContentView(bind.root)
+        initObserver()
+    }
+
+    //basic info가 비어있을경우 설정화면으로 이동
+    private fun initObserver() {
+        pagerViewModel.checkHaveBasicInfo().observe(this) {
+            it.getContent()?.let {hasInfo ->
+                if (!hasInfo) {
+                    Toast.makeText(this, R.string.insert_basic_info_firstjoin, Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, BasicInfoActivity::class.java))
+                }
+            }
+        }
     }
 
     private fun initTabLayout(view : MainPagerBinding) {

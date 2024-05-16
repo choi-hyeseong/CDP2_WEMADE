@@ -23,4 +23,7 @@
     <color name="status_bad">#F63B11</color>
 
     <color name="red">#ff0000</color>
+    <color name="light_grey">#E9EDF0</color>
+    <color name="scarlet">#ff2400</color>
+    <color name="vermilion">#E34234</color>
 </resources>
