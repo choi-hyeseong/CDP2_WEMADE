@@ -14,7 +14,7 @@ import com.home.cdp2app.MainActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthLoginBinding
 import com.home.cdp2app.databinding.AuthRegisterBinding
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 import com.home.cdp2app.user.auth.validator.LoginValidator
 import com.home.cdp2app.view.fragment.auth.validator.LoginViewValidator
 

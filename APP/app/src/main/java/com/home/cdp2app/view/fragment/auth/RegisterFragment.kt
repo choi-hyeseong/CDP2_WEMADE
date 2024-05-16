@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthRegisterBinding
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 import com.home.cdp2app.user.auth.validator.RegisterValidator
 import com.home.cdp2app.view.fragment.auth.validator.RegisterViewValidator
 

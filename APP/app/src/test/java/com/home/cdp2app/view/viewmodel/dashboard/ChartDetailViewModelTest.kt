@@ -16,7 +16,7 @@ import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.health.sleep.usecase.SaveSleepHour
 import com.home.cdp2app.health.sleep.valid.SleepHourValidator
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 import com.home.cdp2app.view.chart.parser.ChartParser
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper

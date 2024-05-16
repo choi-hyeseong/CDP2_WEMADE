@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.DialogBloodpressureBinding
 import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 import com.home.cdp2app.view.dialog.validator.blood.BloodPressureViewValidator
 import com.home.cdp2app.view.viewmodel.dashboard.ChartDetailViewModel
 import java.time.Instant

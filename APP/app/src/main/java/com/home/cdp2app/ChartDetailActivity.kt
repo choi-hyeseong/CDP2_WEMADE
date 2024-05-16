@@ -37,7 +37,7 @@ import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMappe
 import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.dialog.factory.DialogFactory
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 import com.home.cdp2app.health.bloodpressure.valid.BloodPressureValidator
 import com.home.cdp2app.view.dialog.validator.blood.BloodPressureViewValidator
 import com.home.cdp2app.health.heart.valid.HeartRateValidator

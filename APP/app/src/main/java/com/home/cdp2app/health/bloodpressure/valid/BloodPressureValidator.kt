@@ -1,7 +1,7 @@
 package com.home.cdp2app.health.bloodpressure.valid
 
 import com.home.cdp2app.util.date.DateTimeUtil
-import com.home.cdp2app.type.ValidateStatus
+import com.home.cdp2app.valid.type.ValidateStatus
 
 /**
  * VM, ViewValidator에서 사용하는 validation class. VM과 View에서 validation을 수행할때 코드를 중복시키지 않기 위함. 어처피 value valid의 목적은 같으니
