@@ -1,5 +1,6 @@
 package com.home.cdp2app.view.fragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -104,11 +105,23 @@ class PredictFragment : Fragment() {
 
     private fun initListener(bind: MainPredictBinding) {
         bind.predict.setOnClickListener {
-            displayLoadingView()
-            viewModel.requestPredict()
+            showExerciseDialog() //운동 30분 했는지 여부 확인용 다이얼로그
         }
     }
 
+    private fun showExerciseDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.check_exercise)
+            .setMessage(R.string.check_exercise_detail)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                displayLoadingView()
+                viewModel.requestPredict(true)
+            }
+            .setNegativeButton(R.string.no) { _, _ ->
+                displayLoadingView()
+                viewModel.requestPredict(false)
+            }.create().show()
+    }
     private fun initView(bind : MainPredictBinding) {
         //뷰 색상 지정등등
         bind.percentageChartView.let {

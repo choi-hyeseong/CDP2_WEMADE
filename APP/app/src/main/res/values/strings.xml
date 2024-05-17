@@ -110,6 +110,10 @@
     <string name="predict_warn_subtitle">고혈압이 의심돼요! 진료를 받아보시는게 어떨까요?</string>
     <string name="predict_serious_title">고혈압 위험</string>
     <string name="predict_serious_subtitle">고혈압 위험 상태입니다. 진료를 받으시는게 좋겠어요</string>
+    <string name="check_exercise">운동 여부 확인</string>
+    <string name="check_exercise_detail">분석을 위해 운동 여부를 확인해야 합니다.\n오늘 30분정도 운동하셨나요?</string>
+    <string name="yes">네</string>
+    <string name="no">아니요</string>
 
     <!-- 정렬 -->
     <string name="dashboard_order">대시보드 정렬</string>

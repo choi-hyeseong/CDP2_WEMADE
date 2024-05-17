@@ -42,7 +42,8 @@ class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val
         }
     }
 
-    fun requestPredict() {
+    fun requestPredict(exercise : Boolean) {
+        Log.i(HEADER, "EXERCISE : $exercise")
         job = CoroutineScope(Dispatchers.IO).launch {
             predictUseCase().suspendOnSuccess {
                 //suspend 함수를 위한 suspend 수행
