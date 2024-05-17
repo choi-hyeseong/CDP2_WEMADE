@@ -7,6 +7,7 @@ import com.home.cdp2app.user.auth.entity.AuthToken
 import com.home.cdp2app.user.auth.usecase.GetAuthToken
 import com.skydoves.sandwich.ApiResponse
 
+// predict api를 이용한 repository
 class RemotePredictRepository(private val predictAPI: PredictAPI) : PredictRepository {
     override suspend fun predict(authToken: AuthToken, health : String): ApiResponse<PredictResponseDTO> {
         return predictAPI.predict(authToken.getHeaderAccessToken(), PredictRequestDTO())

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.home.cdp2app.databinding.AuthSelectBinding
 import com.home.cdp2app.view.callback.AuthCallback
 
+// 회원가입 - 로그인 선택 뷰
 class AuthSelectFragment : Fragment() {
 
     private var callback : AuthCallback? = null
