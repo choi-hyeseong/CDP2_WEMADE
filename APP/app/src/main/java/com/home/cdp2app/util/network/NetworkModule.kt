@@ -1,5 +1,6 @@
 package com.home.cdp2app.util.network
 
+import com.home.cdp2app.rest.api.PredictAPI
 import com.home.cdp2app.rest.api.RemoteUserAPI
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -27,6 +28,10 @@ class NetworkModule {
 
         val userApi : RemoteUserAPI by lazy {
             retrofit.create(RemoteUserAPI::class.java)
+        }
+
+        val predictAPI : PredictAPI by lazy {
+            retrofit.create(PredictAPI::class.java)
         }
     }
 

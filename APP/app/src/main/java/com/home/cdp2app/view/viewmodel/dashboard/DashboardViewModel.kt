@@ -2,6 +2,7 @@ package com.home.cdp2app.view.viewmodel.dashboard
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
 import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.health.order.type.HealthCategory
@@ -29,7 +30,7 @@ class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
                          private val loadHeartRate: LoadHeartRate,
                          private val loadBloodPressure: LoadBloodPressure,
                          private val loadSleepHour: LoadSleepHour,
-                         private val chartParser: ChartParser) {
+                         private val chartParser: ChartParser) : ViewModel() {
 
     private val LOG_HEADER : String = "Fragment_Dashboard" //for log
 

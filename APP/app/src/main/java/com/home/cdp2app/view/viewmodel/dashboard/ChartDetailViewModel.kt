@@ -2,6 +2,7 @@ package com.home.cdp2app.view.viewmodel.dashboard
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
 import com.home.cdp2app.health.bloodpressure.usecase.SaveBloodPressure
@@ -36,7 +37,7 @@ class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate,
                            private val heartRateValidator: HeartRateValidator,
                            private val sleepHourValidator: SleepHourValidator,
                            private val bloodPressureValidator: BloodPressureValidator,
-                           private val chartParser: ChartParser) {
+                           private val chartParser: ChartParser) : ViewModel() {
     private val LOG_HEADER = "CHART_DETAIL_VIEWMODEL"
     val chartLiveData: MutableLiveData<Chart> = MutableLiveData()
     val saveLiveData: MutableLiveData<Event<ValidateStatus>> = MutableLiveData()

@@ -19,7 +19,7 @@
 
     <!-- 상태 표현 -->
     <color name="status_good">#00CF00</color>
-    <color name="status_normal">#FFE81C</color>
+    <color name="yellow">#FFE81C</color>
     <color name="status_bad">#F63B11</color>
 
     <color name="red">#ff0000</color>

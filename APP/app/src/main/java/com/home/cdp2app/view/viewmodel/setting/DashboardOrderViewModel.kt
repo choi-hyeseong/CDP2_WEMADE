@@ -1,6 +1,7 @@
 package com.home.cdp2app.view.viewmodel.setting
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.home.cdp2app.health.order.entity.ChartOrder
 import com.home.cdp2app.health.order.type.HealthCategory
 import com.home.cdp2app.health.order.usecase.LoadChartOrder
@@ -17,7 +18,7 @@ import java.util.LinkedHashSet
 // 개선할 수 있다면 LiveData value에 직접 접근하는게 아니라, 차라리 필드를 하나 만들어놓고 접근하는게 좋을거 같음.
 
 // 20:31 개선
-class DashboardOrderViewModel(private val loadChartOrder: LoadChartOrder, private val saveChartOrder: SaveChartOrder) {
+class DashboardOrderViewModel(private val loadChartOrder: LoadChartOrder, private val saveChartOrder: SaveChartOrder) : ViewModel() {
 
     // orderLiveData 접근시 차트 순서 로드
     val orderLivedata : MutableLiveData<ChartOrder> by lazy {

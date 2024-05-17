@@ -2,6 +2,7 @@ package com.home.cdp2app.view.viewmodel
 
 import android.media.metrics.Event
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.home.cdp2app.user.auth.usecase.HasAuthToken
 import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
  * @property hasAuthToken AuthToken이 있는지 여부를 확인하는 유스케이스
  * @property checkTutorialCompleted 튜토리얼을 완료했는지 여부를 확인하는 유스케이스
  */
-class MainViewModel(private val hasAuthToken: HasAuthToken, private val checkTutorialCompleted: CheckTutorialCompleted) {
+class MainViewModel(private val hasAuthToken: HasAuthToken, private val checkTutorialCompleted: CheckTutorialCompleted) : ViewModel() {
 
     //tutorial 여부 확인하는 메소드 observe르 사용
     fun checkTutorialStatus() : MutableLiveData<Boolean> {
@@ -36,4 +37,5 @@ class MainViewModel(private val hasAuthToken: HasAuthToken, private val checkTut
         }
         return liveData
     }
+
 }

@@ -2,6 +2,7 @@ package com.home.cdp2app.view.viewmodel.auth
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.home.cdp2app.rest.type.NetworkStatus
 import com.home.cdp2app.user.auth.usecase.LoginUseCase
 import com.home.cdp2app.user.auth.usecase.SaveAuthToken
@@ -15,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginValidator: LoginValidator, private val loginUseCase: LoginUseCase, private val saveAuthToken: SaveAuthToken) {
+class LoginViewModel(private val loginValidator: LoginValidator, private val loginUseCase: LoginUseCase, private val saveAuthToken: SaveAuthToken) : ViewModel() {
 
     private val LOG_HEADER = "LOGIN_VIEWMODEL"
 
@@ -35,8 +36,8 @@ class LoginViewModel(private val loginValidator: LoginValidator, private val log
         CoroutineScope(Dispatchers.IO).launch {
             loginUseCase(email, password).suspendOnSuccess {
                 //suspend method 제공
-                saveAuthToken(data.toEntity())
-                loginStatusLiveData.postValue(Event(NetworkStatus.OK)) //성공한경우
+                saveAuthToken(data.toEntity()) //저장된 dto를 entity로 변환하고 저장
+                loginStatusLiveData.postValue(Event(NetworkStatus.OK)) //성공한경우 ok 리턴
             }.onError {
                 loginStatusLiveData.postValue(Event(NetworkStatus.fromStatusCode(statusCode))) //BadRequest, Internel Error..
                 Log.w(LOG_HEADER, "Encountered Retrofit Error. Status : $statusCode body : ${errorBody?.string()}") //로깅 - 에러

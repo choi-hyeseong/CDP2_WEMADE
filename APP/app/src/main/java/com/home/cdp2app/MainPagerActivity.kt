@@ -32,7 +32,7 @@ import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMappe
 import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.fragment.DashboardFragment
-import com.home.cdp2app.view.fragment.MainFragment
+import com.home.cdp2app.view.fragment.PredictFragment
 import com.home.cdp2app.view.fragment.SettingFragment
 import com.home.cdp2app.view.viewmodel.MainPagerViewModel
 import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
@@ -114,7 +114,7 @@ class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
 
     class ViewpagerFragmentAdapter(mainPagerActivity: MainPagerActivity, dashboardViewModel: DashboardViewModel) : FragmentStateAdapter(mainPagerActivity) {
 
-        private val fragments : List<Fragment> = listOf(DashboardFragment(dashboardViewModel), MainFragment() , SettingFragment())
+        private val fragments : List<Fragment> = listOf(DashboardFragment(dashboardViewModel), PredictFragment() , SettingFragment())
 
         override fun getItemCount(): Int {
             return fragments.size
