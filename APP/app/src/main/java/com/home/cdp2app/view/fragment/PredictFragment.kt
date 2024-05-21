@@ -33,12 +33,13 @@ import java.util.concurrent.ThreadLocalRandom
 
 class PredictFragment : Fragment() {
 
-    private var callback : MainPagerCallback? = null //메인 화면으로 이동하기 위한 콜백
+    private var callback: MainPagerCallback? = null //메인 화면으로 이동하기 위한 콜백
     private var binding: MainPredictBinding? = null
 
     private var viewMapper: PredictViewMapper? = null //predict시 뷰 변경하는 클래스
+
     //todo hilt inject
-    private val viewModel : PredictViewModel by lazy {
+    private val viewModel: PredictViewModel by lazy {
         val storage = SharedPreferencesStorage(requireContext())
         val authTokenRepository = PreferenceAuthTokenRepository(storage)
         val predictRepository = RemotePredictRepository(NetworkModule.predictAPI)
@@ -70,9 +71,7 @@ class PredictFragment : Fragment() {
 
     private fun initObserver() {
         viewModel.predictLiveData.observe(viewLifecycleOwner) {
-            it.getContent()?.let { result ->
-                handlePredictResult(result)
-            }
+            handlePredictResult(it)
         }
 
         viewModel.networkStatus.observe(viewLifecycleOwner) {
@@ -84,17 +83,18 @@ class PredictFragment : Fragment() {
     }
 
     //chart 업데이트 하면서 문자열 수정하기.
-    private fun handlePredictResult(result : PredictResult) {
+    private fun handlePredictResult(result: PredictResult) {
         viewMapper?.notify(result)
     }
 
     // 네트워크 결과값에 따른 핸들링
-    private fun handleNetworkStatus(status : NetworkStatus) {
+    private fun handleNetworkStatus(status: NetworkStatus) {
         when (status) {
             NetworkStatus.UNAUTHORIZED -> {
                 Toast.makeText(requireContext(), R.string.login_required, Toast.LENGTH_LONG).show()
                 callback?.navigateMain()
             }
+
             NetworkStatus.CONNECTION_ERROR -> Toast.makeText(requireContext(), R.string.connection_error, Toast.LENGTH_LONG).show() //통신 오류
             NetworkStatus.BAD_REQUEST -> Toast.makeText(requireContext(), R.string.other_error, Toast.LENGTH_LONG).show() //예측 api에서 bad request는 코딩 문제. 따라서 개발자에게 문의 메시지 노출하기
             NetworkStatus.INTERNAL_ERROR -> Toast.makeText(requireContext(), R.string.internal_error, Toast.LENGTH_LONG).show() //내부 문제
@@ -110,19 +110,16 @@ class PredictFragment : Fragment() {
     }
 
     private fun showExerciseDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.check_exercise)
-            .setMessage(R.string.check_exercise_detail)
-            .setPositiveButton(R.string.yes) { _, _ ->
+        AlertDialog.Builder(requireContext()).setTitle(R.string.check_exercise).setMessage(R.string.check_exercise_detail).setPositiveButton(R.string.yes) { _, _ ->
                 displayLoadingView()
                 viewModel.requestPredict(true)
-            }
-            .setNegativeButton(R.string.no) { _, _ ->
+            }.setNegativeButton(R.string.no) { _, _ ->
                 displayLoadingView()
                 viewModel.requestPredict(false)
             }.create().show()
     }
-    private fun initView(bind : MainPredictBinding) {
+
+    private fun initView(bind: MainPredictBinding) {
         //뷰 색상 지정등등
         bind.percentageChartView.let {
             it.textSize = 70f
@@ -165,7 +162,7 @@ class PredictFragment : Fragment() {
     }
 
 
-    class ChartColorProvider(private val context : Context) : AdaptiveColorProvider {
+    class ChartColorProvider(private val context: Context) : AdaptiveColorProvider {
         override fun provideTextColor(progress: Float): Int {
             return ContextCompat.getColor(context, R.color.black)
         }

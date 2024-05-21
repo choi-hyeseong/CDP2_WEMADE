@@ -19,16 +19,49 @@ import com.github.mikephil.charting.data.BarEntry
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainDashboardBinding
 import com.home.cdp2app.databinding.MainDashboardItemBinding
+import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
+import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
+import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
+import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
+import com.home.cdp2app.health.heart.mapper.HeartRateMapper
+import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
+import com.home.cdp2app.health.heart.usecase.LoadHeartRate
+import com.home.cdp2app.health.order.repository.PreferenceOrderRepository
+import com.home.cdp2app.health.order.usecase.LoadChartOrder
+import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
+import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
+import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
+import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.view.chart.Chart
 import com.home.cdp2app.view.callback.MainPagerCallback
 import com.home.cdp2app.view.chart.formatter.DateFormatter
+import com.home.cdp2app.view.chart.parser.ChartParser
+import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
+import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
 
 // dashboard view
-class DashboardFragment(private val dashboardViewModel: DashboardViewModel) : Fragment() {
+class DashboardFragment() : Fragment() {
 
     private lateinit var adapter : ChartAdapter
     private var callback : MainPagerCallback? = null
+    // todo hilt inject
+    private val dashboardViewModel : DashboardViewModel by lazy {
+        val repository = PreferenceOrderRepository(SharedPreferencesStorage(requireContext()))
+        val healthDao = HealthConnectDao(requireContext())
+        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
+        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
+        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
+        DashboardViewModel(
+            LoadChartOrder(repository),
+            LoadHeartRate(heartRepo),
+            LoadBloodPressure(bloodRepo),
+            LoadSleepHour(sleepRepo),
+            ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = MainDashboardBinding.inflate(inflater)

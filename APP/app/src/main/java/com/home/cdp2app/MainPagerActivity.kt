@@ -39,21 +39,6 @@ import com.home.cdp2app.view.viewmodel.dashboard.DashboardViewModel
 
 class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
 
-    // todo hilt inject
-    private val dashboardViewModel : DashboardViewModel by lazy {
-        val repository = PreferenceOrderRepository(SharedPreferencesStorage(applicationContext))
-        val healthDao = HealthConnectDao(applicationContext)
-        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
-        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
-        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
-       DashboardViewModel(
-           LoadChartOrder(repository),
-            LoadHeartRate(heartRepo),
-            LoadBloodPressure(bloodRepo),
-            LoadSleepHour(sleepRepo),
-            ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
-        )
-    }
 
     private val pagerViewModel : MainPagerViewModel by lazy {
         val storage = SharedPreferencesStorage(this)
@@ -82,7 +67,7 @@ class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
     }
 
     private fun initTabLayout(view : MainPagerBinding) {
-        view.pager.adapter = ViewpagerFragmentAdapter(this, dashboardViewModel)
+        view.pager.adapter = ViewpagerFragmentAdapter(this)
         TabLayoutMediator(view.tabLayout, view.pager) {tab, pos ->
             // icon & text setting
             when (pos) {
@@ -112,9 +97,9 @@ class MainPagerActivity : AppCompatActivity(), MainPagerCallback {
         }.attach()
     }
 
-    class ViewpagerFragmentAdapter(mainPagerActivity: MainPagerActivity, dashboardViewModel: DashboardViewModel) : FragmentStateAdapter(mainPagerActivity) {
+    class ViewpagerFragmentAdapter(mainPagerActivity: MainPagerActivity) : FragmentStateAdapter(mainPagerActivity) {
 
-        private val fragments : List<Fragment> = listOf(DashboardFragment(dashboardViewModel), PredictFragment() , SettingFragment())
+        private val fragments : List<Fragment> = listOf(DashboardFragment(), PredictFragment() , SettingFragment())
 
         override fun getItemCount(): Int {
             return fragments.size

@@ -26,8 +26,8 @@ class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val
     private var job : Job? = null //viewpager 움직임등으로 인해 요청 중단 필요시 job
     private val HEADER : String = "PREDICT_VIEWMODEL"
     //예측 결과를 나타내는 livedata
-    val predictLiveData : MutableLiveData<Event<PredictResult>> by lazy {
-        MutableLiveData<Event<PredictResult>>().also { loadFromCache() }
+    val predictLiveData : MutableLiveData<PredictResult> by lazy {
+        MutableLiveData<PredictResult>().also { loadFromCache() }
     }
     //network 상태 알려주는 Livedata
     val networkStatus : MutableLiveData<Event<NetworkStatus>> = MutableLiveData()
@@ -38,7 +38,7 @@ class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val
         CoroutineScope(Dispatchers.IO).launch {
             val result = getCachePredictResult()
             if (result != null)
-                predictLiveData.postValue(Event(result))
+                predictLiveData.postValue(result)
         }
     }
 
@@ -51,7 +51,7 @@ class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val
 
                 val result = data.toEntity() //entity로 변환하기
                 saveCachePredictResult(result) //캐시 저장 - 재실행시
-                predictLiveData.postValue(Event(result)) //predict view 표시
+                predictLiveData.postValue(result) //predict view 표시
             }.suspendOnError {
                 if (statusCode == StatusCode.Unauthorized)
                     deleteAuthToken()  //Unauthorized인경우 저장된 토큰 제거함. - View에서 로그인 재 유도 위함
