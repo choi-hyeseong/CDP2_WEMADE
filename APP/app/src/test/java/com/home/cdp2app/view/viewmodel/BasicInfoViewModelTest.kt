@@ -28,7 +28,7 @@ class BasicInfoViewModelTest {
     //VM.basicInfoLiveData에 접근할때 lazy로 로드 될지 확인
     @Test
     fun TEST_LOAD_INFO() {
-        val response = BasicInfo(150.0, 70.0, Gender.WOMAN, false) //리턴할 값
+        val response = BasicInfo(150.0, 70.0, 20, Gender.WOMAN, false) //리턴할 값
         val defaultParam : CapturingSlot<Boolean> = slot() //파라미터 캡처용
         coEvery { loadBasicInfo(capture(defaultParam)) } returns response //load시 response 리턴
         assertEquals(response, viewModel.basicInfoLiveData.getOrAwaitValue(1, TimeUnit.SECONDS))
@@ -40,12 +40,13 @@ class BasicInfoViewModelTest {
         val captureData : CapturingSlot<BasicInfo> = slot()
 
         coEvery { saveBasicInfo(capture(captureData)) } returns mockk() // for capture
-        viewModel.saveBasicInfo(145, 70, false, Gender.WOMAN) //세이브 요청
+        viewModel.saveBasicInfo(145, 70, false, 20, Gender.WOMAN) //세이브 요청
         coVerify(atLeast = 1) { saveBasicInfo(any()) }
         //값 비교
         val captured = captureData.captured
         assertEquals(145.0, captured.height, 0.0)
         assertEquals(70.0, captured.weight, 0.0)
+        assertEquals(20, captured.age)
         assertFalse(captured.isSmoking)
         assertEquals(Gender.WOMAN, captured.gender)
 
@@ -54,7 +55,7 @@ class BasicInfoViewModelTest {
     @Test
     fun TEST_NOTIFY_SAVE_COMPLETE() {
         coEvery { saveBasicInfo(any()) } returns mockk() // success save
-        viewModel.saveBasicInfo(145, 70, false, Gender.WOMAN) //세이브 요청
+        viewModel.saveBasicInfo(145, 70, false, 20, Gender.WOMAN) //세이브 요청
 
         val event = viewModel.saveLiveData.getOrAwaitValue(1, TimeUnit.SECONDS) //값 대기
         assertNotNull(event) //올바르게 notify가 되었는가

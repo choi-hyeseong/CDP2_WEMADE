@@ -11,7 +11,7 @@ import com.home.cdp2app.memory.exception.TargetNotFoundException
 interface BasicInfoRepository {
 
     companion object {
-        val DEFAULT : BasicInfo = BasicInfo(180.0, 80.0, Gender.MAN, false)
+        val DEFAULT : BasicInfo = BasicInfo(180.0, 80.0, 20, Gender.MAN, false)
     }
 
     /**

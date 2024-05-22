@@ -39,6 +39,10 @@ class BasicInfoActivity : AppCompatActivity() {
         bind.weight.text = getString(R.string.weight_format, value.toInt())
     }
 
+    private fun setAgeText(bind: MainSettingBasicInfoBinding, value: Float) {
+        bind.age.text = getString(R.string.age_format, value.toInt())
+    }
+
     //뷰 리스너 초기화 부분 (슬라이더, 저장버튼)
     private fun initListener(bind: MainSettingBasicInfoBinding) {
         //키 부분 변경 리스너
@@ -51,13 +55,19 @@ class BasicInfoActivity : AppCompatActivity() {
             setWeightText(bind, value)
         }
 
+        //나이부분 슬라이더 리스너
+        bind.sliderAge.addOnChangeListener {_, value, _ ->
+            setAgeText(bind, value)
+        }
+
         //저장버튼 클릭 리스너
         bind.save.setOnClickListener {
             val height = bind.slider.value.toInt() //키 부분 슬라이더 파싱
             val weight = bind.sliderWeight.value.toInt() //몸무게 부분 슬라이더 파싱
+            val age = bind.sliderAge.value.toInt() //나이부분 슬라이더 파싱
             val isSmoking = bind.smoker.isChecked //흡연자 여부 체크확인 (라디오 그룹으로 되어 있어 흡연자 아닐경우 비흡연자로 체크)
             val gender = if (bind.man.isChecked) Gender.MAN else Gender.WOMAN //성별도 동일하게 남성이 체크되어 있는경우 남자, 아닌경우 여성 체크
-            viewModel.saveBasicInfo(height, weight, isSmoking, gender)
+            viewModel.saveBasicInfo(height, weight, isSmoking, age, gender)
         }
     }
 
@@ -78,9 +88,15 @@ class BasicInfoActivity : AppCompatActivity() {
             bind.slider.value = height
             //슬라이더가 변경되지 않을경우 대비하여 수동으로 변경
             setHeightText(bind, height)
+
             val weight = data.weight.toFloat()
             bind.sliderWeight.value = weight
             setWeightText(bind, weight)
+
+            //나이 부분
+            val age = data.age.toFloat()
+            bind.sliderAge.value = age
+            setAgeText(bind, age)
 
             //흡연 여부
             if (data.isSmoking) bind.smoker.isChecked = true

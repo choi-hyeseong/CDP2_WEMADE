@@ -53,6 +53,8 @@
     <string name="height_format">%1$d cm</string>
     <string name="weight">몸무게</string>
     <string name="weight_format">%1$d kg</string>
+    <string name="age">나이</string>
+    <string name="age_format">%1$d 세</string>
     <string name="smoking_or_not">흡연 여부</string>
     <string name="smoker">흡연자</string>
     <string name="non_smoker">비흡연자</string>

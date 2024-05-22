@@ -25,7 +25,7 @@ class PreferenceBasicInfoRepositoryTest {
     @Test
     fun TEST_SAVE_INFO() {
         //입력할 값
-        val basicInfo = BasicInfo(175.0, 70.0, Gender.MAN, true)
+        val basicInfo = BasicInfo(175.0, 70.0, 20, Gender.MAN, true)
 
         //키값 캡처용 변수
         val captureKey : CapturingSlot<String> = slot()
@@ -45,7 +45,7 @@ class PreferenceBasicInfoRepositoryTest {
 
     @Test
     fun TEST_LOAD_SUCCESS() {
-        val basicInfo = BasicInfo(174.0, 75.0, Gender.WOMAN, false) //로드될 info
+        val basicInfo = BasicInfo(174.0, 75.0, 20, Gender.WOMAN, false) //로드될 info
         coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } returns basicInfo //basic info 반환
 
         runBlocking {
@@ -90,7 +90,7 @@ class PreferenceBasicInfoRepositoryTest {
 
     @Test
     fun TEST_HAVE_INFO() {
-        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } returns BasicInfo(180.0, 80.0, Gender.MAN, false) //DEFAULT와 값은 동일하지만, 다른 객체 (저장된 객체)
+        coEvery { preferencesStorage.loadObject(any(), BasicInfo::class) } returns BasicInfo(180.0, 80.0, 20, Gender.MAN, false) //DEFAULT와 값은 동일하지만, 다른 객체 (저장된 객체)
 
         runBlocking {
             assertTrue(preferenceBasicInfoRepository.hasInfo())

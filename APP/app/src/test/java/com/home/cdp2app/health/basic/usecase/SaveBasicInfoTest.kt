@@ -20,7 +20,7 @@ class SaveBasicInfoTest {
 
     @Test
     fun TEST_CALL_SAVE_INFO() {
-        val info = BasicInfo(170.0, 70.0, Gender.WOMAN, false)
+        val info = BasicInfo(170.0, 70.0, 20, Gender.WOMAN, false)
         val slot : CapturingSlot<BasicInfo> = slot() //입력값 검증위한 슬롯
 
         coEvery { basicInfoRepository.saveInfo(capture(slot)) } returns mockk() //input capture

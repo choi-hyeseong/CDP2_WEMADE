@@ -34,9 +34,9 @@ class BasicInfoViewModel(private val loadBasicInfo: LoadBasicInfo, private val s
     }
 
     // BasicInfo 저장시 사용되는 함수. 저장 버튼 누를때 호출됨
-    fun saveBasicInfo(height: Int, weight: Int, isSmoking: Boolean, gender: Gender) {
+    fun saveBasicInfo(height: Int, weight: Int, isSmoking: Boolean, age : Int, gender: Gender) {
         CoroutineScope(Dispatchers.IO).launch {
-            saveBasicInfo(BasicInfo(height.toDouble(), weight.toDouble(), gender, isSmoking))
+            saveBasicInfo(BasicInfo(height.toDouble(), weight.toDouble(), age, gender, isSmoking))
             saveLiveData.postValue(Event(true)) //저장된경우 true 전달
         }
     }
