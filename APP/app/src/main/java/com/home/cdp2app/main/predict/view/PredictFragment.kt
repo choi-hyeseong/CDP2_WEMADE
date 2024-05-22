@@ -21,9 +21,9 @@ import com.home.cdp2app.main.predict.usecase.GetCachePredictResult
 import com.home.cdp2app.main.predict.usecase.PredictUseCase
 import com.home.cdp2app.main.predict.usecase.SaveCachePredictResult
 import com.home.cdp2app.rest.type.NetworkStatus
-import com.home.cdp2app.user.auth.token.repository.PreferenceAuthTokenRepository
-import com.home.cdp2app.user.auth.token.usecase.DeleteAuthToken
-import com.home.cdp2app.user.auth.token.usecase.GetAuthToken
+import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
+import com.home.cdp2app.user.token.usecase.DeleteAuthToken
+import com.home.cdp2app.user.token.usecase.GetAuthToken
 import com.home.cdp2app.util.network.NetworkModule
 import com.home.cdp2app.main.dashboard.view.callback.MainPagerCallback
 import com.home.cdp2app.main.predict.view.mapper.PredictViewMapper

@@ -1,7 +1,7 @@
 package com.home.cdp2app.main.predict.repository
 
 import com.home.cdp2app.rest.dto.PredictResponseDTO
-import com.home.cdp2app.user.auth.token.entity.AuthToken
+import com.home.cdp2app.user.token.entity.AuthToken
 import com.skydoves.sandwich.ApiResponse
 
 /**

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.home.cdp2app.user.auth.sign.view.AuthActivity
+import com.home.cdp2app.user.sign.view.AuthActivity
 import com.home.cdp2app.databinding.TutorialBinding
 import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.startActivityWithBackstackClear

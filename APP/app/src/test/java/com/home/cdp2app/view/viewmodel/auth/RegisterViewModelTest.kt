@@ -5,9 +5,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
 import com.home.cdp2app.rest.dto.RegisterResponse
 import com.home.cdp2app.rest.type.NetworkStatus
-import com.home.cdp2app.user.auth.sign.usecase.RegisterUseCase
-import com.home.cdp2app.user.auth.sign.validator.RegisterValidator
-import com.home.cdp2app.user.auth.sign.view.register.viewmodel.RegisterViewModel
+import com.home.cdp2app.user.sign.usecase.RegisterUseCase
+import com.home.cdp2app.user.sign.validator.RegisterValidator
+import com.home.cdp2app.user.sign.view.register.viewmodel.RegisterViewModel
 import com.home.cdp2app.valid.type.ValidateStatus
 import com.skydoves.sandwich.ApiResponse
 import io.mockk.CapturingSlot

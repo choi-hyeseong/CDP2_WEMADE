@@ -13,9 +13,9 @@ import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.main.view.MainPagerActivity
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.user.auth.sign.view.AuthActivity
-import com.home.cdp2app.user.auth.token.repository.PreferenceAuthTokenRepository
-import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
+import com.home.cdp2app.user.sign.view.AuthActivity
+import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
+import com.home.cdp2app.user.token.usecase.HasAuthToken
 import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
 import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import com.home.cdp2app.tutorial.view.TutorialActivity

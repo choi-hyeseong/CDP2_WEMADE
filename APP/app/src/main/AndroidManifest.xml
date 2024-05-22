@@ -46,7 +46,7 @@
             android:name=".tutorial.view.TutorialActivity"
             android:exported="false" />
 
-        <activity android:name=".user.auth.sign.view.AuthActivity" android:exported="false"/>
+        <activity android:name=".user.sign.view.AuthActivity" android:exported="false"/>
         <activity
             android:name=".PermissionActivity"
             android:exported="true">

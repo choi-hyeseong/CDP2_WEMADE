@@ -3,7 +3,7 @@ package com.home.cdp2app.view.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
 import com.home.cdp2app.MainViewModel
-import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
+import com.home.cdp2app.user.token.usecase.HasAuthToken
 import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import io.mockk.coEvery
 import io.mockk.mockk

@@ -5,11 +5,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
 import com.home.cdp2app.rest.dto.LoginResponseDTO
 import com.home.cdp2app.rest.type.NetworkStatus
-import com.home.cdp2app.user.auth.token.entity.AuthToken
-import com.home.cdp2app.user.auth.sign.usecase.LoginUseCase
-import com.home.cdp2app.user.auth.token.usecase.SaveAuthToken
-import com.home.cdp2app.user.auth.sign.validator.LoginValidator
-import com.home.cdp2app.user.auth.sign.view.login.viewmodel.LoginViewModel
+import com.home.cdp2app.user.token.entity.AuthToken
+import com.home.cdp2app.user.sign.usecase.LoginUseCase
+import com.home.cdp2app.user.token.usecase.SaveAuthToken
+import com.home.cdp2app.user.sign.validator.LoginValidator
+import com.home.cdp2app.user.sign.view.login.viewmodel.LoginViewModel
 import com.home.cdp2app.valid.type.ValidateStatus
 import com.skydoves.sandwich.ApiResponse
 import io.mockk.CapturingSlot

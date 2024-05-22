@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.auth.validator
 
-import com.home.cdp2app.user.auth.sign.validator.LoginValidator
+import com.home.cdp2app.user.sign.validator.LoginValidator
 import com.home.cdp2app.valid.type.ValidateStatus
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*

@@ -1,6 +1,6 @@
 package com.home.cdp2app.rest.dto
 
-import com.home.cdp2app.user.auth.token.entity.AuthToken
+import com.home.cdp2app.user.token.entity.AuthToken
 
 /**
  * 로그인 응답에 사용되는 DTO 입니다.

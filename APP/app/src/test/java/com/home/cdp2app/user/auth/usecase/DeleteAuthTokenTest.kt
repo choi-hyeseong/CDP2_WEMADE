@@ -1,7 +1,7 @@
 package com.home.cdp2app.user.auth.usecase
 
-import com.home.cdp2app.user.auth.token.repository.AuthTokenRepository
-import com.home.cdp2app.user.auth.token.usecase.DeleteAuthToken
+import com.home.cdp2app.user.token.repository.AuthTokenRepository
+import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

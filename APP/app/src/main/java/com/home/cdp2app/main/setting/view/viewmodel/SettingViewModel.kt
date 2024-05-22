@@ -2,7 +2,7 @@ package com.home.cdp2app.main.setting.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.home.cdp2app.user.auth.token.usecase.DeleteAuthToken
+import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.util.livedata.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
