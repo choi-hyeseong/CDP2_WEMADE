@@ -1,6 +1,7 @@
 package com.home.cdp2app.user.tutorial.usecase
 
-import com.home.cdp2app.user.tutorial.repository.TutorialRepository
+import com.home.cdp2app.tutorial.repository.TutorialRepository
+import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

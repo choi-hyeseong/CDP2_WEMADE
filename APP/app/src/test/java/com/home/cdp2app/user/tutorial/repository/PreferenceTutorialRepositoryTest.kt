@@ -1,6 +1,7 @@
 package com.home.cdp2app.user.tutorial.repository
 
 import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

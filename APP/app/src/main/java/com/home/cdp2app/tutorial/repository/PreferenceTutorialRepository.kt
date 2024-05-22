@@ -1,4 +1,4 @@
-package com.home.cdp2app.user.tutorial.repository
+package com.home.cdp2app.tutorial.repository
 
 import com.home.cdp2app.memory.SharedPreferencesStorage
 

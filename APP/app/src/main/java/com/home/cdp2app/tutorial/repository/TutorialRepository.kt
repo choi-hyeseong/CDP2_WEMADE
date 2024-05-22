@@ -1,4 +1,4 @@
-package com.home.cdp2app.user.tutorial.repository
+package com.home.cdp2app.tutorial.repository
 
 /**
  * 튜토리얼 완료 여부를 관리하는 레포지토리

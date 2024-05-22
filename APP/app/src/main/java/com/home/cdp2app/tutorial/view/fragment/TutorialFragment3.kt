@@ -1,4 +1,4 @@
-package com.home.cdp2app.user.tutorial.view.fragment
+package com.home.cdp2app.tutorial.view.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.home.cdp2app.databinding.TutorialThirdBinding
-import com.home.cdp2app.user.tutorial.view.callback.TutorialCallback
+import com.home.cdp2app.tutorial.view.callback.TutorialCallback
 
 
 class TutorialFragment3 : Fragment() {

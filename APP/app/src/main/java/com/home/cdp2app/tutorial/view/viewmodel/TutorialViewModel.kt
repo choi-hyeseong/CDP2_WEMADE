@@ -1,8 +1,8 @@
-package com.home.cdp2app.user.tutorial.view.viewmodel
+package com.home.cdp2app.tutorial.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.home.cdp2app.user.tutorial.usecase.SaveTutorialCompleted
+import com.home.cdp2app.tutorial.usecase.SaveTutorialCompleted
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

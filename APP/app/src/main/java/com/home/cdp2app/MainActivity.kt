@@ -16,9 +16,9 @@ import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.user.auth.sign.view.AuthActivity
 import com.home.cdp2app.user.auth.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
-import com.home.cdp2app.user.tutorial.repository.PreferenceTutorialRepository
-import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
-import com.home.cdp2app.user.tutorial.view.TutorialActivity
+import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
+import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
+import com.home.cdp2app.tutorial.view.TutorialActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

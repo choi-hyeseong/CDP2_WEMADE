@@ -2,8 +2,8 @@ package com.home.cdp2app.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
-import com.home.cdp2app.user.tutorial.usecase.SaveTutorialCompleted
-import com.home.cdp2app.user.tutorial.view.viewmodel.TutorialViewModel
+import com.home.cdp2app.tutorial.usecase.SaveTutorialCompleted
+import com.home.cdp2app.tutorial.view.viewmodel.TutorialViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule

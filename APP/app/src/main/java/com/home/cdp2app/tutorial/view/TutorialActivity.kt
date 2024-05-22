@@ -1,4 +1,4 @@
-package com.home.cdp2app.user.tutorial.view
+package com.home.cdp2app.tutorial.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +9,13 @@ import com.home.cdp2app.user.auth.sign.view.AuthActivity
 import com.home.cdp2app.databinding.TutorialBinding
 import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.startActivityWithBackstackClear
-import com.home.cdp2app.user.tutorial.repository.PreferenceTutorialRepository
-import com.home.cdp2app.user.tutorial.usecase.SaveTutorialCompleted
-import com.home.cdp2app.user.tutorial.view.callback.TutorialCallback
-import com.home.cdp2app.user.tutorial.view.fragment.TutorialFragment1
-import com.home.cdp2app.user.tutorial.view.fragment.TutorialFragment2
-import com.home.cdp2app.user.tutorial.view.fragment.TutorialFragment3
-import com.home.cdp2app.user.tutorial.view.viewmodel.TutorialViewModel
+import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
+import com.home.cdp2app.tutorial.usecase.SaveTutorialCompleted
+import com.home.cdp2app.tutorial.view.callback.TutorialCallback
+import com.home.cdp2app.tutorial.view.fragment.TutorialFragment1
+import com.home.cdp2app.tutorial.view.fragment.TutorialFragment2
+import com.home.cdp2app.tutorial.view.fragment.TutorialFragment3
+import com.home.cdp2app.tutorial.view.viewmodel.TutorialViewModel
 
 class TutorialActivity : AppCompatActivity(), TutorialCallback {
 

@@ -3,7 +3,7 @@ package com.home.cdp2app
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
-import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
+import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

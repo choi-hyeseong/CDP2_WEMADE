@@ -1,6 +1,6 @@
-package com.home.cdp2app.user.tutorial.usecase
+package com.home.cdp2app.tutorial.usecase
 
-import com.home.cdp2app.user.tutorial.repository.TutorialRepository
+import com.home.cdp2app.tutorial.repository.TutorialRepository
 
 /**
  * 튜토리얼을 완료했는지 여부를 확인하는 유스케이스
