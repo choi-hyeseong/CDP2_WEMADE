@@ -1,6 +1,6 @@
 package com.home.cdp2app.rest.dto
 
-import com.home.cdp2app.predict.entity.PredictResult
+import com.home.cdp2app.main.predict.entity.PredictResult
 
 /**
  * Predict 요청의 결과값을 나타냅니다.

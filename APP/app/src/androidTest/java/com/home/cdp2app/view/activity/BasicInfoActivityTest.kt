@@ -17,7 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.slider.Slider
-import com.home.cdp2app.BasicInfoActivity
+import com.home.cdp2app.main.setting.basicinfo.view.BasicInfoActivity
 import com.home.cdp2app.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher

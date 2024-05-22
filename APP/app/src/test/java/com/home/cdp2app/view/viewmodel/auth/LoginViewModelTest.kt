@@ -1,19 +1,17 @@
 package com.home.cdp2app.view.viewmodel.auth
 
-import android.graphics.Paint.Cap
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
 import com.home.cdp2app.rest.dto.LoginResponseDTO
 import com.home.cdp2app.rest.type.NetworkStatus
-import com.home.cdp2app.user.auth.entity.AuthToken
-import com.home.cdp2app.user.auth.usecase.LoginUseCase
-import com.home.cdp2app.user.auth.usecase.SaveAuthToken
-import com.home.cdp2app.user.auth.validator.LoginValidator
+import com.home.cdp2app.user.auth.token.entity.AuthToken
+import com.home.cdp2app.user.auth.sign.usecase.LoginUseCase
+import com.home.cdp2app.user.auth.token.usecase.SaveAuthToken
+import com.home.cdp2app.user.auth.sign.validator.LoginValidator
+import com.home.cdp2app.user.auth.sign.view.login.viewmodel.LoginViewModel
 import com.home.cdp2app.valid.type.ValidateStatus
 import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.StatusCode
-import com.skydoves.sandwich.onError
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -22,7 +20,6 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.slot
 import io.mockk.unmockkAll
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import org.junit.Rule

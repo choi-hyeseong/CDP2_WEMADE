@@ -1,5 +1,6 @@
 package com.home.cdp2app.user.auth.entity
 
+import com.home.cdp2app.user.auth.token.entity.AuthToken
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

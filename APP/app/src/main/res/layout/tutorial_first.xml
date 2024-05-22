@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".view.fragment.tutorial.TutorialFragment1">
+    tools:context=".user.tutorial.view.fragment.TutorialFragment1">
 
 
     <ImageView

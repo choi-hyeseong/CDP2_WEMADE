@@ -1,8 +1,9 @@
 package com.home.cdp2app.health.basic.usecase
 
-import com.home.cdp2app.health.basic.entity.BasicInfo
-import com.home.cdp2app.health.basic.repository.BasicInfoRepository
-import com.home.cdp2app.health.basic.type.Gender
+import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
+import com.home.cdp2app.main.setting.basicinfo.repository.BasicInfoRepository
+import com.home.cdp2app.main.setting.basicinfo.type.Gender
+import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

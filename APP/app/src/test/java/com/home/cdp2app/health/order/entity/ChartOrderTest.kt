@@ -1,7 +1,8 @@
 package com.home.cdp2app.health.order.entity
 
 import com.home.cdp2app.health.heart.entity.HeartRate
-import com.home.cdp2app.health.order.type.HealthCategory
+import com.home.cdp2app.main.setting.order.type.HealthCategory
+import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

@@ -11,12 +11,14 @@ import androidx.health.connect.client.PermissionController
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
+import com.home.cdp2app.main.view.MainPagerActivity
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.user.auth.repository.PreferenceAuthTokenRepository
-import com.home.cdp2app.user.auth.usecase.HasAuthToken
+import com.home.cdp2app.user.auth.sign.view.AuthActivity
+import com.home.cdp2app.user.auth.token.repository.PreferenceAuthTokenRepository
+import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
 import com.home.cdp2app.user.tutorial.repository.PreferenceTutorialRepository
 import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
-import com.home.cdp2app.view.viewmodel.MainViewModel
+import com.home.cdp2app.user.tutorial.view.TutorialActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

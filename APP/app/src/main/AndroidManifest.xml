@@ -25,12 +25,12 @@
         android:theme="@style/Theme.CDP2app"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChartDetailActivity" android:exported="false">
+        <activity android:name=".main.dashboard.view.ChartDetailActivity" android:exported="false">
 
         </activity>
-        <activity android:name=".DashboardOrderActivity" android:exported="false"/>
+        <activity android:name=".main.setting.order.view.DashboardOrderActivity" android:exported="false"/>
         <activity
-            android:name=".BasicInfoActivity"
+            android:name=".main.setting.basicinfo.view.BasicInfoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -41,12 +41,12 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".MainPagerActivity" android:exported="false"/>
+        <activity android:name=".main.view.MainPagerActivity" android:exported="false"/>
         <activity
-            android:name=".TutorialActivity"
+            android:name=".user.tutorial.view.TutorialActivity"
             android:exported="false" />
 
-        <activity android:name=".AuthActivity" android:exported="false"/>
+        <activity android:name=".user.auth.sign.view.AuthActivity" android:exported="false"/>
         <activity
             android:name=".PermissionActivity"
             android:exported="true">

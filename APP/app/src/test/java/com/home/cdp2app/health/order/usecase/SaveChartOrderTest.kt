@@ -1,8 +1,9 @@
 package com.home.cdp2app.health.order.usecase
 
-import com.home.cdp2app.health.order.entity.ChartOrder
-import com.home.cdp2app.health.order.repository.ChartOrderRepository
-import com.home.cdp2app.health.order.type.HealthCategory
+import com.home.cdp2app.main.setting.order.entity.ChartOrder
+import com.home.cdp2app.main.setting.order.repository.ChartOrderRepository
+import com.home.cdp2app.main.setting.order.type.HealthCategory
+import com.home.cdp2app.main.setting.order.usecase.SaveChartOrder
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk

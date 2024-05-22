@@ -1,10 +1,10 @@
 package com.home.cdp2app.view.dialog.factory
 
-import com.home.cdp2app.health.order.type.HealthCategory
-import com.home.cdp2app.health.sleep.entity.SleepHour
-import com.home.cdp2app.view.dialog.BloodPressureDialog
-import com.home.cdp2app.view.dialog.HeartRateDialog
-import com.home.cdp2app.view.dialog.SleepHourDialog
+import com.home.cdp2app.main.setting.order.type.HealthCategory
+import com.home.cdp2app.main.dashboard.view.dialog.blood.BloodPressureDialog
+import com.home.cdp2app.main.dashboard.view.dialog.heart.HeartRateDialog
+import com.home.cdp2app.main.dashboard.view.dialog.sleep.SleepHourDialog
+import com.home.cdp2app.main.dashboard.view.dialog.factory.DialogFactory
 import io.mockk.mockk
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*

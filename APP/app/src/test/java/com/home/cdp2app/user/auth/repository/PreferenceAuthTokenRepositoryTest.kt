@@ -2,7 +2,8 @@ package com.home.cdp2app.user.auth.repository
 
 import com.home.cdp2app.memory.SharedPreferencesStorage
 import com.home.cdp2app.memory.exception.TargetNotFoundException
-import com.home.cdp2app.user.auth.entity.AuthToken
+import com.home.cdp2app.user.auth.token.entity.AuthToken
+import com.home.cdp2app.user.auth.token.repository.PreferenceAuthTokenRepository
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

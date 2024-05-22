@@ -2,10 +2,9 @@ package com.home.cdp2app.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
-import com.home.cdp2app.user.auth.usecase.DeleteAuthToken
-import com.home.cdp2app.user.auth.usecase.HasAuthToken
+import com.home.cdp2app.MainViewModel
+import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
 import com.home.cdp2app.user.tutorial.usecase.CheckTutorialCompleted
-import com.home.cdp2app.view.viewmodel.setting.SettingViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule

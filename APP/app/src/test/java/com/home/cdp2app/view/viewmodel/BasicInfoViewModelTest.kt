@@ -2,11 +2,11 @@ package com.home.cdp2app.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
-import com.home.cdp2app.health.basic.entity.BasicInfo
-import com.home.cdp2app.health.basic.type.Gender
-import com.home.cdp2app.health.basic.usecase.LoadBasicInfo
-import com.home.cdp2app.health.basic.usecase.SaveBasicInfo
-import com.home.cdp2app.view.viewmodel.setting.BasicInfoViewModel
+import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
+import com.home.cdp2app.main.setting.basicinfo.type.Gender
+import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
+import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
+import com.home.cdp2app.main.setting.basicinfo.view.viewmodel.BasicInfoViewModel
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

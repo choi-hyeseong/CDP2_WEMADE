@@ -1,15 +1,11 @@
 package com.home.cdp2app.health.basic.usecase
 
-import com.home.cdp2app.health.basic.entity.BasicInfo
-import com.home.cdp2app.health.basic.repository.BasicInfoRepository
-import com.home.cdp2app.health.basic.type.Gender
-import io.mockk.CapturingSlot
+import com.home.cdp2app.main.setting.basicinfo.repository.BasicInfoRepository
+import com.home.cdp2app.main.setting.basicinfo.usecase.HasBasicInfo
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.slot
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

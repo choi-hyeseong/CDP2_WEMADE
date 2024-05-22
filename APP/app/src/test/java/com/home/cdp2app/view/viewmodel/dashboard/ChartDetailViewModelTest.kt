@@ -11,17 +11,18 @@ import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.health.heart.usecase.SaveHeartRate
 import com.home.cdp2app.health.heart.valid.HeartRateValidator
-import com.home.cdp2app.health.order.type.HealthCategory
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.health.sleep.entity.SleepHour
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.health.sleep.usecase.SaveSleepHour
 import com.home.cdp2app.health.sleep.valid.SleepHourValidator
 import com.home.cdp2app.valid.type.ValidateStatus
-import com.home.cdp2app.view.chart.parser.ChartParser
-import com.home.cdp2app.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
-import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
-import com.home.cdp2app.view.chart.parser.mapper.HeartRateChartMapper
-import com.home.cdp2app.view.chart.parser.mapper.SleepHourChartMapper
+import com.home.cdp2app.main.dashboard.view.chart.parser.ChartParser
+import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
+import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.HeartRateChartMapper
+import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.SleepHourChartMapper
+import com.home.cdp2app.main.dashboard.view.viewmodel.ChartDetailViewModel
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -34,7 +35,6 @@ import java.time.Duration
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
-import kotlin.math.log
 
 class ChartDetailViewModelTest {
 

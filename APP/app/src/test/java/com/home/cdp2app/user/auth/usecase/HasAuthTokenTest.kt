@@ -1,6 +1,7 @@
 package com.home.cdp2app.user.auth.usecase
 
-import com.home.cdp2app.user.auth.repository.AuthTokenRepository
+import com.home.cdp2app.user.auth.token.repository.AuthTokenRepository
+import com.home.cdp2app.user.auth.token.usecase.HasAuthToken
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

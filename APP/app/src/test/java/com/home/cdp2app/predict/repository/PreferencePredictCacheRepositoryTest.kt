@@ -1,7 +1,8 @@
 package com.home.cdp2app.predict.repository
 
 import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.predict.entity.PredictResult
+import com.home.cdp2app.main.predict.entity.PredictResult
+import com.home.cdp2app.main.predict.repository.PreferencePredictCacheRepository
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

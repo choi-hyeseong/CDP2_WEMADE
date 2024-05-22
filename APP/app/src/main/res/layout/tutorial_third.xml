@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".view.fragment.tutorial.TutorialFragment2">
+    tools:context=".user.tutorial.view.fragment.TutorialFragment2">
 
     <include layout="@layout/imageview_logo_on_top"/>
 

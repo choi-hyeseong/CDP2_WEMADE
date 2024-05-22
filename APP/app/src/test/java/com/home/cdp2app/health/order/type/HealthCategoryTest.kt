@@ -1,5 +1,6 @@
 package com.home.cdp2app.health.order.type
 
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

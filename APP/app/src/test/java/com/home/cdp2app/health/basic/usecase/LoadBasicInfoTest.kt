@@ -1,6 +1,7 @@
 package com.home.cdp2app.health.basic.usecase
 
-import com.home.cdp2app.health.basic.repository.BasicInfoRepository
+import com.home.cdp2app.main.setting.basicinfo.repository.BasicInfoRepository
+import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk

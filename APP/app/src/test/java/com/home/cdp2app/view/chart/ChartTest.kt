@@ -1,7 +1,10 @@
 package com.home.cdp2app.view.chart
 
-import com.home.cdp2app.health.order.entity.ChartOrder
-import com.home.cdp2app.health.order.type.HealthCategory
+import com.home.cdp2app.main.dashboard.view.chart.Chart
+import com.home.cdp2app.main.dashboard.view.chart.ChartItem
+import com.home.cdp2app.main.dashboard.view.chart.applyChart
+import com.home.cdp2app.main.setting.order.entity.ChartOrder
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 import java.time.Instant
@@ -11,7 +14,9 @@ class ChartTest {
     @Test
     fun TEST_APPLY_CHART_SUCCESS() {
         val chart = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.SLEEP_HOUR))).toEmptyChart()
-        val sleepHourChart = Chart(HealthCategory.SLEEP_HOUR, listOf(ChartItem(Instant.now(), 1.5), ChartItem(
+        val sleepHourChart = Chart(
+            HealthCategory.SLEEP_HOUR, listOf(
+                ChartItem(Instant.now(), 1.5), ChartItem(
             Instant.now(), 3.0)
         ))
         assertDoesNotThrow {
@@ -25,7 +30,9 @@ class ChartTest {
     fun TEST_APPLY_CHART_FAIL_NOT_FOUND_INDEX() {
         val chart = ChartOrder(LinkedHashSet(listOf(HealthCategory.HEART_RATE, HealthCategory.SLEEP_HOUR))).toEmptyChart()
         // systolic은 등록되지 않음
-        val systolicChart = Chart(HealthCategory.BLOOD_PRESSURE_SYSTOLIC, listOf(ChartItem(Instant.now(), 1.5), ChartItem(
+        val systolicChart = Chart(
+            HealthCategory.BLOOD_PRESSURE_SYSTOLIC, listOf(
+                ChartItem(Instant.now(), 1.5), ChartItem(
             Instant.now(), 3.0)
         ))
         assertThrows(IllegalStateException::class.java) {

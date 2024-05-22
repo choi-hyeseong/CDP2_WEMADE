@@ -1,6 +1,7 @@
 package com.home.cdp2app.user.auth.usecase
 
-import com.home.cdp2app.user.auth.repository.UserRepository
+import com.home.cdp2app.user.auth.sign.repository.UserRepository
+import com.home.cdp2app.user.auth.sign.usecase.RegisterUseCase
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.mockk

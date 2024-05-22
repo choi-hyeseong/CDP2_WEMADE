@@ -2,9 +2,9 @@ package com.home.cdp2app.view.chart.mapper
 
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.sleep.entity.SleepHour
-import com.home.cdp2app.view.chart.Chart
-import com.home.cdp2app.view.chart.parser.mapper.BloodPressureSystolicChartMapper
-import com.home.cdp2app.health.order.type.HealthCategory
+import com.home.cdp2app.main.dashboard.view.chart.Chart
+import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import org.junit.Assert
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
