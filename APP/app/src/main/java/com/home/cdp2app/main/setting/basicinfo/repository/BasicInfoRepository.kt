@@ -2,7 +2,7 @@ package com.home.cdp2app.main.setting.basicinfo.repository
 
 import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
-import com.home.cdp2app.memory.exception.TargetNotFoundException
+import com.home.cdp2app.common.memory.exception.TargetNotFoundException
 
 /**
  * 사용자의 기본 건강정보를 관리하는 레포지토리 입니다.

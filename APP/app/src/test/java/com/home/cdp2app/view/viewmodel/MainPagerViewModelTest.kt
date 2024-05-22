@@ -3,7 +3,7 @@ package com.home.cdp2app.view.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
 import com.home.cdp2app.main.setting.basicinfo.usecase.HasBasicInfo
-import com.home.cdp2app.main.view.viewmodel.MainPagerViewModel
+import com.home.cdp2app.main.MainPagerViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule

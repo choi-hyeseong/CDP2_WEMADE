@@ -8,10 +8,10 @@ import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
-import com.home.cdp2app.util.livedata.Event
-import com.home.cdp2app.main.dashboard.view.chart.Chart
-import com.home.cdp2app.main.dashboard.view.chart.applyChart
-import com.home.cdp2app.main.dashboard.view.chart.parser.ChartParser
+import com.home.cdp2app.common.util.livedata.Event
+import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.dashboard.chart.applyChart
+import com.home.cdp2app.main.dashboard.chart.parser.ChartParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

@@ -41,7 +41,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".main.view.MainPagerActivity" android:exported="false"/>
+        <activity android:name=".main.MainPagerActivity" android:exported="false"/>
         <activity
             android:name=".tutorial.view.TutorialActivity"
             android:exported="false" />

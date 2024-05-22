@@ -2,6 +2,7 @@ package com.home.cdp2app.util.json
 
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.JsonMappingException
+import com.home.cdp2app.common.util.json.JsonMapperUtil
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.heart.entity.HeartRate
 import org.junit.Assert

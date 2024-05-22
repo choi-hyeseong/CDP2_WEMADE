@@ -6,7 +6,7 @@ import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
 import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
-import com.home.cdp2app.util.livedata.Event
+import com.home.cdp2app.common.util.livedata.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

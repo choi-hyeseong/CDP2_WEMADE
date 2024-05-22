@@ -2,8 +2,8 @@ package com.home.cdp2app.main.dashboard.view.dialog.heart.validator
 
 import com.home.cdp2app.databinding.DialogHeartBinding
 import com.home.cdp2app.health.heart.valid.HeartRateValidator
-import com.home.cdp2app.valid.type.ValidateStatus
-import com.home.cdp2app.valid.ViewBindingValidator
+import com.home.cdp2app.common.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.ViewBindingValidator
 
 /**
  * DialogHeartBinding 뷰를 검증하는 클래스

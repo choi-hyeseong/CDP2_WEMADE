@@ -6,10 +6,11 @@ import android.content.SharedPreferences.Editor
 import android.graphics.Paint.Cap
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.health.bloodpressure.entity.BloodPressure
 import com.home.cdp2app.health.heart.entity.HeartRate
-import com.home.cdp2app.memory.exception.TargetNotFoundException
-import com.home.cdp2app.util.json.JsonMapperUtil
+import com.home.cdp2app.common.memory.exception.TargetNotFoundException
+import com.home.cdp2app.common.util.json.JsonMapperUtil
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

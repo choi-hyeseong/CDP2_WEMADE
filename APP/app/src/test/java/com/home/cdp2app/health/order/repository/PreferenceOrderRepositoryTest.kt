@@ -3,8 +3,8 @@ package com.home.cdp2app.health.order.repository
 import android.graphics.Paint.Cap
 import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.type.HealthCategory
-import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.memory.exception.TargetNotFoundException
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.exception.TargetNotFoundException
 import com.home.cdp2app.main.setting.order.repository.ChartOrderRepository
 import com.home.cdp2app.main.setting.order.repository.PreferenceOrderRepository
 import io.mockk.CapturingSlot

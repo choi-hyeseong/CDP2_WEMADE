@@ -11,8 +11,8 @@ import androidx.health.connect.client.PermissionController
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
-import com.home.cdp2app.main.view.MainPagerActivity
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.main.MainPagerActivity
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.user.sign.view.AuthActivity
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.token.usecase.HasAuthToken

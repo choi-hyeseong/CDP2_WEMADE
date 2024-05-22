@@ -13,7 +13,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainPredictBinding
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.predict.entity.PredictResult
 import com.home.cdp2app.main.predict.repository.PreferencePredictCacheRepository
 import com.home.cdp2app.main.predict.repository.RemotePredictRepository
@@ -24,15 +24,15 @@ import com.home.cdp2app.rest.type.NetworkStatus
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.user.token.usecase.GetAuthToken
-import com.home.cdp2app.util.network.NetworkModule
-import com.home.cdp2app.main.dashboard.view.callback.MainPagerCallback
+import com.home.cdp2app.common.util.network.NetworkModule
+import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
 import com.home.cdp2app.main.predict.view.mapper.PredictViewMapper
 import com.home.cdp2app.main.predict.view.viewmodel.PredictViewModel
 import com.ramijemli.percentagechartview.callback.AdaptiveColorProvider
 
 class PredictFragment : Fragment() {
 
-    private var callback: MainPagerCallback? = null //메인 화면으로 이동하기 위한 콜백
+    private var callback: ChartDetailCallback? = null //메인 화면으로 이동하기 위한 콜백
     private var binding: MainPredictBinding? = null
 
     private var viewMapper: PredictViewMapper? = null //predict시 뷰 변경하는 클래스
@@ -48,7 +48,7 @@ class PredictFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = context as MainPagerCallback?
+        callback = context as ChartDetailCallback?
     }
 
     override fun onDetach() {

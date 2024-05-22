@@ -1,7 +1,7 @@
 package com.home.cdp2app.main.setting.basicinfo.repository
 
 import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 
 class PreferenceBasicInfoRepository(private val sharedPreferencesStorage: SharedPreferencesStorage) : BasicInfoRepository {
 

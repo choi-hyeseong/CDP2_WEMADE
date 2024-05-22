@@ -6,7 +6,7 @@ import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
 import com.home.cdp2app.main.setting.order.usecase.SaveChartOrder
-import com.home.cdp2app.util.livedata.Event
+import com.home.cdp2app.common.util.livedata.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

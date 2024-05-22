@@ -1,9 +1,9 @@
 package com.home.cdp2app.user.sign.view.register.validator
 
 import com.home.cdp2app.databinding.AuthRegisterBinding
-import com.home.cdp2app.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.user.sign.validator.RegisterValidator
-import com.home.cdp2app.valid.ViewBindingValidator
+import com.home.cdp2app.common.valid.ViewBindingValidator
 
 //회원가입 뷰 validator
 class RegisterViewValidator(private val registerValidator: RegisterValidator) : ViewBindingValidator<AuthRegisterBinding> {

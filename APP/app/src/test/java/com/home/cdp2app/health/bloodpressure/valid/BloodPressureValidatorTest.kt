@@ -1,6 +1,6 @@
 package com.home.cdp2app.health.bloodpressure.valid
 
-import com.home.cdp2app.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

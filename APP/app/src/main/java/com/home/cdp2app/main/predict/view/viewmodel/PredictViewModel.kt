@@ -9,7 +9,7 @@ import com.home.cdp2app.main.predict.usecase.PredictUseCase
 import com.home.cdp2app.main.predict.usecase.SaveCachePredictResult
 import com.home.cdp2app.rest.type.NetworkStatus
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
-import com.home.cdp2app.util.livedata.Event
+import com.home.cdp2app.common.util.livedata.Event
 import com.skydoves.sandwich.StatusCode
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnError

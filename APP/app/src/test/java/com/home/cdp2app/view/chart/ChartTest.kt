@@ -1,8 +1,8 @@
 package com.home.cdp2app.view.chart
 
-import com.home.cdp2app.main.dashboard.view.chart.Chart
-import com.home.cdp2app.main.dashboard.view.chart.ChartItem
-import com.home.cdp2app.main.dashboard.view.chart.applyChart
+import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.dashboard.chart.ChartItem
+import com.home.cdp2app.main.dashboard.chart.applyChart
 import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 import org.junit.Test

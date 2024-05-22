@@ -31,22 +31,22 @@ import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
 import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
 import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
-import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.main.dashboard.view.chart.Chart
-import com.home.cdp2app.main.dashboard.view.callback.MainPagerCallback
-import com.home.cdp2app.main.dashboard.view.chart.formatter.DateFormatter
-import com.home.cdp2app.main.dashboard.view.chart.parser.ChartParser
-import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.BloodPressureDiastolicChartMapper
-import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.BloodPressureSystolicChartMapper
-import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.HeartRateChartMapper
-import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.SleepHourChartMapper
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
+import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
+import com.home.cdp2app.main.dashboard.chart.formatter.DateFormatter
+import com.home.cdp2app.main.dashboard.chart.parser.ChartParser
+import com.home.cdp2app.main.dashboard.chart.parser.mapper.BloodPressureDiastolicChartMapper
+import com.home.cdp2app.main.dashboard.chart.parser.mapper.BloodPressureSystolicChartMapper
+import com.home.cdp2app.main.dashboard.chart.parser.mapper.HeartRateChartMapper
+import com.home.cdp2app.main.dashboard.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.main.dashboard.view.viewmodel.DashboardViewModel
 
 // dashboard view
 class DashboardFragment() : Fragment() {
 
     private lateinit var adapter : ChartAdapter
-    private var callback : MainPagerCallback? = null
+    private var callback : ChartDetailCallback? = null
     // todo hilt inject
     private val dashboardViewModel : DashboardViewModel by lazy {
         val repository = PreferenceOrderRepository(SharedPreferencesStorage(requireContext()))
@@ -92,7 +92,7 @@ class DashboardFragment() : Fragment() {
     //callback 할당
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = context as MainPagerCallback?
+        callback = context as ChartDetailCallback?
     }
 
     //callback 제거
@@ -102,7 +102,7 @@ class DashboardFragment() : Fragment() {
     }
 
     // view에서 표시할 chart 받는 adapter
-    class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardViewModel, private val callback: MainPagerCallback?) : RecyclerView.Adapter<ChartViewHolder>() {
+    class ChartAdapter(var chartList: List<Chart>, private val viewModel: DashboardViewModel, private val callback: ChartDetailCallback?) : RecyclerView.Adapter<ChartViewHolder>() {
 
         fun updateView(chart: List<Chart>) {
             this.chartList = chart
@@ -126,7 +126,7 @@ class DashboardFragment() : Fragment() {
     }
 
     //Adapter에서 bind된 layout 받아서 holder에서 가공
-    class ChartViewHolder(private val view: MainDashboardItemBinding, private val viewModel: DashboardViewModel, private val callback : MainPagerCallback?) : RecyclerView.ViewHolder(view.root) {
+    class ChartViewHolder(private val view: MainDashboardItemBinding, private val viewModel: DashboardViewModel, private val callback : ChartDetailCallback?) : RecyclerView.ViewHolder(view.root) {
 
         fun bind(chart: Chart) {
             view.title.text = chart.type.displayName //displayName으로 설정

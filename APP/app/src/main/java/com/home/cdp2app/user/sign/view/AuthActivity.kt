@@ -2,7 +2,7 @@ package com.home.cdp2app.user.sign.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.home.cdp2app.main.view.MainPagerActivity
+import com.home.cdp2app.main.MainPagerActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthBinding
 import com.home.cdp2app.startActivityWithBackstackClear

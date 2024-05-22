@@ -9,7 +9,7 @@ import com.home.cdp2app.main.setting.basicinfo.repository.PreferenceBasicInfoRep
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
 import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.basicinfo.view.viewmodel.BasicInfoViewModel
 
 /**

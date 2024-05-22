@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.token.repository
 
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.user.token.entity.AuthToken
 
 /**

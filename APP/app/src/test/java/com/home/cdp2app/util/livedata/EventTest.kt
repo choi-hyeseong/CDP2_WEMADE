@@ -1,5 +1,6 @@
 package com.home.cdp2app.util.livedata
 
+import com.home.cdp2app.common.util.livedata.Event
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 

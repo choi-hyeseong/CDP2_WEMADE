@@ -3,8 +3,8 @@ package com.home.cdp2app.view.chart.mapper
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.health.sleep.entity.SleepHour
-import com.home.cdp2app.main.dashboard.view.chart.Chart
-import com.home.cdp2app.main.dashboard.view.chart.parser.mapper.HeartRateChartMapper
+import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.dashboard.chart.parser.mapper.HeartRateChartMapper
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.jupiter.api.Assertions

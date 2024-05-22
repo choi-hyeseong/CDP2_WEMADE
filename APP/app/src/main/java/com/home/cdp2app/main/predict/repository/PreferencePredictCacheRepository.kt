@@ -1,6 +1,6 @@
 package com.home.cdp2app.main.predict.repository
 
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.predict.entity.PredictResult
 
 class PreferencePredictCacheRepository(private val preferencesStorage: SharedPreferencesStorage) : PredictCacheRepository {

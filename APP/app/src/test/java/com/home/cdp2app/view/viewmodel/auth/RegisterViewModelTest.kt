@@ -8,7 +8,7 @@ import com.home.cdp2app.rest.type.NetworkStatus
 import com.home.cdp2app.user.sign.usecase.RegisterUseCase
 import com.home.cdp2app.user.sign.validator.RegisterValidator
 import com.home.cdp2app.user.sign.view.register.viewmodel.RegisterViewModel
-import com.home.cdp2app.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.skydoves.sandwich.ApiResponse
 import io.mockk.CapturingSlot
 import io.mockk.coEvery

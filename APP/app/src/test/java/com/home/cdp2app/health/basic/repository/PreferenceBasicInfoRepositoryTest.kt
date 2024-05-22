@@ -4,8 +4,8 @@ import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
 import com.home.cdp2app.main.setting.basicinfo.repository.BasicInfoRepository
 import com.home.cdp2app.main.setting.basicinfo.repository.PreferenceBasicInfoRepository
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
-import com.home.cdp2app.memory.SharedPreferencesStorage
-import com.home.cdp2app.memory.exception.TargetNotFoundException
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.exception.TargetNotFoundException
 import io.mockk.CapturingSlot
 import io.mockk.coEvery
 import io.mockk.coVerify

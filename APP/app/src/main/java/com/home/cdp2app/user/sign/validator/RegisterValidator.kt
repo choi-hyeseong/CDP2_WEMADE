@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.sign.validator
 
-import com.home.cdp2app.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import java.util.regex.Pattern
 
 /**

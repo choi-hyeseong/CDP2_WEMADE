@@ -1,6 +1,6 @@
 package com.home.cdp2app.main.setting.order.repository
 
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 

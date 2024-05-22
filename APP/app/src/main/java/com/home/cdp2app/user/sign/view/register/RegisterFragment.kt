@@ -12,9 +12,9 @@ import com.home.cdp2app.databinding.AuthRegisterBinding
 import com.home.cdp2app.rest.type.NetworkStatus
 import com.home.cdp2app.user.sign.repository.RemoteUserRepository
 import com.home.cdp2app.user.sign.usecase.RegisterUseCase
-import com.home.cdp2app.valid.type.ValidateStatus
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.user.sign.validator.RegisterValidator
-import com.home.cdp2app.util.network.NetworkModule
+import com.home.cdp2app.common.util.network.NetworkModule
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
 import com.home.cdp2app.user.sign.view.register.validator.RegisterViewValidator
 import com.home.cdp2app.user.sign.view.register.viewmodel.RegisterViewModel

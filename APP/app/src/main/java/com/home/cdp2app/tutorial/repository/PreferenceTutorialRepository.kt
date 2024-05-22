@@ -1,6 +1,6 @@
 package com.home.cdp2app.tutorial.repository
 
-import com.home.cdp2app.memory.SharedPreferencesStorage
+import com.home.cdp2app.common.memory.SharedPreferencesStorage
 
 /**
  * SharedPreference를 사용해서 Tutorial 여부를 저장하는 레포지토리

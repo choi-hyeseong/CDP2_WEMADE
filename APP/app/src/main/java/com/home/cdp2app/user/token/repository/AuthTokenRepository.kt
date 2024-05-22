@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.token.repository
 
-import com.home.cdp2app.memory.exception.TargetNotFoundException
+import com.home.cdp2app.common.memory.exception.TargetNotFoundException
 import com.home.cdp2app.user.token.entity.AuthToken
 
 /**
