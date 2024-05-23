@@ -21,6 +21,7 @@ import com.home.cdp2app.main.predict.usecase.GetCachePredictResult
 import com.home.cdp2app.main.predict.usecase.PredictUseCase
 import com.home.cdp2app.main.predict.usecase.SaveCachePredictResult
 import com.home.cdp2app.common.network.type.NetworkStatus
+import com.home.cdp2app.common.throttle.setThrottleClickListener
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.user.token.usecase.GetAuthToken
@@ -103,20 +104,21 @@ class PredictFragment : Fragment() {
     }
 
     private fun initListener(bind: MainPredictBinding) {
-        bind.predict.setOnClickListener {
+        bind.predict.setThrottleClickListener {
             showExerciseDialog() //운동 30분 했는지 여부 확인용 다이얼로그
         }
     }
 
     private fun showExerciseDialog() {
-        displayLoadingView()
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.check_exercise)
             .setMessage(R.string.check_exercise_detail)
             .setCancelable(false) //외부 클릭 금지
             .setPositiveButton(R.string.yes) { _, _ ->
+                displayLoadingView()
                 viewModel.requestPredict(true) //true로 요청
             }.setNegativeButton(R.string.no) { _, _ ->
+                displayLoadingView()
                 viewModel.requestPredict(false) //false로 요청
             }.create().show()
     }
