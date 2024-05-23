@@ -1,6 +1,7 @@
 package com.home.cdp2app.rest.type
 
 import com.google.gson.JsonSyntaxException
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.skydoves.sandwich.StatusCode
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*

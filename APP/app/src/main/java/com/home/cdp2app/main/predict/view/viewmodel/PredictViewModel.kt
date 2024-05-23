@@ -7,7 +7,7 @@ import com.home.cdp2app.main.predict.entity.PredictResult
 import com.home.cdp2app.main.predict.usecase.GetCachePredictResult
 import com.home.cdp2app.main.predict.usecase.PredictUseCase
 import com.home.cdp2app.main.predict.usecase.SaveCachePredictResult
-import com.home.cdp2app.rest.type.NetworkStatus
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.common.util.livedata.Event
 import com.skydoves.sandwich.StatusCode

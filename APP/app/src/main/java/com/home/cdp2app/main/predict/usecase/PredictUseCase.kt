@@ -1,7 +1,7 @@
 package com.home.cdp2app.main.predict.usecase
 
 import com.home.cdp2app.main.predict.repository.PredictRepository
-import com.home.cdp2app.rest.dto.PredictResponseDTO
+import com.home.cdp2app.main.predict.api.dto.PredictResponseDTO
 import com.home.cdp2app.user.token.usecase.GetAuthToken
 import com.skydoves.sandwich.ApiResponse
 

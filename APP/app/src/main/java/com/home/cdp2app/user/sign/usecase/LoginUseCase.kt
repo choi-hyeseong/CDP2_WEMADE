@@ -1,6 +1,6 @@
 package com.home.cdp2app.user.sign.usecase
 
-import com.home.cdp2app.rest.dto.LoginResponseDTO
+import com.home.cdp2app.user.sign.api.dto.LoginResponseDTO
 import com.home.cdp2app.user.sign.repository.UserRepository
 import com.skydoves.sandwich.ApiResponse
 

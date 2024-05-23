@@ -1,8 +1,7 @@
-package com.home.cdp2app.rest.type
+package com.home.cdp2app.common.network.type
 
 import com.skydoves.sandwich.StatusCode
 import java.io.IOException
-import java.lang.Exception
 
 /**
  * Retrofit 요청의 응답으로 받은 HttpStatus를 나타내는 Enum입니다.

@@ -1,7 +1,7 @@
-package com.home.cdp2app.rest.api
+package com.home.cdp2app.main.predict.api
 
-import com.home.cdp2app.rest.dto.PredictRequestDTO
-import com.home.cdp2app.rest.dto.PredictResponseDTO
+import com.home.cdp2app.main.predict.api.dto.PredictRequestDTO
+import com.home.cdp2app.main.predict.api.dto.PredictResponseDTO
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
 import retrofit2.http.Header

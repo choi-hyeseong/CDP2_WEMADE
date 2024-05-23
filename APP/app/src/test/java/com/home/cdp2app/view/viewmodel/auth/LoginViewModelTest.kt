@@ -3,8 +3,8 @@ package com.home.cdp2app.view.viewmodel.auth
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
-import com.home.cdp2app.rest.dto.LoginResponseDTO
-import com.home.cdp2app.rest.type.NetworkStatus
+import com.home.cdp2app.user.sign.api.dto.LoginResponseDTO
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.home.cdp2app.user.token.entity.AuthToken
 import com.home.cdp2app.user.sign.usecase.LoginUseCase
 import com.home.cdp2app.user.token.usecase.SaveAuthToken

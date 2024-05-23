@@ -1,4 +1,4 @@
-package com.home.cdp2app.rest.dto
+package com.home.cdp2app.user.sign.api.dto
 
 /**
  * 로그인 요청 DTO입니다.

@@ -3,7 +3,7 @@ package com.home.cdp2app.user.sign.view.login.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.home.cdp2app.rest.type.NetworkStatus
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.home.cdp2app.user.sign.usecase.LoginUseCase
 import com.home.cdp2app.user.token.usecase.SaveAuthToken
 import com.home.cdp2app.user.sign.validator.LoginValidator

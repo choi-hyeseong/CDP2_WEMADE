@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthLoginBinding
 import com.home.cdp2app.common.memory.SharedPreferencesStorage
-import com.home.cdp2app.rest.type.NetworkStatus
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.sign.repository.RemoteUserRepository
 import com.home.cdp2app.user.sign.usecase.LoginUseCase

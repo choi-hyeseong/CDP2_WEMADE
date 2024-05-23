@@ -1,7 +1,7 @@
 package com.home.cdp2app.common.util.network
 
-import com.home.cdp2app.rest.api.PredictAPI
-import com.home.cdp2app.rest.api.RemoteUserAPI
+import com.home.cdp2app.main.predict.api.PredictAPI
+import com.home.cdp2app.user.sign.api.RemoteUserAPI
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

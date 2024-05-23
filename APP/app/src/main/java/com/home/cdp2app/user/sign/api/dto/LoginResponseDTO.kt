@@ -1,4 +1,4 @@
-package com.home.cdp2app.rest.dto
+package com.home.cdp2app.user.sign.api.dto
 
 import com.home.cdp2app.user.token.entity.AuthToken
 

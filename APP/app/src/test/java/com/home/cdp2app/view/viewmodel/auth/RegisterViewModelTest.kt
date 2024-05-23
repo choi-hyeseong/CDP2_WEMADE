@@ -3,8 +3,8 @@ package com.home.cdp2app.view.viewmodel.auth
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.getOrAwaitValue
-import com.home.cdp2app.rest.dto.RegisterResponse
-import com.home.cdp2app.rest.type.NetworkStatus
+import com.home.cdp2app.user.sign.api.dto.RegisterResponse
+import com.home.cdp2app.common.network.type.NetworkStatus
 import com.home.cdp2app.user.sign.usecase.RegisterUseCase
 import com.home.cdp2app.user.sign.validator.RegisterValidator
 import com.home.cdp2app.user.sign.view.register.viewmodel.RegisterViewModel
