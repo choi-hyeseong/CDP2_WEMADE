@@ -26,23 +26,23 @@ export class AuthService {
     return token;
   }
 
-  decodeBasicToken(base64String: string) {
-    const decoded = Buffer.from(base64String, 'base64').toString('utf8');
+  // decodeBasicToken(base64String: string) {
+  //   const decoded = Buffer.from(base64String, 'base64').toString('utf8');
 
-    const split = decoded.split(':');
+  //   const split = decoded.split(':');
 
-    if (split.length !== 2) {
-      throw new UnauthorizedException('잘못된 유형의 토큰');
-    }
+  //   if (split.length !== 2) {
+  //     throw new UnauthorizedException('잘못된 유형의 토큰');
+  //   }
 
-    const email = split[0];
-    const password = split[1];
+  //   const email = split[0];
+  //   const password = split[1];
 
-    return {
-      email,
-      password,
-    };
-  }
+  //   return {
+  //     email,
+  //     password,
+  //   };
+  // }
 
   verifyToken(token: string) {
     return this.jwtService.verify(token, {
@@ -115,11 +115,18 @@ export class AuthService {
   ) {
     const hash = await bcrypt.hash(user.password, HASH_ROUNDS);
 
-    const newUser = await this.userService.createUser({
+    // const newUser = await this.userService.createUser({
+    //   ...user,
+    //   password: hash,
+    // });
+
+    // return this.loginUser(newUser);
+
+    await this.userService.createUser({
       ...user,
       password: hash,
     });
 
-    return this.loginUser(newUser);
+    return true;
   }
 }
