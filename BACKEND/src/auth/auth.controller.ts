@@ -27,12 +27,16 @@ export class AuthController {
     };
   }
   @Post('login/email')
-  postLoginEmail(@Headers('authorization') rawToken: string) {
-    const token = this.authService.extractTokenFromHeader(rawToken, false);
+  postLoginEmail(
+    /*@Headers('authorization') rawToken: string*/
+    @Body('email') email: string,
+    @Body('password') password: string,
+  ) {
+    // const token = this.authService.extractTokenFromHeader(rawToken, false);
+    // const credentials = this.authService.decodeBasicToken(token);
+    // return this.authService.loginWithEmail(credentials);
 
-    const credentials = this.authService.decodeBasicToken(token);
-
-    return this.authService.loginWithEmail(credentials);
+    return this.authService.loginWithEmail({ email, password });
   }
 
   @Post('register/email')
