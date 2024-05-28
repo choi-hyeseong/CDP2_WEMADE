@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".tutorial.view.fragment.TutorialFragment2">
+
+    <include layout="@layout/imageview_logo_on_top"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="80dp"
+        android:fontFamily="@font/nanum_gothic_normal"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/tutorial3"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/computer" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_gothic_normal"
+        android:textSize="12sp"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/tutorial3_detail"/>
+
+    <Button
+        android:id="@+id/end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/background_button_enabled"
+        android:text="@string/start"
+        android:textColor="@color/white" />
+
+
+
+</LinearLayout>

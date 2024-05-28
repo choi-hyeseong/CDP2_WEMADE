@@ -4,4 +4,127 @@
     <string name="health_require_install">HealthConnect 설치가 필요합니다. 마켓으로 이동합니다.</string>
     <string name="health_require_permission">앱 사용에 필요한 권한 허용이 필요합니다.</string>
     <string name="health_permission_denied">앱 사용에 필요한 권한이 허용되지 않았습니다. 다시 시도해주세요.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="service_title">고혈압 관리 앱</string>
+
+    <!-- 튜토리얼 -->
+    <string name="tutorial2">고혈압 관리? 지금부터 시작!</string>
+    <string name="tutorial2_detail_1">고혈압은 초기 증상이 없어 꾸준한 관리가 필요한 질병입니다.</string>
+    <string name="tutorial2_detail_2">저희가 위험도를 예측하고 관리할 수 있도록 도와드릴게요!</string>
+    <string name="tutorial3">AI를 이용한 고혈압 위험도 판단!</string>
+    <string name="tutorial3_detail">저희가 학습시킨 AI를 이용해 고혈압의 위험도를 판단할 수 있어요!</string>
+    <string name="start">지금 시작하기</string>
+
+
+    <!-- 로그인 -->
+    <string name="signin">로그인</string>
+    <string name="signin_comment">반갑습니다!</string>
+    <string name="signin_login_badrequest">로그인에 실패하였습니다. 다시 시도해주세요</string>
+    <string name="account_email">이메일</string>
+    <string name="account_nickname">별명</string>
+    <string name="account_nickname_hint">닉네임 (2자 이상)</string>
+    <string name="account_id_hint">이메일 형식</string>
+    <string name="account_id_mismatch">아이디가 존재하지 않습니다.</string>
+    <string name="account_id_warning">아이디 구성 조건을 확인해주세요.\n6 ~ 20자 (영문, 숫자)</string>
+    <string name="account_pw">비밀번호</string>
+    <string name="account_pw_hint">8 ~ 20자 (특수문자, 영문, 숫자 한개이상)</string>
+    <string name="account_pw_mismatch">비밀번호가 정확하지 않습니다.</string>
+    <string name="account_pw_warning">비밀번호 구성 조건을 확인해 주세요.\n8 ~ 20자 (영문, 숫자, 특수문자 각각 1자 이상)</string>
+    <string name="forgot_pw">비밀번호를 잊으셨나요?</string>
+    <string name="auto_login">자동 로그인을 사용합니다.</string>
+    <string name="success_login">로그인에 성공했습니다!</string>
+    <string name="insert_basic_info_firstjoin">최초 접속시 개인 건강정보를 입력해야 합니다! 추후 수정이 가능합니다</string>
+
+    <!-- 회원가입 -->
+    <string name="signup">회원 가입</string>
+    <string name="signup_comment">환영합니다!</string>
+    <string name="signup_success">회원가입에 성공하였습니다. 해당 계정으로 로그인 해주시길 바랍니다.</string>
+    <string name="account_pw_again">비밀번호 확인</string>
+    <string name="account_pw_again_hint">비밀번호를 한 번 더 입력해 주세요.</string>
+    <string name="account_pw_again_warning">비밀번호가 서로 일치하지 않습니다.</string>
+    <string name="collect_information">개인정보 수집 및 이용에 동의합니다.</string>
+    <string name="connection_badrequest_signup">이메일이 이미 존재합니다. 다른 이메일로 시도해주세요.</string>
+    
+    <!-- 기본 정보 -->
+    <string name="insert_basic_info">개인 정보 입력</string>
+    <string name="insert_basic_info_detail">고혈압 관리를 위한 정보 기입</string>
+    <string name="height">키</string>
+    <string name="height_format">%1$d cm</string>
+    <string name="weight">몸무게</string>
+    <string name="weight_format">%1$d kg</string>
+    <string name="age">나이</string>
+    <string name="age_format">%1$d 세</string>
+    <string name="smoking_or_not">흡연 여부</string>
+    <string name="smoker">흡연자</string>
+    <string name="non_smoker">비흡연자</string>
+    <string name="save">저장</string>
+    <string name="gender">성별</string>
+    <string name="man">남성</string>
+    <string name="woman">여성</string>
+    <string name="save_success">개인정보 저장이 완료 되었습니다.</string>
+
+    <!-- 대시보드 -->
+    <string name="dashboard">대시보드</string>
+    <string name="sync">동기화</string>
+    <string name="detail">상세 정보</string>
+    <string name="sync_complete">%1$s의 동기화가 완료되었습니다!</string>
+
+    <!-- 상세정보 -->
+    <string name="insert_health">직접 입력</string>
+    <string name="select_date">날짜를 선택해주세요</string>
+    <string name="chart_not_provide">차트 데이터가 제공되지 않았습니다. 다시 시도해주세요</string>
+
+    <!-- 다이얼로그 -->
+    <string name="date">날짜</string>
+    <string name="heart_rate">심박수</string>
+    <string name="input_date">날짜 입력하기</string>
+    <string name="input_heart_rate">심박수 입력하기 (숫자만 입력!)</string>
+    <string name="select_date_dialog">날짜 선택</string>
+    <string name="select_time_dialog">시간 선택</string>
+    <string name="field_empty">필요한 필드가 비어있습니다. 비어있는곳이 없게 작성해주세요</string>
+    <string name="value_error">일부 필드에 올바르지 않은 값이 들어있습니다. 값을 올바르게 작성해주세요.</string>
+    <string name="dialog_save_complete">건강정보 저장이 완료되었습니다!</string>
+    <string name="blood_systolic">혈압(수축기)</string>
+    <string name="blood_diastolic">혈압(이완기)</string>
+    <string name="blood_hint">혈압 입력하기 (소수점 가능!, 10이하 안됨!)</string>
+    <string name="sleep_hour">수면시간</string>
+    <string name="sleep_hint">수면시간 (0.5 = 30분, 0.1이상 입력)</string>
+
+    <!-- 설정 -->
+    <string name="setting">설정</string>
+    <string name="modify_user_info">개인 정보 수정</string>
+    <string name="change_dashboard_order">대시보드 순서</string>
+    <string name="sign_out">로그아웃</string>
+
+    <!-- 고혈압 평가 -->
+    <string name="blood_pressure_predict">고혈압 평가</string>
+    <string name="predict_require">진단이 필요해요!</string>
+    <string name="predict_request_now">버튼을 클릭하면 고혈압 진단이 시작돼요</string>
+    <string name="predict_now">지금 진단하기</string>
+    <string name="in_predicting">현재 진단중입니다. 잠시만 기다려주세요!</string>
+    <string name="login_required">로그인 세션이 만료되었습니다. 다시 로그인 해주시길 바랍니다!</string>
+    <string name="predict_good_title">잘 관리하고 있어요</string>
+    <string name="predict_good_subtitle">혈압 관리가 잘 되고 있어요!</string>
+    <string name="predict_caution_title">주의가 필요해요!</string>
+    <string name="predict_caution_subtitle">혈압에 관심을 가질 필요가 있어요!</string>
+    <string name="predict_warn_title">고혈압 의심!</string>
+    <string name="predict_warn_subtitle">고혈압이 의심돼요! 진료를 받아보시는게 어떨까요?</string>
+    <string name="predict_serious_title">고혈압 위험</string>
+    <string name="predict_serious_subtitle">고혈압 위험 상태입니다. 진료를 받으시는게 좋겠어요</string>
+    <string name="check_exercise">운동 여부 확인</string>
+    <string name="check_exercise_detail">분석을 위해 운동 여부를 확인해야 합니다.\n오늘 30분정도 운동하셨나요?</string>
+    <string name="yes">네</string>
+    <string name="no">아니요</string>
+
+    <!-- 정렬 -->
+    <string name="dashboard_order">대시보드 정렬</string>
+    <string name="dashboard_order_save_complete">대시보드 순서 저장이 완료되었습니다. 앱 재시작시 적용됩니다.</string>
+    <string name="dashboard_order_save_failed">대시보드 순서 저장에 실패했습니다. 다시 시도해주세요</string>
+
+    <!-- 네트워크 오류 -->
+    <string name="connection_error">서버와 연결상태가 좋지 않습니다. 다시 시도해주세요.</string>
+    <string name="unauthorized">로그인 상태가 만료되었습니다. 다시 로그인해주세요.</string>
+    <string name="internal_error">서버 상태가 좋지 않습니다. 잠시후 시도해주세요.</string>
+    <string name="other_error">기타 오류가 발생했습니다. 개발자에게 문의해주세요.</string>
 </resources>

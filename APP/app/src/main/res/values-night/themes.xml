@@ -1,7 +1,31 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.CDP2app" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.CDP2app" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/main_blue</item>
+        <item name="colorPrimaryDark">@color/main_blue</item>
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="colorAccent">@color/main_blue</item>
+
+    </style>
+
+    <style name="Theme.CDP2app" parent="Base.Theme.CDP2app" />
+
+    <style name="custom_dropdown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/main_blue</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="endIconTint">@color/main_blue</item>
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="MaterialCustomDate" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/main_blue</item>
+        <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
+        <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
     </style>
 </resources>

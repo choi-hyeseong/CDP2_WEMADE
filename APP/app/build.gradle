@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -28,13 +30,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
+
+    testOptions {
+        packagingOptions { jniLibs { useLegacyPackaging = true } }
+    }
 }
 
 
@@ -57,13 +71,39 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     // mockk
     testImplementation "io.mockk:mockk:1.13.10"
+    androidTestImplementation "io.mockk:mockk-android:1.13.10"
     // powermock
     implementation 'org.powermock:powermock-core:2.0.9'
     // mpchart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    // jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
+
+    implementation 'androidx.test:core-ktx:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    debugImplementation 'androidx.fragment:fragment-testing:1.5.0'
+
+    // viewpager indicator
+    implementation "com.tbuonomo:dotsindicator:5.0"
+
+    // percent chart view - hotfix for renderer repository
+    implementation 'com.github.choi-hyeseong:PercentageChartView:-SNAPSHOT'
+
+    // cardview
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:2.43.2"
+    implementation 'androidx.activity:activity-ktx:1.5.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.0'
+    kapt "com.google.dagger:hilt-compiler:2.43.2"
+    kapt "com.google.dagger:dagger-android-processor:2.43.2"
 }
+

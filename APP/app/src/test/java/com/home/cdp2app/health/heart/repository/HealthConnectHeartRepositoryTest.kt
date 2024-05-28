@@ -3,9 +3,6 @@ package com.home.cdp2app.health.heart.repository
 
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.Record
-import androidx.health.connect.client.records.StepsRecord
-import androidx.health.connect.client.request.ReadRecordsRequest
-import androidx.health.connect.client.time.TimeRangeFilter
 import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
 import com.home.cdp2app.health.heart.entity.HeartRate
 import com.home.cdp2app.health.heart.mapper.HeartRateMapper
@@ -34,22 +31,18 @@ class HealthConnectHeartRepositoryTest {
         val offset = ZonedDateTime.now().offset
 
         //mock dao에서 접근하는 요청
-        val request =
-            ReadRecordsRequest(HeartRateRecord::class, TimeRangeFilter.between(start, end))
         //그에따라 받아올 값
         val response = listOf(
             HeartRateRecord(
                 start, offset, end, offset, listOf(
-                    HeartRateRecord.Sample(Instant.now(), 150),
-                    HeartRateRecord.Sample(Instant.now(), 100)
-                )))
-        coEvery { heartDao.readRecord(request) } returns response
+                    HeartRateRecord.Sample(Instant.now(), 150), HeartRateRecord.Sample(Instant.now(), 100))))
+        coEvery { heartDao.readRecordBefore(HeartRateRecord::class, any()) } returns response
         runBlocking {
-            val entityResponse = heartRepository.readHeartRate(start, end)
+            val entityResponse = heartRepository.readHeartRateBefore(start)
             Assertions.assertEquals(2, entityResponse.size)
             Assertions.assertEquals(150, entityResponse[0].bpm)
             Assertions.assertEquals(100, entityResponse[1].bpm)
-            coVerify(atLeast = 1) { heartDao.readRecord(request) }
+            coVerify(atLeast = 1) { heartDao.readRecordBefore(HeartRateRecord::class, any()) }
         }
 
     }

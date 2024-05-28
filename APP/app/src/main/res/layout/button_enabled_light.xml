@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="40dp"
+    android:layout_marginVertical="10dp"
+    android:paddingVertical="17dp"
+    android:background="@drawable/background_button_enabled"
+    android:backgroundTint="@color/main_blue_light"
+    android:fontFamily="@font/nanum_gothic_normal"
+    android:textColor="@color/main_blue"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:text="연한 버튼"
+    android:elevation="5dp"
+>
+
+    <!-- xml 파일에서 텍스트 내용을 변경할 수 없습니다. Activity 코드에서 변경해 주세요. -->
+
+</Button>

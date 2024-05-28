@@ -14,8 +14,7 @@ class HeartRateMapper : MultipleRecordMapper<HeartRateRecord, HeartRate> {
     }
 
     override fun mapToRecord(entities: List<HeartRate>): HeartRateRecord {
-        if (entities.isEmpty())
-            throw IllegalArgumentException("HeartRate Entity List는 비어있어선 안됩니다.")
+        if (entities.isEmpty()) throw IllegalArgumentException("HeartRate Entity List는 비어있어선 안됩니다.")
         //zone의 offset은 지역이 일정하므로 현재 지역의 offset을 가져옴
         val zoneOffset = ZonedDateTime.now().offset
         //시작시간 - entity 목록중 제일 이른 시간
