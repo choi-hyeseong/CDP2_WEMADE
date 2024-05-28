@@ -3,8 +3,8 @@ package com.home.cdp2app.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.home.cdp2app.main.setting.basicinfo.usecase.HasBasicInfo
 import com.home.cdp2app.common.util.livedata.Event
+import com.home.cdp2app.main.setting.basicinfo.usecase.HasBasicInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

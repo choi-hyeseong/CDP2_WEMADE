@@ -1,22 +1,19 @@
 package com.home.cdp2app.tutorial.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.home.cdp2app.user.sign.view.AuthActivity
 import com.home.cdp2app.databinding.TutorialBinding
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.startActivityWithBackstackClear
-import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
-import com.home.cdp2app.tutorial.usecase.SaveTutorialCompleted
 import com.home.cdp2app.tutorial.view.callback.TutorialCallback
 import com.home.cdp2app.tutorial.view.fragment.TutorialFragment1
 import com.home.cdp2app.tutorial.view.fragment.TutorialFragment2
 import com.home.cdp2app.tutorial.view.fragment.TutorialFragment3
 import com.home.cdp2app.tutorial.view.viewmodel.TutorialViewModel
+import com.home.cdp2app.user.sign.view.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

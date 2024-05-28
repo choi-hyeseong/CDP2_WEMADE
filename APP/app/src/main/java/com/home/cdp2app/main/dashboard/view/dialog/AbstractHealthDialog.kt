@@ -1,17 +1,13 @@
 package com.home.cdp2app.main.dashboard.view.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.home.cdp2app.R
-import com.home.cdp2app.common.util.date.DateTimeUtil
-import java.time.Instant
 import java.util.Calendar
 import java.util.Date
 

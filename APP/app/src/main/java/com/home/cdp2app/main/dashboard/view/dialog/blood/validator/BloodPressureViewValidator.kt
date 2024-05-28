@@ -1,9 +1,9 @@
 package com.home.cdp2app.main.dashboard.view.dialog.blood.validator
 
+import com.home.cdp2app.common.valid.ViewBindingValidator
+import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.databinding.DialogBloodpressureBinding
 import com.home.cdp2app.health.bloodpressure.valid.BloodPressureValidator
-import com.home.cdp2app.common.valid.type.ValidateStatus
-import com.home.cdp2app.common.valid.ViewBindingValidator
 
 //혈압 뷰 validate class
 class BloodPressureViewValidator(private val bloodPressureValidator: BloodPressureValidator) : ViewBindingValidator<DialogBloodpressureBinding> {

@@ -12,16 +12,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.home.cdp2app.MainActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainPagerBinding
-import com.home.cdp2app.main.setting.basicinfo.repository.PreferenceBasicInfoRepository
-import com.home.cdp2app.main.setting.basicinfo.usecase.HasBasicInfo
-import com.home.cdp2app.main.setting.basicinfo.view.BasicInfoActivity
 import com.home.cdp2app.main.dashboard.view.ChartDetailActivity
-import com.home.cdp2app.main.setting.order.type.HealthCategory
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
-import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
 import com.home.cdp2app.main.dashboard.view.DashboardFragment
+import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
 import com.home.cdp2app.main.predict.view.PredictFragment
 import com.home.cdp2app.main.setting.SettingFragment
+import com.home.cdp2app.main.setting.basicinfo.view.BasicInfoActivity
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

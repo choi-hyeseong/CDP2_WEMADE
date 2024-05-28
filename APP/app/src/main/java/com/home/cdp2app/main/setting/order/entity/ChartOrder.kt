@@ -1,7 +1,7 @@
 package com.home.cdp2app.main.setting.order.entity
 
-import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 
 /**
  * RecyclerView에서 표시될 건강정보의 순서를 나타내는 클래스. List<HealthCategory>로 사용하려 했으나, List 제네릭을 class로 가져올 수 없음.

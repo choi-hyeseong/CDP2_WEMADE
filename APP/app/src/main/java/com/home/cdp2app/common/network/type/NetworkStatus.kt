@@ -1,5 +1,11 @@
 package com.home.cdp2app.common.network.type
 
+import com.home.cdp2app.common.network.type.NetworkStatus.BAD_REQUEST
+import com.home.cdp2app.common.network.type.NetworkStatus.CONNECTION_ERROR
+import com.home.cdp2app.common.network.type.NetworkStatus.INTERNAL_ERROR
+import com.home.cdp2app.common.network.type.NetworkStatus.OK
+import com.home.cdp2app.common.network.type.NetworkStatus.OTHER
+import com.home.cdp2app.common.network.type.NetworkStatus.UNAUTHORIZED
 import com.skydoves.sandwich.StatusCode
 import java.io.IOException
 

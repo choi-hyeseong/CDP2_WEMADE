@@ -3,8 +3,8 @@ package com.home.cdp2app.main.predict.usecase
 import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
 import com.home.cdp2app.health.heart.usecase.LoadHeartRate
 import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
-import com.home.cdp2app.main.predict.repository.PredictRepository
 import com.home.cdp2app.main.predict.api.dto.PredictResponseDTO
+import com.home.cdp2app.main.predict.repository.PredictRepository
 import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.home.cdp2app.user.token.usecase.GetAuthToken
 import com.skydoves.sandwich.ApiResponse

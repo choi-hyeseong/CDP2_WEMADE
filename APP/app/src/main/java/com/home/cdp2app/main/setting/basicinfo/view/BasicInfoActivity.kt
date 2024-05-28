@@ -6,11 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainSettingBasicInfoBinding
-import com.home.cdp2app.main.setting.basicinfo.repository.PreferenceBasicInfoRepository
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
-import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
-import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.basicinfo.view.viewmodel.BasicInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

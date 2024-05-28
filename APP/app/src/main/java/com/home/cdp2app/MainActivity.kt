@@ -13,13 +13,8 @@ import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
 import com.home.cdp2app.health.healthconnect.component.HealthConnectStatus
 import com.home.cdp2app.main.MainPagerActivity
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
-import com.home.cdp2app.user.sign.view.AuthActivity
-import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
-import com.home.cdp2app.user.token.usecase.HasAuthToken
-import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
-import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import com.home.cdp2app.tutorial.view.TutorialActivity
+import com.home.cdp2app.user.sign.view.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

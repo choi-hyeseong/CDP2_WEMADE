@@ -1,7 +1,7 @@
 package com.home.cdp2app.main.dashboard.chart.parser.mapper
 
-import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.dashboard.chart.Chart
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 import kotlin.reflect.KClass
 
 /**

@@ -45,7 +45,7 @@ class RemoteUserRepositoryTest {
     @Test
     fun TEST_Register() {
         val requestSlot : CapturingSlot<RegisterRequestDTO> = slot()
-        coEvery { userAPI.register(capture(requestSlot)) } returns ApiResponse.of { Response.success(RegisterResponse()) }//success
+        coEvery { userAPI.register(capture(requestSlot)) } returns ApiResponse.of { Response.success(RegisterResponse(true)) }//success
 
         runBlocking {
             val response = repository.register("email", "password", "nickname")

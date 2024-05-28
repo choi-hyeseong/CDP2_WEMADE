@@ -53,7 +53,7 @@ class RegisterViewModelTest {
         val emailSlot : CapturingSlot<String> = slot()
         val passSlot : CapturingSlot<String> = slot()
         val nickSlot : CapturingSlot<String> = slot()
-        val successApiResponse = ApiResponse.of { Response.success(RegisterResponse()) } //api response
+        val successApiResponse = ApiResponse.of { Response.success(RegisterResponse(true)) } //api response
 
         coEvery { registerUseCase(capture(emailSlot), capture(passSlot), capture(nickSlot)) } returns successApiResponse // success 호출
 

@@ -16,5 +16,8 @@ data class BasicInfo(val height: Double, val weight: Double, val age : Int, val 
      * BMI를 계산하는 함수입니다.
      * @return 몸무게 / 키^2 한 결과가 반환됩니다.
      */
-    fun calculateBMI() : Float = (weight / (height * height)).toFloat()
+    fun calculateBMI() : Float {
+        val heightMeter = (height / 100) //미터 단위로 변환한 후 제곱해야 결과 나옴
+        return (weight / (heightMeter * heightMeter)).toFloat()
+    }
 }

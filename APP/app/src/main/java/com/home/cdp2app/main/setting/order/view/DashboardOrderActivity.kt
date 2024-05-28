@@ -11,11 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainSettingOrderBinding
 import com.home.cdp2app.databinding.MainSettingOrderItemBinding
-import com.home.cdp2app.main.setting.order.repository.PreferenceOrderRepository
 import com.home.cdp2app.main.setting.order.type.HealthCategory
-import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
-import com.home.cdp2app.main.setting.order.usecase.SaveChartOrder
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.order.view.viewmodel.DashboardOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Collections

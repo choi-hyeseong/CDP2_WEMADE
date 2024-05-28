@@ -9,16 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.home.cdp2app.R
-import com.home.cdp2app.databinding.AuthLoginBinding
-import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.common.network.type.NetworkStatus
-import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
-import com.home.cdp2app.user.sign.repository.RemoteUserRepository
-import com.home.cdp2app.user.sign.usecase.LoginUseCase
-import com.home.cdp2app.user.token.usecase.SaveAuthToken
 import com.home.cdp2app.common.valid.type.ValidateStatus
-import com.home.cdp2app.user.sign.validator.LoginValidator
-import com.home.cdp2app.common.module.NetworkModule
+import com.home.cdp2app.databinding.AuthLoginBinding
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
 import com.home.cdp2app.user.sign.view.login.validator.LoginViewValidator
 import com.home.cdp2app.user.sign.view.login.viewmodel.LoginViewModel

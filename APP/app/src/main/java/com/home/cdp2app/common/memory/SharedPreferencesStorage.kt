@@ -3,11 +3,8 @@ package com.home.cdp2app.common.memory
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.gson.Gson
 import com.home.cdp2app.common.memory.exception.TargetNotFoundException
 import com.home.cdp2app.common.util.json.JsonMapperUtil
-import java.lang.Exception
 import kotlin.reflect.KClass
 
 const val PREFERENCE_KEY = "HEALTH_APP_PREFERENCE" //preference 파일 키값. 고정

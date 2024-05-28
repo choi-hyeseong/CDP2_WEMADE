@@ -3,7 +3,6 @@ package com.home.cdp2app.user.sign.usecase
 import com.home.cdp2app.user.sign.api.dto.RegisterResponse
 import com.home.cdp2app.user.sign.repository.UserRepository
 import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.onError
 
 /**
  * 회원가입을 수행하는 유스케이스입니다.

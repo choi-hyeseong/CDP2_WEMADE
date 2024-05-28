@@ -3,7 +3,6 @@ package com.home.cdp2app.common.module
 import com.home.cdp2app.main.dashboard.chart.parser.ChartParser
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.BloodPressureDiastolicChartMapper
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.BloodPressureSystolicChartMapper
-import com.home.cdp2app.main.dashboard.chart.parser.mapper.ChartMapper
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.SleepHourChartMapper
 import dagger.Module

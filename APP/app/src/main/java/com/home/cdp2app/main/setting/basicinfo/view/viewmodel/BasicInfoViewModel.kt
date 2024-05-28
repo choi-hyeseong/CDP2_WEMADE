@@ -2,11 +2,11 @@ package com.home.cdp2app.main.setting.basicinfo.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.home.cdp2app.common.util.livedata.Event
 import com.home.cdp2app.main.setting.basicinfo.entity.BasicInfo
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
 import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
-import com.home.cdp2app.common.util.livedata.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

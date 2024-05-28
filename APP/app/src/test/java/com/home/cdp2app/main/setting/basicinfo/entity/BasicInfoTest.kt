@@ -13,6 +13,6 @@ class BasicInfoTest {
         val height = 180.0
         val info = BasicInfo(height, weight, 23, Gender.WOMAN, false)
 
-        assertEquals(23.1, info.calculateBMI())
+        assertEquals(23.1f, info.calculateBMI(), 0.1f)
     }
 }

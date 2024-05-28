@@ -1,8 +1,8 @@
 package com.home.cdp2app.main.dashboard.chart.parser
 
-import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.dashboard.chart.Chart
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.ChartMapper
+import com.home.cdp2app.main.setting.order.type.HealthCategory
 
 /**
  * List<T> 의 형태로 된 객체를 Chart로 변환해주는 Parser

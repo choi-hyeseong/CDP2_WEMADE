@@ -2,16 +2,15 @@ package com.home.cdp2app.main.setting.order.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.home.cdp2app.common.util.livedata.Event
 import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.type.HealthCategory
 import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
 import com.home.cdp2app.main.setting.order.usecase.SaveChartOrder
-import com.home.cdp2app.common.util.livedata.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.LinkedHashSet
 import javax.inject.Inject
 
 // 대시보드 순서 정보 저장하고 가져오는 뷰모델

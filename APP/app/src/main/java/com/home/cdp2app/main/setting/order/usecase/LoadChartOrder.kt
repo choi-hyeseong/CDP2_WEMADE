@@ -2,7 +2,6 @@ package com.home.cdp2app.main.setting.order.usecase
 
 import com.home.cdp2app.main.setting.order.entity.ChartOrder
 import com.home.cdp2app.main.setting.order.repository.ChartOrderRepository
-import com.home.cdp2app.main.setting.order.repository.PreferenceOrderRepository
 
 /**
  * Chart의 순서를 가져오는 유스케이스
