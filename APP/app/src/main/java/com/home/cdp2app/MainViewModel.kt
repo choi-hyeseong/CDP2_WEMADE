@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.home.cdp2app.user.token.usecase.HasAuthToken
 import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * 초기 MainActivity에서 화면 전환 위한 뷰모델
@@ -16,7 +18,8 @@ import kotlinx.coroutines.launch
  * @property hasAuthToken AuthToken이 있는지 여부를 확인하는 유스케이스
  * @property checkTutorialCompleted 튜토리얼을 완료했는지 여부를 확인하는 유스케이스
  */
-class MainViewModel(private val hasAuthToken: HasAuthToken, private val checkTutorialCompleted: CheckTutorialCompleted) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val hasAuthToken: HasAuthToken, private val checkTutorialCompleted: CheckTutorialCompleted) : ViewModel() {
 
     //tutorial 여부 확인하는 메소드 observe르 사용
     fun checkTutorialStatus() : MutableLiveData<Boolean> {

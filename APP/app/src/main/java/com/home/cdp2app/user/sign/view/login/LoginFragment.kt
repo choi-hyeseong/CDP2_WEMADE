@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthLoginBinding
 import com.home.cdp2app.common.memory.SharedPreferencesStorage
@@ -17,21 +18,20 @@ import com.home.cdp2app.user.sign.usecase.LoginUseCase
 import com.home.cdp2app.user.token.usecase.SaveAuthToken
 import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.user.sign.validator.LoginValidator
-import com.home.cdp2app.common.util.network.NetworkModule
+import com.home.cdp2app.common.module.NetworkModule
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
 import com.home.cdp2app.user.sign.view.login.validator.LoginViewValidator
 import com.home.cdp2app.user.sign.view.login.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     // 로그인 화면
     private var callback : AuthCallback? = null
-    // todo hilt inject
-    private val validator : LoginViewValidator = LoginViewValidator(LoginValidator())
-    private val viewModel : LoginViewModel by lazy {
-        val authRepo = PreferenceAuthTokenRepository(SharedPreferencesStorage(requireContext()))
-        val repository : RemoteUserRepository = RemoteUserRepository(NetworkModule.userApi)
-        LoginViewModel(LoginValidator(), LoginUseCase(repository), SaveAuthToken(authRepo))
-    }
+
+    @Inject lateinit var validator : LoginViewValidator
+    private val viewModel : LoginViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -88,8 +88,7 @@ class LoginFragment : Fragment() {
             NetworkStatus.BAD_REQUEST -> Toast.makeText(requireContext(), R.string.signin_login_badrequest, Toast.LENGTH_LONG).show() //이메일 중복
             NetworkStatus.INTERNAL_ERROR -> Toast.makeText(requireContext(), R.string.internal_error, Toast.LENGTH_LONG).show()
             NetworkStatus.OTHER -> Toast.makeText(requireContext(), R.string.other_error, Toast.LENGTH_LONG).show()
-            //여기서는 Auth를 사용하지 않으므로 핸들하지 않음
-            NetworkStatus.UNAUTHORIZED -> {}
+            NetworkStatus.UNAUTHORIZED -> Toast.makeText(requireContext(), R.string.signin_login_badrequest, Toast.LENGTH_LONG).show() //이메일 중복
         }
     }
 

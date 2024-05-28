@@ -14,12 +14,15 @@ import com.skydoves.sandwich.StatusCode
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnSuccess
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val predictUseCase: PredictUseCase, private val saveCachePredictResult: SaveCachePredictResult, private val getCachePredictResult: GetCachePredictResult) : ViewModel() {
+@HiltViewModel
+class PredictViewModel @Inject constructor(private val deleteAuthToken: DeleteAuthToken, private val predictUseCase: PredictUseCase, private val saveCachePredictResult: SaveCachePredictResult, private val getCachePredictResult: GetCachePredictResult) : ViewModel() {
 
     private var job : Job? = null //viewpager 움직임등으로 인해 요청 중단 필요시 job
     private val HEADER : String = "PREDICT_VIEWMODEL"
@@ -43,7 +46,7 @@ class PredictViewModel(private val deleteAuthToken: DeleteAuthToken, private val
     fun requestPredict(exercise : Boolean) {
         Log.i(HEADER, "EXERCISE : $exercise")
         job = CoroutineScope(Dispatchers.IO).launch {
-            predictUseCase().suspendOnSuccess {
+            predictUseCase(exercise).suspendOnSuccess {
                 //suspend 함수를 위한 suspend 수행
                 networkStatus.postValue(Event(NetworkStatus.OK)) //network status를 먼저 보내서 로딩창 없애기
 

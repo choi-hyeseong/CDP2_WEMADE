@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.home.cdp2app.databinding.AuthSelectBinding
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
+import dagger.hilt.android.AndroidEntryPoint
 
 // 회원가입 - 로그인 선택 뷰
+@AndroidEntryPoint
 class AuthSelectFragment : Fragment() {
 
     private var callback : AuthCallback? = null

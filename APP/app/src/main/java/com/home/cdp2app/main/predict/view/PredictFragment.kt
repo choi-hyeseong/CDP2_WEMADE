@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainPredictBinding
 import com.home.cdp2app.common.memory.SharedPreferencesStorage
@@ -25,27 +26,33 @@ import com.home.cdp2app.common.throttle.setThrottleClickListener
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.user.token.usecase.GetAuthToken
-import com.home.cdp2app.common.util.network.NetworkModule
+import com.home.cdp2app.common.module.NetworkModule
+import com.home.cdp2app.health.bloodpressure.mapper.BloodPressureMapper
+import com.home.cdp2app.health.bloodpressure.repository.HealthConnectBloodPressureRepository
+import com.home.cdp2app.health.bloodpressure.usecase.LoadBloodPressure
+import com.home.cdp2app.health.healthconnect.dao.HealthConnectDao
+import com.home.cdp2app.health.heart.mapper.HeartRateMapper
+import com.home.cdp2app.health.heart.repository.HealthConnectHeartRepository
+import com.home.cdp2app.health.heart.usecase.LoadHeartRate
+import com.home.cdp2app.health.sleep.mapper.SleepHourMapper
+import com.home.cdp2app.health.sleep.repository.HealthConnectSleepRepository
+import com.home.cdp2app.health.sleep.usecase.LoadSleepHour
 import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
 import com.home.cdp2app.main.predict.view.mapper.PredictViewMapper
 import com.home.cdp2app.main.predict.view.viewmodel.PredictViewModel
+import com.home.cdp2app.main.setting.basicinfo.repository.PreferenceBasicInfoRepository
+import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.ramijemli.percentagechartview.callback.AdaptiveColorProvider
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PredictFragment : Fragment() {
 
     private var callback: ChartDetailCallback? = null //메인 화면으로 이동하기 위한 콜백
     private var binding: MainPredictBinding? = null
-
     private var viewMapper: PredictViewMapper? = null //predict시 뷰 변경하는 클래스
 
-    //todo hilt inject
-    private val viewModel: PredictViewModel by lazy {
-        val storage = SharedPreferencesStorage(requireContext())
-        val authTokenRepository = PreferenceAuthTokenRepository(storage)
-        val predictRepository = RemotePredictRepository(NetworkModule.predictAPI)
-        val predictCacheRepository = PreferencePredictCacheRepository(storage)
-        PredictViewModel(DeleteAuthToken(authTokenRepository), PredictUseCase(GetAuthToken(authTokenRepository), predictRepository), SaveCachePredictResult(predictCacheRepository), GetCachePredictResult(predictCacheRepository))
-    }
+    private val viewModel: PredictViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

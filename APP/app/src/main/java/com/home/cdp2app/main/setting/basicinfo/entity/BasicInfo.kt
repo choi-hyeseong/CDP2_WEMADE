@@ -10,4 +10,11 @@ import com.home.cdp2app.main.setting.basicinfo.type.Gender
  * @property gender 사용자의 성별입니다.
  * @property isSmoking 사용자의 흡연 여부입니다.
  */
-data class BasicInfo(val height: Double, val weight: Double, val age : Int, val gender : Gender, val isSmoking: Boolean)
+data class BasicInfo(val height: Double, val weight: Double, val age : Int, val gender : Gender, val isSmoking: Boolean) {
+
+    /**
+     * BMI를 계산하는 함수입니다.
+     * @return 몸무게 / 키^2 한 결과가 반환됩니다.
+     */
+    fun calculateBMI() : Float = (weight / (height * height)).toFloat()
+}

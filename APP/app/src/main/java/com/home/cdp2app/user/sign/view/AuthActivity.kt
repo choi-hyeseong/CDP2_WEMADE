@@ -9,8 +9,10 @@ import com.home.cdp2app.startActivityWithBackstackClear
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
 import com.home.cdp2app.user.sign.view.login.LoginFragment
 import com.home.cdp2app.user.sign.view.register.RegisterFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 //로그인 - 회원가입 관리하는 액티비티
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity(), AuthCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {

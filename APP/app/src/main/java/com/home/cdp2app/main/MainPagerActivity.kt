@@ -3,6 +3,7 @@ package com.home.cdp2app.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -21,15 +22,12 @@ import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
 import com.home.cdp2app.main.dashboard.view.DashboardFragment
 import com.home.cdp2app.main.predict.view.PredictFragment
 import com.home.cdp2app.main.setting.SettingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainPagerActivity : AppCompatActivity(), ChartDetailCallback {
 
-
-    private val pagerViewModel : MainPagerViewModel by lazy {
-        val storage = SharedPreferencesStorage(this)
-        val repository = PreferenceBasicInfoRepository(storage)
-        MainPagerViewModel(HasBasicInfo(repository))
-    }
+    private val pagerViewModel : MainPagerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

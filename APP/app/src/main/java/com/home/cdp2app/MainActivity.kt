@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.health.connect.client.PermissionController
 import com.home.cdp2app.databinding.ActivityMainBinding
@@ -19,23 +20,19 @@ import com.home.cdp2app.user.token.usecase.HasAuthToken
 import com.home.cdp2app.tutorial.repository.PreferenceTutorialRepository
 import com.home.cdp2app.tutorial.usecase.CheckTutorialCompleted
 import com.home.cdp2app.tutorial.view.TutorialActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), HealthConnectSuccessCallback {
 
     private val LOG_HEADER = "MainActivity-Logger"
     private val permissions = HealthConnectAPI.PERMISSIONS
     private lateinit var requestPermission: ActivityResultLauncher<Set<String>>
 
-    //todo hilt inject
-    private val viewModel : MainViewModel by lazy {
-        val storage = SharedPreferencesStorage(this)
-        val tutorial = PreferenceTutorialRepository(storage)
-        val auth = PreferenceAuthTokenRepository(storage)
-        MainViewModel(HasAuthToken(auth), CheckTutorialCompleted(tutorial))
-    }
+    private val viewModel : MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

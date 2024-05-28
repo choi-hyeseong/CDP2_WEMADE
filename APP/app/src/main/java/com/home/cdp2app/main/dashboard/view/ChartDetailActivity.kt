@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.BarChart
@@ -46,42 +47,19 @@ import com.home.cdp2app.main.dashboard.view.dialog.heart.validator.HeartRateView
 import com.home.cdp2app.health.sleep.valid.SleepHourValidator
 import com.home.cdp2app.main.dashboard.view.dialog.sleep.validator.SleepHourViewValidator
 import com.home.cdp2app.main.dashboard.view.viewmodel.ChartDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 //해당 액티비티 실행시 Intent에 DETAIL_PARAM값과 함께 HealthCategory enum을 제공해야 합니다.
+@AndroidEntryPoint
 class ChartDetailActivity : AppCompatActivity() {
 
     companion object {
         val DETAIL_PARAM: String = "DETAIL_ENUM" //파라미터용 key
     }
+    private val viewModel: ChartDetailViewModel by viewModels()
 
-    private val heartRateValidator = HeartRateValidator()
-    private val sleepHourValidator = SleepHourValidator()
-    private val bloodPressureValidator = BloodPressureValidator()
-
-    // todo hilt init
-    private val viewModel: ChartDetailViewModel by lazy {
-        val healthDao = HealthConnectDao(applicationContext)
-        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
-        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
-        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
-        ChartDetailViewModel(LoadHeartRate(heartRepo), LoadBloodPressure(bloodRepo), LoadSleepHour(sleepRepo),
-            SaveHeartRate(heartRepo),
-            SaveBloodPressure(bloodRepo),
-            SaveSleepHour(sleepRepo),
-            heartRateValidator,
-            sleepHourValidator,
-            bloodPressureValidator,
-            ChartParser(listOf(
-                HeartRateChartMapper(),
-                BloodPressureDiastolicChartMapper(),
-                BloodPressureSystolicChartMapper(),
-                SleepHourChartMapper()))
-        )
-    }
-
-    private val factory: DialogFactory by lazy {
-        DialogFactory(HeartRateViewValidator(heartRateValidator), BloodPressureViewValidator(bloodPressureValidator), SleepHourViewValidator(sleepHourValidator))
-    }
+    @Inject lateinit var factory: DialogFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

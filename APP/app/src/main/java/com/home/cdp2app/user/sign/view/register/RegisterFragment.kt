@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthRegisterBinding
 import com.home.cdp2app.common.network.type.NetworkStatus
@@ -14,20 +15,19 @@ import com.home.cdp2app.user.sign.repository.RemoteUserRepository
 import com.home.cdp2app.user.sign.usecase.RegisterUseCase
 import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.user.sign.validator.RegisterValidator
-import com.home.cdp2app.common.util.network.NetworkModule
+import com.home.cdp2app.common.module.NetworkModule
 import com.home.cdp2app.user.sign.view.callback.AuthCallback
 import com.home.cdp2app.user.sign.view.register.validator.RegisterViewValidator
 import com.home.cdp2app.user.sign.view.register.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     private var callback : AuthCallback? = null
-    //todo hilt inject
-    private val validator : RegisterViewValidator = RegisterViewValidator(RegisterValidator())
-    private val viewModel : RegisterViewModel by lazy {
-        val repository = RemoteUserRepository(NetworkModule.userApi)
-        RegisterViewModel(RegisterValidator(), RegisterUseCase(repository))
-    }
+    @Inject lateinit var validator : RegisterViewValidator
+    private val viewModel : RegisterViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

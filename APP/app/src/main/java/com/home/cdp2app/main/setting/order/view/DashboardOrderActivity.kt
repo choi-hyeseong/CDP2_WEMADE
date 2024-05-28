@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -16,17 +17,14 @@ import com.home.cdp2app.main.setting.order.usecase.LoadChartOrder
 import com.home.cdp2app.main.setting.order.usecase.SaveChartOrder
 import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.order.view.viewmodel.DashboardOrderViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Collections
 
 //대시보드 순서 관리하는 액티비티
+@AndroidEntryPoint
 class DashboardOrderActivity : AppCompatActivity() {
 
-    private val viewModel : DashboardOrderViewModel by lazy {
-        // todo init hilt
-        val preferenceStorage = SharedPreferencesStorage(this)
-        val repository = PreferenceOrderRepository(preferenceStorage)
-        DashboardOrderViewModel(LoadChartOrder(repository), SaveChartOrder(repository))
-    }
+    private val viewModel : DashboardOrderViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = MainSettingOrderBinding.inflate(layoutInflater)

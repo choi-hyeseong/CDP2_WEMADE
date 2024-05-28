@@ -12,11 +12,14 @@ import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val loginValidator: LoginValidator, private val loginUseCase: LoginUseCase, private val saveAuthToken: SaveAuthToken) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val loginValidator: LoginValidator, private val loginUseCase: LoginUseCase, private val saveAuthToken: SaveAuthToken) : ViewModel() {
 
     private val LOG_HEADER = "LOGIN_VIEWMODEL"
 

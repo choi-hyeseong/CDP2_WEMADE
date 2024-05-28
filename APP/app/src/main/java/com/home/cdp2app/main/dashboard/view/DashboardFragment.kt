@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
@@ -41,27 +42,15 @@ import com.home.cdp2app.main.dashboard.chart.parser.mapper.BloodPressureSystolic
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.HeartRateChartMapper
 import com.home.cdp2app.main.dashboard.chart.parser.mapper.SleepHourChartMapper
 import com.home.cdp2app.main.dashboard.view.viewmodel.DashboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 // dashboard view
+@AndroidEntryPoint
 class DashboardFragment() : Fragment() {
 
     private lateinit var adapter : ChartAdapter
     private var callback : ChartDetailCallback? = null
-    // todo hilt inject
-    private val dashboardViewModel : DashboardViewModel by lazy {
-        val repository = PreferenceOrderRepository(SharedPreferencesStorage(requireContext()))
-        val healthDao = HealthConnectDao(requireContext())
-        val bloodRepo = HealthConnectBloodPressureRepository(healthDao, BloodPressureMapper())
-        val heartRepo = HealthConnectHeartRepository(healthDao, HeartRateMapper())
-        val sleepRepo = HealthConnectSleepRepository(SleepHourMapper(), healthDao)
-        DashboardViewModel(
-            LoadChartOrder(repository),
-            LoadHeartRate(heartRepo),
-            LoadBloodPressure(bloodRepo),
-            LoadSleepHour(sleepRepo),
-            ChartParser(listOf(HeartRateChartMapper(), BloodPressureDiastolicChartMapper(), BloodPressureSystolicChartMapper(), SleepHourChartMapper()))
-        )
-    }
+    private val dashboardViewModel : DashboardViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val bind = MainDashboardBinding.inflate(inflater)

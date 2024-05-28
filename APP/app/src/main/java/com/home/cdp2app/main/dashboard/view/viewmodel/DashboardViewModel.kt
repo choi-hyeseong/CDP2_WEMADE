@@ -12,11 +12,13 @@ import com.home.cdp2app.common.util.livedata.Event
 import com.home.cdp2app.main.dashboard.chart.Chart
 import com.home.cdp2app.main.dashboard.chart.applyChart
 import com.home.cdp2app.main.dashboard.chart.parser.ChartParser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.time.Instant
+import javax.inject.Inject
 
 /**
  * 대쉬보드 관리에 사용되는 VM
@@ -26,11 +28,12 @@ import java.time.Instant
  * @property loadSleepHour 수면시간을 가져올때 사용됩니다.
  * @property chartParser 읽어온 엔티티를 차트로 파싱할때 사용됩니다. 사용하는 매퍼는 초기화 되어 있습니다.
  */
-class DashboardViewModel(private val loadChartOrder: LoadChartOrder,
-                         private val loadHeartRate: LoadHeartRate,
-                         private val loadBloodPressure: LoadBloodPressure,
-                         private val loadSleepHour: LoadSleepHour,
-                         private val chartParser: ChartParser) : ViewModel() {
+@HiltViewModel
+class DashboardViewModel @Inject constructor(private val loadChartOrder: LoadChartOrder,
+                                             private val loadHeartRate: LoadHeartRate,
+                                             private val loadBloodPressure: LoadBloodPressure,
+                                             private val loadSleepHour: LoadSleepHour,
+                                             private val chartParser: ChartParser) : ViewModel() {
 
     private val LOG_HEADER : String = "Fragment_Dashboard" //for log
 

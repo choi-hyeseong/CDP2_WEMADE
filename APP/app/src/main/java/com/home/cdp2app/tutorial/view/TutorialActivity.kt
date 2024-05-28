@@ -2,6 +2,7 @@ package com.home.cdp2app.tutorial.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -16,15 +17,13 @@ import com.home.cdp2app.tutorial.view.fragment.TutorialFragment1
 import com.home.cdp2app.tutorial.view.fragment.TutorialFragment2
 import com.home.cdp2app.tutorial.view.fragment.TutorialFragment3
 import com.home.cdp2app.tutorial.view.viewmodel.TutorialViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TutorialActivity : AppCompatActivity(), TutorialCallback {
 
-    //todo hilt inject
-    private val viewModel : TutorialViewModel by lazy {
-        val storage = SharedPreferencesStorage(this)
-        val repository = PreferenceTutorialRepository(storage)
-        TutorialViewModel(SaveTutorialCompleted(repository))
-    }
+    private val viewModel : TutorialViewModel by viewModels()
+
     // 튜토리얼
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -21,23 +21,27 @@ import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.health.bloodpressure.valid.BloodPressureValidator
 import com.home.cdp2app.health.heart.valid.HeartRateValidator
 import com.home.cdp2app.health.sleep.valid.SleepHourValidator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.Instant
+import javax.inject.Inject
 
 //dashboard에서 상세정보 클릭시 보여줄 액티비티의 vm
-class ChartDetailViewModel(private val loadHeartRate: LoadHeartRate,
-                           private val loadBloodPressure: LoadBloodPressure,
-                           private val loadSleepHour: LoadSleepHour,
-                           private val saveHeartRate: SaveHeartRate,
-                           private val saveBloodPressure: SaveBloodPressure,
-                           private val saveSleepHour: SaveSleepHour,
-                           private val heartRateValidator: HeartRateValidator,
-                           private val sleepHourValidator: SleepHourValidator,
-                           private val bloodPressureValidator: BloodPressureValidator,
-                           private val chartParser: ChartParser) : ViewModel() {
+
+@HiltViewModel
+class ChartDetailViewModel @Inject constructor(private val loadHeartRate: LoadHeartRate,
+                                               private val loadBloodPressure: LoadBloodPressure,
+                                               private val loadSleepHour: LoadSleepHour,
+                                               private val saveHeartRate: SaveHeartRate,
+                                               private val saveBloodPressure: SaveBloodPressure,
+                                               private val saveSleepHour: SaveSleepHour,
+                                               private val heartRateValidator: HeartRateValidator,
+                                               private val sleepHourValidator: SleepHourValidator,
+                                               private val bloodPressureValidator: BloodPressureValidator,
+                                               private val chartParser: ChartParser) : ViewModel() {
     private val LOG_HEADER = "CHART_DETAIL_VIEWMODEL"
     val chartLiveData: MutableLiveData<Chart> = MutableLiveData()
     val saveLiveData: MutableLiveData<Event<ValidateStatus>> = MutableLiveData()

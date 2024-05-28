@@ -11,11 +11,14 @@ import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.onSuccess
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel(private val registerValidator: RegisterValidator, private val registerUseCase: RegisterUseCase) : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(private val registerValidator: RegisterValidator, private val registerUseCase: RegisterUseCase) : ViewModel() {
 
     private val LOG_HEADER = "REGISTER_VIEWMODEL"
 

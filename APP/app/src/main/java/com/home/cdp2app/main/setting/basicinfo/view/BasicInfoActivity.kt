@@ -2,6 +2,7 @@ package com.home.cdp2app.main.setting.basicinfo.view
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainSettingBasicInfoBinding
@@ -11,16 +12,15 @@ import com.home.cdp2app.main.setting.basicinfo.usecase.LoadBasicInfo
 import com.home.cdp2app.main.setting.basicinfo.usecase.SaveBasicInfo
 import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.main.setting.basicinfo.view.viewmodel.BasicInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 기본 건강정보 (BasicInfo)를 수정하고 관리하는 액티비티
  */
+@AndroidEntryPoint
 class BasicInfoActivity : AppCompatActivity() {
 
-    // todo hilt inject
-
-    private val repository by lazy {  PreferenceBasicInfoRepository(SharedPreferencesStorage(this)) }
-    private val viewModel : BasicInfoViewModel by lazy {  BasicInfoViewModel(LoadBasicInfo(repository), SaveBasicInfo(repository)) }
+    private val viewModel : BasicInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

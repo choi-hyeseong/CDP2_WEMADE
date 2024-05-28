@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.home.cdp2app.main.setting.basicinfo.view.BasicInfoActivity
 import com.home.cdp2app.main.setting.order.view.DashboardOrderActivity
 import com.home.cdp2app.databinding.MainSettingBinding
@@ -14,16 +15,14 @@ import com.home.cdp2app.common.memory.SharedPreferencesStorage
 import com.home.cdp2app.user.token.repository.PreferenceAuthTokenRepository
 import com.home.cdp2app.user.token.usecase.DeleteAuthToken
 import com.home.cdp2app.main.dashboard.view.callback.ChartDetailCallback
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingFragment : Fragment() {
 
     private var callback : ChartDetailCallback? = null
 
-    //todo hilt inject
-    private val viewModel : SettingViewModel by lazy {
-        val storage = SharedPreferencesStorage(requireContext())
-        SettingViewModel(DeleteAuthToken(PreferenceAuthTokenRepository(storage)))
-    }
+    private val viewModel : SettingViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
