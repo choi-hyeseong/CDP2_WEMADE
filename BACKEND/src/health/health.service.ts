@@ -40,6 +40,6 @@ export class HealthService {
     ) as tf.Tensor;
     const prediction_result = await outputData.data();
 
-    return prediction_result[0];
+    return { prediction_result: prediction_result[0] };
   }
 }

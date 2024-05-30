@@ -45,9 +45,13 @@ export class AuthService {
   // }
 
   verifyToken(token: string) {
-    return this.jwtService.verify(token, {
-      secret: JWT_SECRET,
-    });
+    try {
+      return this.jwtService.verify(token, {
+        secret: JWT_SECRET,
+      });
+    } catch (e) {
+      throw new UnauthorizedException('토큰만료 혹은 잘못된 토큰방식');
+    }
   }
 
   rotateToken(token: string, isRefreshToken: boolean) {
@@ -127,6 +131,6 @@ export class AuthService {
       password: hash,
     });
 
-    return true;
+    return { isSuccess: true };
   }
 }
