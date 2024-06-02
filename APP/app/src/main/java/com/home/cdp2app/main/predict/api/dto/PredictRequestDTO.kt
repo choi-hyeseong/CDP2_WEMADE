@@ -13,13 +13,12 @@ package com.home.cdp2app.main.predict.api.dto
  * @property total_sleep 총 수면시간입니다.
  */
 data class PredictRequestDTO(
-        private val sex : Int,
-        private val age : Int,
-        private val HE_sbp : Float?,
-        private val HE_dbp : Float?,
-        private val HE_BMI : Float?,
-        private val HE_PLS : Float?,
-        private val sm_present : Int,
-        private val pa_walk : Int,
-        private val total_sleep : Float?
+        val sex : Int,
+        val age : Int,
+        val HE_sbp : Float?,
+        val HE_dbp : Float?,
+        val HE_BMI : Float?,
+        val sm_present : Int,
+        val pa_walk : Int,
+        val total_sleep : Float?
 )

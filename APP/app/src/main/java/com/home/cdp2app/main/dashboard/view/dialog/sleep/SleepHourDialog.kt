@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.home.cdp2app.R
+import com.home.cdp2app.common.throttle.setThrottleClickListener
 import com.home.cdp2app.common.util.date.DateTimeUtil
 import com.home.cdp2app.common.valid.type.ValidateStatus
 import com.home.cdp2app.databinding.DialogSleephourBinding
@@ -26,7 +27,7 @@ class SleepHourDialog(private val validator : SleepHourViewValidator, private va
     }
 
     private fun initListener(view : DialogSleephourBinding) {
-        view.date.setOnClickListener {
+        view.date.setThrottleClickListener(1000L) {
             // date pick
             openDateTimePicker(object : DateTimePickerCallback {
                 override fun onDateTimeSelected(millisecond: Long) {
@@ -34,7 +35,7 @@ class SleepHourDialog(private val validator : SleepHourViewValidator, private va
                 }
             })
         }
-        view.save.setOnClickListener {
+        view.save.setThrottleClickListener {
             //validator 추가
             when (validator.validate(view)) {
                 ValidateStatus.OK -> {

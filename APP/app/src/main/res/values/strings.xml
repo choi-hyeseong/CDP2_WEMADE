@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">CDP2app</string>
+    <string name="app_name">High Risk</string>
     <string name="health_not_supported">지원하지 않는 안드로이드 버젼 및 기기입니다. 애플리케이션을 종료합니다.</string>
     <string name="health_require_install">HealthConnect 설치가 필요합니다. 마켓으로 이동합니다.</string>
     <string name="health_require_permission">앱 사용에 필요한 권한 허용이 필요합니다.</string>
     <string name="health_permission_denied">앱 사용에 필요한 권한이 허용되지 않았습니다. 다시 시도해주세요.</string>
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="service_title">고혈압 관리 앱</string>
+    <string name="service_title">하이 리스크</string>
 
     <!-- 튜토리얼 -->
     <string name="tutorial2">고혈압 관리? 지금부터 시작!</string>
@@ -100,7 +100,7 @@
     <!-- 고혈압 평가 -->
     <string name="blood_pressure_predict">고혈압 평가</string>
     <string name="predict_require">진단이 필요해요!</string>
-    <string name="predict_request_now">버튼을 클릭하면 고혈압 진단이 시작돼요</string>
+    <string name="predict_request_now">버튼을 클릭하면 고혈압 진단이 시작돼요!</string>
     <string name="predict_now">지금 진단하기</string>
     <string name="in_predicting">현재 진단중입니다. 잠시만 기다려주세요!</string>
     <string name="login_required">로그인 세션이 만료되었습니다. 다시 로그인 해주시길 바랍니다!</string>

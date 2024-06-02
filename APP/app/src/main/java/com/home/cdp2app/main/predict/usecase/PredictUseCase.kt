@@ -15,12 +15,11 @@ import java.time.Instant
  * @param getAuthToken authToken을 가져오는 유스케이스 입니다. 해당 predict를 호출하기전 AuthToken의 존재 여부를 확인함으로 notnull입니다.
  * @param repository predict를 수행하는 레포지토리 입니다.
  */
-class PredictUseCase(private val getAuthToken: GetAuthToken, private val loadBasicInfo: LoadBasicInfo, private val loadSleepHour: LoadSleepHour, private val loadHeartRate: LoadHeartRate, private val loadBloodPressure: LoadBloodPressure, private val repository: PredictRepository) {
+class PredictUseCase(private val getAuthToken: GetAuthToken, private val loadBasicInfo: LoadBasicInfo, private val loadSleepHour: LoadSleepHour, private val loadBloodPressure: LoadBloodPressure, private val repository: PredictRepository) {
 
     suspend operator fun invoke(isExercised : Boolean): ApiResponse<PredictResponseDTO> {
-        // TODO
         val instant = Instant.now()
         //제일 최신 값을 가져오고, 없을경우 null 입력
-        return repository.predict(isExercised, getAuthToken(), loadBasicInfo(true), loadBloodPressure(instant).lastOrNull(), loadHeartRate(instant).lastOrNull(), loadSleepHour(instant).lastOrNull())
+        return repository.predict(isExercised, getAuthToken(), loadBasicInfo(true), loadBloodPressure(instant).lastOrNull(), loadSleepHour(instant).lastOrNull())
     }
 }
