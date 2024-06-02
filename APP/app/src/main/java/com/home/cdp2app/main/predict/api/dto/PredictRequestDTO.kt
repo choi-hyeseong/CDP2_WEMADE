@@ -7,7 +7,6 @@ package com.home.cdp2app.main.predict.api.dto
  * @property HE_sbp 수축기 혈압입니다.
  * @property HE_dbp 이완기 혈압입니다.
  * @property HE_BMI 체질량 지수입니다.
- * @property HE_PLS 15초 맥박수 입니다.
  * @property sm_present 흡연 여부입니다.
  * @property pa_walk 주 5회이상 운동을 한 여부입니다.
  * @property total_sleep 총 수면시간입니다.
