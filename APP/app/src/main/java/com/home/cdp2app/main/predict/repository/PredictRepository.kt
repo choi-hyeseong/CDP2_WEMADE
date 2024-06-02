@@ -19,8 +19,7 @@ interface PredictRepository {
      * @param authToken Header 인증에 필요한 token 정보입니다.
      * @param basicInfo 키, 몸무게 등 기본 건강정보 값입니다.
      * @param latestBloodPressure 제일 최근 혈압 측정값입니다. 저장되어 있지 않을 수 있어 nullable 합니다.
-     * @param latestHeartRate 제일 최근 심박수 측정값입니다. 저장되어 있지 않을 수 있어 nullable 합니다.
      * @param latestSleepHour 제일 최근 수면시간입니다. 저장되어 있지 않을 수 있어 nullable 합니다.
      */
-    suspend fun predict(isExercised : Boolean, authToken: AuthToken, basicInfo: BasicInfo, latestBloodPressure: BloodPressure?, latestHeartRate: HeartRate?, latestSleepHour: SleepHour?) : ApiResponse<PredictResponseDTO>
+    suspend fun predict(isExercised : Boolean, authToken: AuthToken, basicInfo: BasicInfo, latestBloodPressure: BloodPressure?, latestSleepHour: SleepHour?) : ApiResponse<PredictResponseDTO>
 }

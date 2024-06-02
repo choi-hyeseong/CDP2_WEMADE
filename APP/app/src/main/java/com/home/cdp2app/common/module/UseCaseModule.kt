@@ -170,7 +170,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun providePredict(getAuthToken: GetAuthToken, loadBasicInfo: LoadBasicInfo, loadHeartRate: LoadHeartRate, loadSleepHour: LoadSleepHour, loadBloodPressure: LoadBloodPressure, repository: PredictRepository) : PredictUseCase {
-        return PredictUseCase(getAuthToken, loadBasicInfo, loadSleepHour, loadHeartRate, loadBloodPressure, repository)
+    fun providePredict(getAuthToken: GetAuthToken, loadBasicInfo: LoadBasicInfo, loadSleepHour: LoadSleepHour, loadBloodPressure: LoadBloodPressure, repository: PredictRepository) : PredictUseCase {
+        return PredictUseCase(getAuthToken, loadBasicInfo, loadSleepHour, loadBloodPressure, repository)
     }
 }
