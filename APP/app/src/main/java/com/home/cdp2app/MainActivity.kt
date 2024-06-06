@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.health.connect.client.PermissionController
 import com.home.cdp2app.databinding.ActivityMainBinding
 import com.home.cdp2app.health.healthconnect.component.HealthConnectAPI
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), HealthConnectSuccessCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         setContentView(ActivityMainBinding.inflate(layoutInflater).root)
         handleHealthConnectSDK()

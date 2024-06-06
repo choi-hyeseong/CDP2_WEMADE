@@ -8,7 +8,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorPrimary">@color/main_blue</item>
         <item name="colorPrimaryDark">@color/main_blue</item>
-        <item name="android:colorControlNormal">@color/white</item>
+        <item name="android:colorControlNormal">#FFFFFF</item>
         <item name="colorAccent">@color/main_blue</item>
 
     </style>
@@ -19,7 +19,7 @@
         <item name="boxStrokeColor">@color/main_blue</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="endIconTint">@color/main_blue</item>
-        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxBackgroundColor">#FFFFFF</item>
     </style>
 
     <style name="MaterialCustomDate" parent="Theme.MaterialComponents.Light">

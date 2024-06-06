@@ -3,6 +3,7 @@ package com.home.cdp2app.tutorial.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,6 +25,7 @@ class TutorialActivity : AppCompatActivity(), TutorialCallback {
     // 튜토리얼
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val binding = TutorialBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

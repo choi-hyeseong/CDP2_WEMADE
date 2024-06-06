@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.home.cdp2app.R
@@ -23,6 +24,7 @@ class DashboardOrderActivity : AppCompatActivity() {
     private val viewModel : DashboardOrderViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val bind = MainSettingOrderBinding.inflate(layoutInflater)
         initView(bind)
         initObserver(bind)

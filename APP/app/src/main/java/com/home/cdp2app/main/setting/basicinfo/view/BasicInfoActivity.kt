@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.MainSettingBasicInfoBinding
 import com.home.cdp2app.main.setting.basicinfo.type.Gender
@@ -20,6 +21,7 @@ class BasicInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val bind = MainSettingBasicInfoBinding.inflate(layoutInflater)
         setContentView(bind.root)
         initListener(bind)

@@ -2,6 +2,7 @@ package com.home.cdp2app.user.sign.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.home.cdp2app.R
 import com.home.cdp2app.databinding.AuthBinding
 import com.home.cdp2app.main.MainPagerActivity
@@ -17,6 +18,7 @@ class AuthActivity : AppCompatActivity(), AuthCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val bind = AuthBinding.inflate(layoutInflater)
         navigateSelect()
         setContentView(bind.root)
