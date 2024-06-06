@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'com.home.cdp2app'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.home.cdp2app"
         minSdk 28
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -63,7 +63,7 @@ dependencies {
     // Sandwich
     implementation "com.github.skydoves:sandwich:1.2.4"
     // health connect
-    implementation "androidx.health.connect:connect-client:1.0.0-alpha11"
+    implementation "androidx.health.connect:connect-client:1.1.0-alpha07"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

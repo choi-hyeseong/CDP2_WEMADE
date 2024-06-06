@@ -25,7 +25,7 @@ class HealthConnectAPITest {
         mockkStatic(HealthConnectClient.Companion::class)
         mockkObject(HealthConnectClient)
         val context = mockk<Context>()
-        every { HealthConnectClient.sdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE
+        every { HealthConnectClient.getSdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE
         assertEquals(HealthConnectStatus.NOT_SUPPORTED, HealthConnectAPI.getSdkStatus(context))
         unmockkAll()
     }
@@ -37,7 +37,7 @@ class HealthConnectAPITest {
         mockkStatic(HealthConnectClient.Companion::class)
         mockkObject(HealthConnectClient)
         val context = mockk<Context>()
-        every { HealthConnectClient.sdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED
+        every { HealthConnectClient.getSdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED
         assertEquals(HealthConnectStatus.REQUIRE_INSTALL, HealthConnectAPI.getSdkStatus(context))
         unmockkAll()
     }
@@ -49,7 +49,7 @@ class HealthConnectAPITest {
         mockkStatic(HealthConnectClient.Companion::class)
         mockkObject(HealthConnectClient)
         val context = mockk<Context>()
-        every { HealthConnectClient.sdkStatus(any()) } returns HealthConnectClient.SDK_AVAILABLE
+        every { HealthConnectClient.getSdkStatus(any()) } returns HealthConnectClient.SDK_AVAILABLE
         assertEquals(HealthConnectStatus.OK, HealthConnectAPI.getSdkStatus(context))
         unmockkAll()
     }
@@ -80,8 +80,7 @@ class HealthConnectAPITest {
         Whitebox.setInternalState(
             Build.VERSION::class.java, "SDK_INT", 28)
         val context = mockk<Context>()
-        every { HealthConnectClient.isProviderAvailable(any(), any()) } returns false //HealthConnect의 설치 여부를 가져오지 못했을때
-        every { HealthConnectClient.sdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED
+        every { HealthConnectClient.getSdkStatus(any()) } returns HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED
         org.junit.jupiter.api.assertThrows<IllegalStateException> { HealthConnectAPI.getHealthConnectClient(context) }
         unmockkAll()
     }

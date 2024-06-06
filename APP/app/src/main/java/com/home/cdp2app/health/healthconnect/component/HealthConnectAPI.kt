@@ -36,7 +36,7 @@ class HealthConnectAPI {
          * @return HealthConnectStatus Enum을 반환합니다.
          */
         fun getSdkStatus(context: Context): HealthConnectStatus {
-            return when (HealthConnectClient.sdkStatus(context, PROVIDER_PACKAGE_NAME)) {
+            return when (HealthConnectClient.getSdkStatus(context, PROVIDER_PACKAGE_NAME)) {
                 HealthConnectClient.SDK_UNAVAILABLE -> NOT_SUPPORTED
                 HealthConnectClient.SDK_UNAVAILABLE_PROVIDER_UPDATE_REQUIRED -> REQUIRE_INSTALL
                 else -> OK
